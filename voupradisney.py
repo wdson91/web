@@ -12,7 +12,7 @@ from selenium.common.exceptions import NoSuchElementException
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
 # Definindo as datas de viagem
-datas_viagem = [datetime.now().date() + timedelta(days=d) for d in [5, 10, 20, 47, 65, 126]]
+datas_viagem = [datetime.now().date() + timedelta(days=d) for d in [5]]
 
 # Definindo os nomes dos parques e os XPaths correspondentes
 parques_xpaths = [
@@ -26,17 +26,6 @@ parques_xpaths = [
     ("4 Dias - Disney Promocional",'/html/body/div[4]/div/div[1]/div[2]/div[1]/div[49]/div/div/div[3]/div[1]/div[2]'),
     ("5 Dias - Disney World Básico",'/html/body/div[4]/div/div[1]/div[2]/div[1]/div[63]/div/div/div[3]/div[1]/div[2]'),
 ]
-
-# Cores ANSI para os grupos de datas
-cores = {
-    '5 Dias': '\033[91m',   # Vermelho
-    '10 Dias': '\033[92m',  # Verde
-    '20 Dias': '\033[93m',  # Amarelo
-    '47 Dias': '\033[94m',  # Azul
-    '65 Dias': '\033[95m',  # Roxo
-    '126 Dias': '\033[96m'  # Ciano
-}
-
 # Lista para armazenar os dados
 dados = []
 
@@ -54,16 +43,12 @@ for data_viagem in datas_viagem:
             # Se o elemento não for encontrado, atribua um traço "-" ao valor
             preco_texto = "-"
 
-        # Determine a cor com base na diferença de datas
-        diferenca_datas = (data_viagem - datetime.now().date()).days
-        cor = cores.get(f'{diferenca_datas} Dias', '')
-
         # Adicione os dados a lista de dicionários
         dados.append({
-            'Data_Hora_Coleta': datetime.now().strftime('%Y-%m-%d %H:%M'),
+            'Data_Hora_Coleta': datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f'),
             'Data_viagem': data_viagem.strftime('%Y-%m-%d'),
             'Parque': parque,
-            'Preço': cor + preco_texto + '\033[0m'  # Reset da cor
+            'Preço': preco_texto
         })
 
 # Fechando o driver
@@ -73,9 +58,9 @@ driver.quit()
 df = pd.DataFrame(dados)
 
 # Ordenando por data de viagem
-df = df.sort_values(by=['Data_viagem', 'Parque'])
+df = df.sort_values(by='Data_viagem')
 
 # Salvando em um arquivo TXT
 df.to_csv('precos_ingressos_voupra.txt', sep='\t', index=False)
 
-print(df)
+df.head()  # Exibindo as primeiras linhas do DataFrame como exemplo
