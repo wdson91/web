@@ -1,4 +1,0 @@
-Data_Hora_Coleta	Data_viagem	Parque	Preço
-2024-01-23 12:04:38.894510	2024-01-28	1 Dia 1 Parque - SeaWorld Orlando	R$ 592,71
-2024-01-23 12:04:40.994515	2024-01-28	3 Dias 3 Parques - SeaWorld Orlando	R$ 788,97
-2024-01-23 12:04:44.628517	2024-01-28	14 Dias 3 Parques - SeaWorld Orlando	R$ 1.161,40
