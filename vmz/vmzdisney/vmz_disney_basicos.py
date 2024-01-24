@@ -1,3 +1,4 @@
+import asyncio
 import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -7,8 +8,11 @@ from datetime import datetime, timedelta
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
+import os
 
 async def coletar_precos_vmz_dineybasicos():
+
+    
     # Lista de sites, XPaths e nomes de parques
     sites = [
         ("https://www.vmzviagens.com.br/ingressos/orlando/disney-world-ingresso/disney-ingresso-magic-kingdom-1dia?", '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/b', '1 Dia - Disney Básico Magic Kingdom'),
@@ -23,7 +27,7 @@ async def coletar_precos_vmz_dineybasicos():
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
     # Definindo as datas
-    datas = [datetime.now().date() + timedelta(days=d) for d in [5,10,20,47,64,126]]
+    datas = [datetime.now().date() + timedelta(days=d) for d in [5, 10, 20, 47, 64, 126]]
 
     # Lista para armazenar os dados
     dados = []
@@ -73,15 +77,25 @@ async def coletar_precos_vmz_dineybasicos():
 
     # Criando um DataFrame
     df = pd.DataFrame(dados)
+    # Obtém o diretório atual onde o arquivo Python está localizado
+    diretorio_atual = os.path.dirname(os.path.abspath(__file__))
+
+    # Define o nome do arquivo de saída
+    nome_arquivo_saida = "precos_vmz_disney_basicos.txt"
+
+    # Define o caminho completo para o arquivo de saída dentro da pasta "vmzdisney"
+    caminho_arquivo_saida = os.path.join(diretorio_atual, nome_arquivo_saida)
+
+    
 
     # Ordenando o DataFrame pelas datas da viagem e pelo nome do parque
     df['Data_viagem'] = pd.to_datetime(df['Data_viagem'])
     df = df.sort_values(by=['Data_viagem', 'Parque'])
 
     # Salvando em um arquivo TXT
-    df.to_csv('precos_vmz_disney.txt', sep='\t', index=False)
-
-    print(df)
+    df.to_csv(caminho_arquivo_saida, sep='\t', index=False)
 
 
-    return
+
+if __name__ == "__main__":
+    asyncio.run(coletar_precos_vmz_dineybasicos())

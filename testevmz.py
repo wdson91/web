@@ -9,7 +9,7 @@ from datetime import datetime, timedelta
 import time
 
 # Configuração inicial do Selenium
-async def coletar_precos_vmz_dineydias():
+def coletar_precos_vmz_dineydias():
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
     def fechar_popups(driver):
@@ -25,21 +25,33 @@ async def coletar_precos_vmz_dineydias():
 
     def scroll_to_element(driver, element):
         driver.execute_script("arguments[0].scrollIntoView(true);", element)
-        time.sleep(10)  # Espera para a rolagem acontecer
+        time.sleep(7)  # Espera para a rolagem acontecer
 
     def mudar_mes_ano(driver, mes, ano):
-        month_select = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((By.ID, "month-control")))
+        try:
+            current_year_element = WebDriverWait(driver, 3).until(
+                EC.presence_of_element_located((By.CSS_SELECTOR, '#year-control option[selected="selected"]'))
+            )
+            current_year = int(current_year_element.get_attribute('value'))
+
+            if current_year != ano:
+                year_select = WebDriverWait(driver, 3).until(EC.element_to_be_clickable((By.ID, "year-control")))
+                scroll_to_element(driver, year_select)
+                year_select.click()
+                driver.find_element(By.CSS_SELECTOR, f'option[value="{ano}"]').click()
+        except ValueError:
+            print("Could not determine the current year. Proceeding with the selected year.")
+        
+        month_select = WebDriverWait(driver, 8).until(EC.element_to_be_clickable((By.ID, "month-control")))
         scroll_to_element(driver, month_select)
         month_select.click()
         driver.find_element(By.CSS_SELECTOR, f'option[value="{mes}"]').click()
 
-        year_select = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((By.ID, "year-control")))
-        scroll_to_element(driver, year_select)
-        year_select.click()
-        driver.find_element(By.CSS_SELECTOR, f'option[value="{ano}"]').click()
+
+        
 
     def encontrar_preco_data(driver, data):
-        time.sleep(20)  # Aguardar o calendário carregar
+        time.sleep(8)  # Aguardar o calendário carregar
         elementos_fc_content = driver.find_elements(By.CLASS_NAME, 'fc-content')
         for elemento in elementos_fc_content:
             fc_date = elemento.find_element(By.CLASS_NAME, 'fc-date').text
@@ -92,3 +104,5 @@ async def coletar_precos_vmz_dineydias():
     df_resultados = pd.DataFrame(resultados)
     df_resultados.to_csv('precos_ingressos.txt', sep='\t', index=False)
     print(df_resultados)
+
+coletar_precos_vmz_dineydias()

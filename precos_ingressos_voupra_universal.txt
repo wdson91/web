@@ -1,7 +1,0 @@
-Data_Hora_Coleta	Data_viagem	Parque	Preço
-2024-01-23 20:18:43.388325	2024-01-28	1 Dia 1 Parque - Universal Orlando	R$ 909,56
-2024-01-23 20:18:45.580964	2024-01-28	1 Dia 2 Parques - Universal Orlando	R$ 1.245,28
-2024-01-23 20:18:47.411075	2024-01-28	2 Dias 2 Parques - Universal Orlando	R$ 1.712,17
-2024-01-23 20:18:50.106674	2024-01-28	4 Dias 2 Parques - Universal Orlando	R$ 1.712,17
-2024-01-23 20:18:51.711745	2024-01-28	4 Dias 3 Parques - Universal Orlando	-
-2024-01-23 20:18:53.711683	2024-01-28	14 Dias 3 Parques - Universal Orlando	R$ 1.989,92
