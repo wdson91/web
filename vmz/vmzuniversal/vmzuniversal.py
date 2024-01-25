@@ -8,9 +8,12 @@ from datetime import datetime, timedelta
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import NoSuchElementException
 import os
+import logging
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 async def coletar_precos_vmz_universal():
-
+    logging.info("Iniciando coleta de preços da Universal Orlando.")
     # Lista de sites e nomes de parques
     sites = [
         ("https://www.vmzviagens.com.br/ingressos/orlando/universal-orlando-resort/1-parque-1-dia-data-fixa?", '1 Dia 1 Parque - Universal Orlando'),
@@ -34,7 +37,9 @@ async def coletar_precos_vmz_universal():
     dados = []
 
     for data in datas:
+        
         for url_template, parque in sites:
+            logging.info(f"Coletando preços do parque {parque}.")
             site_url = f"{url_template}data={data.strftime('%Y-%m-%d')}"
             driver.get(site_url)
 
@@ -54,7 +59,7 @@ async def coletar_precos_vmz_universal():
                 preco_texto = "-"
 
             # Adicione os dados a lista de dicionários
-            dados.append({'Data_Hora_Coleta': datetime.now().strftime("%Y-%m-%d %H:%M:%S"), 'Data_viagem': (data + timedelta(days=0)).strftime("%Y-%m-%d"), 'Parque': parque, 'Preço': preco_texto})
+            dados.append({'Data_Hora_Coleta': datetime.now().strftime("%Y-%m-%d %H:%M:%S"), 'Data_viagem': (data + timedelta(days=0)).strftime("%Y-%m-%d"), 'Parque': parque, 'Preco': preco_texto})
 
     # Coleta de preços para 14 Dias 3 Parques - Universal Orlando (não dinâmico)
     driver.get(url_14_dias)
@@ -95,13 +100,17 @@ async def coletar_precos_vmz_universal():
     df.to_csv(caminho_arquivo_saida_txt, sep='\t', index=False)
 
     # Define o nome do arquivo de saída em formato JSON
-    nome_arquivo_saida_json = "precos_vmz_universal.json"
+    formato_data_hora = "%d%m%Y_%H%M"
+    data_hora_atual = datetime.now().strftime(formato_data_hora)
+    nome_arquivo_saida_json = f"coleta_vmz_universal_{data_hora_atual}.json"
+    nome_arquivo_json = nome_arquivo_saida_json.replace("/", "_").replace(":", "_").replace(" ", "_")
 
     # Define o caminho completo para o arquivo de saída JSON na mesma pasta que o script
-    caminho_arquivo_saida_json = os.path.join(nome_arquivo_saida_json)
+    caminho_arquivo_saida_json = os.path.join(nome_arquivo_json)
 
     # Salvando em um arquivo JSON no mesmo diretório que o script
     df.to_json(caminho_arquivo_saida_json, orient='records', date_format='iso')
-
+    logging.info(f"Resultados salvos em {caminho_arquivo_saida_txt} e {caminho_arquivo_saida_json}")
+    logging.info("Coleta finalizada.")
 if __name__ == "__main__":
     asyncio.run(coletar_precos_vmz_universal())

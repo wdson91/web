@@ -1,0 +1,37 @@
+Data_Hora_Coleta	Data_viagem	Parque	Preco
+2024-01-25 15:14:43.759504	2024-01-30	1 Dia 1 Parque - Universal Orlando	R$ 845,46
+2024-01-25 15:14:47.325198	2024-01-30	1 Dia 2 Parques - Universal Orlando	R$ 1.179,91
+2024-01-25 15:14:59.498232	2024-01-30	14 Dias 3 Parques - Universal Orlando	R$ 1.982,66
+2024-01-25 15:14:49.229098	2024-01-30	2 Dias 2 Parques - Universal Orlando	R$ 1.665,79
+2024-01-25 15:14:51.517686	2024-01-30	4 Dias 2 Parques - Universal Orlando	R$ 1.665,79
+2024-01-25 15:14:56.534430	2024-01-30	4 Dias 3 Parques - Universal Orlando	-
+2024-01-25 15:15:02.101257	2024-02-04	1 Dia 1 Parque - Universal Orlando	R$ 906,23
+2024-01-25 15:15:04.757391	2024-02-04	1 Dia 2 Parques - Universal Orlando	R$ 1.240,74
+2024-01-25 15:15:14.289061	2024-02-04	14 Dias 3 Parques - Universal Orlando	R$ 1.982,66
+2024-01-25 15:15:06.486034	2024-02-04	2 Dias 2 Parques - Universal Orlando	R$ 1.705,92
+2024-01-25 15:15:10.013794	2024-02-04	4 Dias 2 Parques - Universal Orlando	R$ 1.705,92
+2024-01-25 15:15:11.640956	2024-02-04	4 Dias 3 Parques - Universal Orlando	-
+2024-01-25 15:15:16.220762	2024-02-14	1 Dia 1 Parque - Universal Orlando	R$ 875,79
+2024-01-25 15:15:20.220985	2024-02-14	1 Dia 2 Parques - Universal Orlando	R$ 1.210,35
+2024-01-25 15:15:28.427661	2024-02-14	14 Dias 3 Parques - Universal Orlando	R$ 1.982,66
+2024-01-25 15:15:22.061634	2024-02-14	2 Dias 2 Parques - Universal Orlando	R$ 1.756,06
+2024-01-25 15:15:24.675137	2024-02-14	4 Dias 2 Parques - Universal Orlando	R$ 1.756,06
+2024-01-25 15:15:26.827256	2024-02-14	4 Dias 3 Parques - Universal Orlando	-
+2024-01-25 15:15:30.046369	2024-03-12	1 Dia 1 Parque - Universal Orlando	R$ 927,60
+2024-01-25 15:15:32.248904	2024-03-12	1 Dia 2 Parques - Universal Orlando	R$ 1.248,45
+2024-01-25 15:15:40.158252	2024-03-12	14 Dias 3 Parques - Universal Orlando	R$ 1.901,74
+2024-01-25 15:15:34.503311	2024-03-12	2 Dias 2 Parques - Universal Orlando	R$ 1.780,69
+2024-01-25 15:15:36.328036	2024-03-12	4 Dias 2 Parques - Universal Orlando	R$ 1.780,69
+2024-01-25 15:15:37.953615	2024-03-12	4 Dias 3 Parques - Universal Orlando	-
+2024-01-25 15:15:41.962038	2024-03-29	1 Dia 1 Parque - Universal Orlando	R$ 985,95
+2024-01-25 15:15:44.347605	2024-03-29	1 Dia 2 Parques - Universal Orlando	R$ 1.306,75
+2024-01-25 15:15:52.327063	2024-03-29	14 Dias 3 Parques - Universal Orlando	R$ 1.901,74
+2024-01-25 15:15:46.331730	2024-03-29	2 Dias 2 Parques - Universal Orlando	R$ 1.876,94
+2024-01-25 15:15:48.559714	2024-03-29	4 Dias 2 Parques - Universal Orlando	R$ 1.876,94
+2024-01-25 15:15:50.733955	2024-03-29	4 Dias 3 Parques - Universal Orlando	-
+2024-01-25 15:15:55.086394	2024-05-30	1 Dia 1 Parque - Universal Orlando	R$ 879,28
+2024-01-25 15:15:57.155704	2024-05-30	1 Dia 2 Parques - Universal Orlando	R$ 1.193,36
+2024-01-25 15:16:05.062539	2024-05-30	14 Dias 3 Parques - Universal Orlando	R$ 1.861,28
+2024-01-25 15:15:58.823134	2024-05-30	2 Dias 2 Parques - Universal Orlando	R$ 1.700,46
+2024-01-25 15:16:00.445142	2024-05-30	4 Dias 2 Parques - Universal Orlando	R$ 1.700,46
+2024-01-25 15:16:02.151951	2024-05-30	4 Dias 3 Parques - Universal Orlando	-

@@ -1,0 +1,91 @@
+import asyncio
+import os
+import pandas as pd
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from datetime import datetime, timedelta
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import NoSuchElementException
+import logging
+# Configuração inicial do Selenium
+
+
+async def coletar_precos_voupra_sea():
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    log_format = '%(asctime)s - %(levelname)s - %(message)s'
+    logging.basicConfig(level=logging.INFO, format=log_format)
+    # Definindo as datas de viagem
+    datas_viagem = [datetime.now().date() + timedelta(days=d) for d in [5, 10, 20, 47, 64, 126]]
+
+    # Definindo os nomes dos parques e os XPaths correspondentes
+    parques_xpaths = [
+        ("1 Dia 1 Parque - SeaWorld Orlando", '/html/body/div[4]/div/div[1]/div[2]/div[12]/div/div/div[3]/div[1]/div[2]'),
+        ("3 Dias 3 Parques - SeaWorld Orlando", '/html/body/div[4]/div/div[1]/div[2]/div[6]/div/div/div[3]/div[1]/div[2]'),
+        ("14 Dias 3 Parques - SeaWorld Orlando", '/html/body/div[4]/div/div[1]/div[2]/div[27]/div/div/div[3]/div[1]/div[2]')
+    ]
+
+
+    # Lista para armazenar os dados
+    dados = []
+    logging.info("Iniciando a coleta de preços de ingressos Seaworld no site Voupra.")
+    for data_viagem in datas_viagem:
+        for parque, xpath in parques_xpaths:
+            url = f"https://www.voupra.com/estados-unidos/orlando/seaworld?Id=58825&Busca=true&DataTemporada={data_viagem.strftime('%d%%2F%m%%2F%Y')}"
+            driver.get(url)
+
+            try:
+                # Tente localizar o elemento com o preço
+                wait = WebDriverWait(driver, 10)
+                elemento_preco = driver.find_element(By.XPATH, xpath)
+                preco_texto = elemento_preco.text
+            except NoSuchElementException:
+                # Se o elemento não for encontrado, atribua um traço "-" ao valor
+                preco_texto = "-"
+
+            # Adicione os dados a lista de dicionários
+            dados.append({
+                'Data_Hora_Coleta': datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f'),
+                'Data_viagem': data_viagem.strftime('%Y-%m-%d'),
+                'Parque': parque,
+                'Preco': preco_texto
+            })
+
+    # Fechando o driver
+    driver.quit()
+
+    # Criando um DataFrame
+    df = pd.DataFrame(dados)
+
+    # Ordenando por data de viagem
+    df = df.sort_values(by=['Data_viagem','Parque'])
+    nome_arquivo_saida_txt = f'coleta_voupra_sea_{datetime.now().strftime("%Y%m%d_%H%M%S")}.txt'
+
+
+    diretorio_atual = os.path.dirname(os.path.abspath(__file__))
+
+    # Define o caminho completo para o arquivo de saída TXT na mesma pasta que o script
+    caminho_arquivo_saida_txt = os.path.join(diretorio_atual, nome_arquivo_saida_txt)
+
+    # Salvando em um arquivo TXT no mesmo diretório que o script
+    df.to_csv(caminho_arquivo_saida_txt, sep='\t', index=False)
+
+    # Define o nome do arquivo de saída em formato JSON
+    formato_data_hora = "%d%m%Y_%H%M"
+    data_hora_atual = datetime.now().strftime(formato_data_hora)
+    nome_arquivo_saida_json = f"coleta_voupra_sea_{data_hora_atual}.json"
+    nome_arquivo_json = nome_arquivo_saida_json.replace("/", "_").replace(":", "_").replace(" ", "_")
+
+        # Define o caminho completo para o arquivo de saída JSON na mesma pasta que o script
+    caminho_arquivo_saida_json = os.path.join(nome_arquivo_json)
+
+        # Salvando em um arquivo JSON no mesmo diretório que o script
+    df.to_json(caminho_arquivo_saida_json, orient='records', date_format='iso')
+    logging.info(f"Resultados salvos em {caminho_arquivo_saida_txt} e {caminho_arquivo_saida_json}")
+    logging.info("Coleta finalizada.")
+    # Salvando em um arquivo TXT
+
+if __name__ == '__main__':
+    asyncio.run(coletar_precos_voupra_sea())

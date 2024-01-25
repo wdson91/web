@@ -9,9 +9,13 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 import os
+import logging
+
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 async def coletar_precos_vmz_seaworld():
-
+    logging.info("Iniciando coleta de preços do SeaWorld.")
     # Lista de sites e nomes de parques
     sites = [
         ("https://www.vmzviagens.com.br/ingressos/orlando/seaworld-orlando/seaworld-1-dia", '1 Dia 1 Parque - SeaWorld Orlando'),
@@ -30,6 +34,8 @@ async def coletar_precos_vmz_seaworld():
 
     for data in datas:
         for url, parque in sites:
+            logging.info(f"Coletando preços do parque {parque}.")
+
             driver.get(url)
 
             try:
@@ -48,7 +54,7 @@ async def coletar_precos_vmz_seaworld():
                 preco_texto = "-"
 
             # Adicione os dados a lista de dicionários
-            dados.append({'Data_Hora_Coleta': datetime.now(), 'Data_viagem': data.strftime("%Y-%m-%d"), 'Parque': parque, 'Preço': preco_texto})
+            dados.append({'Data_Hora_Coleta': datetime.now(), 'Data_viagem': data.strftime("%Y-%m-%d"), 'Parque': parque, 'Preco': preco_texto})
 
     # Fechando o driver
     driver.quit()
@@ -64,20 +70,26 @@ async def coletar_precos_vmz_seaworld():
 
     # Define o nome do arquivo de saída
     nome_arquivo_saida = "precos_vmz_seaworld.txt"
+    
 
     # Define o caminho completo para o arquivo de saída na mesma pasta que o script
-    caminho_arquivo_saida = os.path.join(nome_arquivo_saida)
+    caminho_arquivo_saida = os.path.join(diretorio_atual,nome_arquivo_saida)
 
     # Salvando em um arquivo TXT no mesmo diretório que o script
     df.to_csv(caminho_arquivo_saida, sep='\t', index=False)
 
-    nome_arquivo_saida_json = "precos_vmz_seaworld.json"
-
+    formato_data_hora = "%d%m%Y_%H%M"
+    data_hora_atual = datetime.now().strftime(formato_data_hora)
+    nome_arquivo_saida_json = f"coleta_vmz_seaworld_{data_hora_atual}.json"
+    nome_arquivo_json = nome_arquivo_saida_json.replace("/", "_").replace(":", "_").replace(" ", "_")
+    
     # Define o caminho completo para o arquivo de saída JSON na mesma pasta que o script
-    caminho_arquivo_saida_json = os.path.join(diretorio_atual, nome_arquivo_saida_json)
+    caminho_arquivo_saida_json = os.path.join(nome_arquivo_json)
 
     # Salvando em um arquivo JSON no mesmo diretório que o script
     df.to_json(caminho_arquivo_saida_json, orient='records', date_format='iso')
-
+    
+    logging.info(f"Resultados salvos em {caminho_arquivo_saida} e {caminho_arquivo_saida_json}")
+    logging.info("Coleta finalizada.")
 if __name__ == "__main__":
     asyncio.run(coletar_precos_vmz_seaworld())
