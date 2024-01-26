@@ -28,12 +28,12 @@ def salvar_dados(df, diretorio, identificador):
     
 
     # Salvar em TXT
-    nome_arquivo_txt = f'coleta_{identificador}_{datetime.now().strftime("%Y%m%d_%H%M")}.txt'
+    nome_arquivo_txt = f'coleta_{identificador}_{datetime.now().strftime('%d%m%Y')}.txt'
     caminho_arquivo_txt = os.path.join(diretorio, nome_arquivo_txt)
     df.to_csv(caminho_arquivo_txt, sep='\t', index=False)
 
     # Salvar em JSON
-    nome_arquivo_json = f'coleta_{identificador}_{datetime.now().strftime("%d%m%Y_%H%M")}.json'
+    nome_arquivo_json = f'coleta_{identificador}_{datetime.now().strftime('%d%m%Y')}.json'
     caminho_arquivo_json = os.path.join( nome_arquivo_json)
     df.to_json(caminho_arquivo_json, orient='records', date_format='iso')
 
