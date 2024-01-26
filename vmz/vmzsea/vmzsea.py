@@ -64,6 +64,9 @@ async def coletar_precos_vmz_seaworld():
 
     # Ordenando o DataFrame pelas datas da viagem e pelo nome do parque
     df['Data_viagem'] = pd.to_datetime(df['Data_viagem'])
+    # Convertendo 'Data_Hora_Coleta' para datetime e removendo os milissegundos
+    df['Data_Hora_Coleta'] = pd.to_datetime(df['Data_Hora_Coleta']).dt.strftime('%Y-%m-%d %H:%M:%S')
+
     df = df.sort_values(by=['Data_viagem', 'Parque'])
 
     diretorio_atual = os.path.dirname(os.path.abspath(__file__))
@@ -87,7 +90,7 @@ async def coletar_precos_vmz_seaworld():
     caminho_arquivo_saida_json = os.path.join(nome_arquivo_json)
 
     # Salvando em um arquivo JSON no mesmo diretório que o script
-    df.to_json(caminho_arquivo_saida_json, orient='records', date_format='iso')
+    df.to_json(caminho_arquivo_saida_json, orient='records')
     
     logging.info(f"Resultados salvos em {caminho_arquivo_saida} e {caminho_arquivo_saida_json}")
     logging.info("Coleta finalizada.")

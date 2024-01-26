@@ -1,5 +1,6 @@
 import asyncio
 import os
+import sys
 import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -11,6 +12,12 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 import logging
 
+
+diretorio_atual = os.path.dirname(os.path.abspath(__file__))  # Diretório de teste.py
+diretorio_pai = os.path.dirname(diretorio_atual)  # Subindo um nível
+diretorio_avo = os.path.dirname(diretorio_pai)  # Subindo mais um nível
+sys.path.insert(0, diretorio_avo)
+from salvardados import salvar_dados
 async def coletar_precos_voupra_universal():
     # Configuração inicial do Selenium
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
@@ -61,32 +68,8 @@ async def coletar_precos_voupra_universal():
     # Criando um DataFrame
     df = pd.DataFrame(dados)
 
-    # Ordenando por data de viagem
-    df = df.sort_values(by=['Data_viagem','Parque'])
-
-    nome_arquivo_saida_txt = f'coleta_voupra_universal_{datetime.now().strftime("%Y%m%d_%H%M%S")}.txt'
-
-
-    diretorio_atual = os.path.dirname(os.path.abspath(__file__))
-
-    # Define o caminho completo para o arquivo de saída TXT na mesma pasta que o script
-    caminho_arquivo_saida_txt = os.path.join(diretorio_atual, nome_arquivo_saida_txt)
-
-    # Salvando em um arquivo TXT no mesmo diretório que o script
-    df.to_csv(caminho_arquivo_saida_txt, sep='\t', index=False)
-
-    # Define o nome do arquivo de saída em formato JSON
-    formato_data_hora = "%d%m%Y_%H%M"
-    data_hora_atual = datetime.now().strftime(formato_data_hora)
-    nome_arquivo_saida_json = f"coleta_voupra_universal_{data_hora_atual}.json"
-    nome_arquivo_json = nome_arquivo_saida_json.replace("/", "_").replace(":", "_").replace(" ", "_")
-
-        # Define o caminho completo para o arquivo de saída JSON na mesma pasta que o script
-    caminho_arquivo_saida_json = os.path.join(nome_arquivo_json)
-
-        # Salvando em um arquivo JSON no mesmo diretório que o script
-    df.to_json(caminho_arquivo_saida_json, orient='records', date_format='iso')
-    logging.info(f"Resultados salvos em {caminho_arquivo_saida_txt} e {caminho_arquivo_saida_json}")
+    salvar_dados(df, diretorio_atual, 'voupra_universal')
+    
     logging.info("Coleta finalizada.")
     # Salvando em um arquivo TXT
 

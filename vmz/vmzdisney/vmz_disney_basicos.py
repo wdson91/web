@@ -81,6 +81,14 @@ async def coletar_precos_vmz_disneybasicos():
 
     # Criando um DataFrame
     df = pd.DataFrame(dados)
+
+    order = ['1 Dia - Disney Básico Magic Kingdom', '1 Dia - Disney Básico Hollywood Studios', '1 Dia - Disney Básico Animal Kingdom', '1 Dia - Disney Básico Epcot','4 Dias - Disney Promocional']
+    df['Parque'] = pd.Categorical(df['Parque'], categories=order, ordered=True)
+    df['Data_viagem'] = pd.to_datetime(df['Data_viagem'])
+    df['Data_Hora_Coleta'] = pd.to_datetime(df['Data_Hora_Coleta']).dt.strftime('%Y-%m-%d %H:%M:%S')
+
+    df = df.sort_values(by=['Data_viagem', 'Parque'])
+
     # Obtém o diretório atual onde o arquivo Python está localizado
     diretorio_atual = os.path.dirname(os.path.abspath(__file__))
 
@@ -89,12 +97,6 @@ async def coletar_precos_vmz_disneybasicos():
 
     # Define o caminho completo para o arquivo de saída dentro da pasta "vmzdisney"
     caminho_arquivo_saida = os.path.join(diretorio_atual, nome_arquivo_saida)
-
-    
-
-    # Ordenando o DataFrame pelas datas da viagem e pelo nome do parque
-    df['Data_viagem'] = pd.to_datetime(df['Data_viagem'])
-    df = df.sort_values(by=['Data_viagem', 'Parque'])
 
     # Salvando em um arquivo TXT
     df.to_csv(caminho_arquivo_saida, sep='\t', index=False)

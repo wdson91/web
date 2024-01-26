@@ -109,7 +109,7 @@ async def coletar_precos_vmz_universal():
     caminho_arquivo_saida_json = os.path.join(nome_arquivo_json)
 
     # Salvando em um arquivo JSON no mesmo diretório que o script
-    df.to_json(caminho_arquivo_saida_json, orient='records', date_format='iso')
+    df.to_json(caminho_arquivo_saida_json, orient='records')
     logging.info(f"Resultados salvos em {caminho_arquivo_saida_txt} e {caminho_arquivo_saida_json}")
     logging.info("Coleta finalizada.")
 if __name__ == "__main__":

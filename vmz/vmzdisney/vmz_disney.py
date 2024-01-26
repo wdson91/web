@@ -3,8 +3,8 @@ import asyncio
 import os
 from datetime import datetime
 import logging
-from .vmz_disney_dias import coletar_precos_vmz_disneydias
-from .vmz_disney_basicos import coletar_precos_vmz_disneybasicos
+from vmz_disney_dias import coletar_precos_vmz_disneydias
+from vmz_disney_basicos import coletar_precos_vmz_disneybasicos
 
 
 async def coletar_precos_vmz_disney():

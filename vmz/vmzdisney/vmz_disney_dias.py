@@ -10,6 +10,7 @@ from datetime import datetime, timedelta
 import time
 import os
 import logging
+
 # Configuração inicial do Selenium
 async def coletar_precos_vmz_disneydias():
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
@@ -25,7 +26,7 @@ async def coletar_precos_vmz_disneydias():
             botao_fechar.click()
             logging.info("Pop-up fechado.")
         except Exception as e:
-            logging.warning(f"Não foi possível fechar pop-up: {e}")
+            logging.warning(f"Popup não encontrada")
 
     def scroll_to_element(driver, element):
         driver.execute_script("arguments[0].scrollIntoView(true);", element)
@@ -52,7 +53,7 @@ async def coletar_precos_vmz_disneydias():
 
     def encontrar_preco_data(driver, data):
         try:
-            time.sleep(waiter + 5)  # Aguardar o calendário carregar
+            time.sleep(waiter + 9)  # Aguardar o calendário carregar
             elementos_fc_content = driver.find_elements(By.CLASS_NAME, 'fc-content')
             for elemento in elementos_fc_content:
                 fc_date = elemento.find_element(By.CLASS_NAME, 'fc-date').text
@@ -116,11 +117,15 @@ async def coletar_precos_vmz_disneydias():
 
     # Define o caminho completo para o arquivo de saída dentro da pasta "vmzdisney"
     caminho_arquivo_saida = os.path.join(diretorio_atual,nome_arquivo_saida)
-
     
-
     df_resultados = pd.DataFrame(resultados)
+
+    df_resultados['Data_viagem'] = pd.to_datetime(df_resultados['Data_viagem'])
+    df_resultados['Data_Hora_Coleta'] = pd.to_datetime(df_resultados['Data_Hora_Coleta']).dt.strftime('%Y-%m-%d %H:%M:%S')
+    df_resultados = df_resultados.sort_values(by=['Data_viagem', 'Parque'])
+    
     df_resultados.to_csv(caminho_arquivo_saida, sep='\t', index=False)
+
     logging.info(f"Resultados salvos em {caminho_arquivo_saida}")
 
 if __name__ == "__main__":
