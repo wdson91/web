@@ -40,8 +40,8 @@ async def coletar_precos_vmz_universal():
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
     # Definindo as datas
-    #datas = [datetime.now().date() + timedelta(days=d) for d in [5, 10, 20, 47, 64, 126]]
-    datas = [datetime.now().date() + timedelta(days=d) for d in [5]]
+    datas = [datetime.now().date() + timedelta(days=d) for d in [5, 10, 20, 47, 64, 126]]
+    
     # Lista para armazenar os dados
     dados = []
 
@@ -58,7 +58,8 @@ async def coletar_precos_vmz_universal():
                 xpath_selector = '//*[@id="__layout"]/div/div/section/article[1]/div/div/div[4]/div[1]/div[3]/div[2]/b'
                 elemento_preco = driver.find_element(By.XPATH, xpath_selector)
                 preco_texto = elemento_preco.text
-
+                
+                
                 # Multiplicar o preço por 10
                 preco_texto = preco_texto.replace('R$ ', '').replace(',', '.')
                 preco_float = float(preco_texto) * 10
@@ -66,10 +67,16 @@ async def coletar_precos_vmz_universal():
             except NoSuchElementException:
                 # Se o elemento não for encontrado, atribua um traço "-" ao valor
                 preco_texto = "-"
-
+                
             # Adicione os dados a lista de dicionários
-            dados.append({'Data_Hora_Coleta': datetime.now().strftime("%Y-%m-%d %H:%M:%S"), 'Data_viagem': (data + timedelta(days=0)).strftime("%Y-%m-%d"), 'Parque': parque, 'Preco': preco_texto})
-
+            data_hora_atual = datetime.now()
+            dados.append({
+                    'Data_Coleta': data_hora_atual.strftime("%Y-%m-%d"),
+                    'Hora_Coleta': data_hora_atual.strftime("%H:%M:%S"),
+                    'Data_viagem': (data + timedelta(days=0)).strftime("%Y-%m-%d"),
+                    'Parque': parque,
+                    'Preco': preco_texto
+                })
     # Coleta de preços para 14 Dias 3 Parques - Universal Orlando (não dinâmico)
     driver.get(url_14_dias)
     try:
@@ -77,16 +84,22 @@ async def coletar_precos_vmz_universal():
         xpath_selector = '//*[@id="__layout"]/div/div/section/article[1]/div/div/div[4]/div[1]/div[1]/div[2]/b'
         elemento_preco_14_dias = driver.find_element(By.XPATH, xpath_selector)
         preco_texto_14_dias = elemento_preco_14_dias.text
-        preco_texto_14_dias = preco_texto_14_dias.replace('R$ ', '').replace(',', '.')
-        preco_float_14_dias = float(preco_texto_14_dias) * 10
-        preco_texto_14_dias = f"R$ {preco_float_14_dias:.2f}"
+        price_decimal = float(preco_texto_14_dias.replace('R$', '').replace('.', '').replace(',', '.').strip())
+        new_price = round(price_decimal * 1.10, 2)
+        new_price *= 10
     except NoSuchElementException:
-        preco_texto_14_dias = "-"
+        new_price = "-"
 
     # Adicionando o preço fixo para 14 Dias 3 Parques - Universal Orlando
     for data in datas:
-        dados.append({'Data_Hora_Coleta': datetime.now().strftime("%Y-%m-%d %H:%M:%S"), 'Data_viagem': (data + timedelta(days=0)).strftime("%Y-%m-%d"), 'Parque': '14 Dias 3 Parques - Universal Orlando', 'Preco': preco_texto_14_dias})
-
+                data_hora_atual = datetime.now()
+                dados.append({
+                    'Data_Coleta': data_hora_atual.strftime("%Y-%m-%d"),
+                    'Hora_Coleta': data_hora_atual.strftime("%H:%M:%S"),
+                    'Data_viagem': (data + timedelta(days=0)).strftime("%Y-%m-%d"),
+                    'Parque': parque,
+                    'Preco': new_price
+                })    
     # Fechando o driver
     driver.quit()
 
@@ -94,8 +107,10 @@ async def coletar_precos_vmz_universal():
     df = pd.DataFrame(dados)
 
     #salvar_dados(df, diretorio_atual, 'vmz_disney_universal')
-    inserir_dados_no_banco(df, 'vmz_universal')
 
+    # Inserindo os dados no banco de dados
+    inserir_dados_no_banco(df, 'vmz_universal')
+    print(df)
     logging.info("Coleta finalizada Site Vmz- Universal Orlando.")
 if __name__ == "__main__":
     asyncio.run(coletar_precos_vmz_universal())

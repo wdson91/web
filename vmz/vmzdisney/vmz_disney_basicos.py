@@ -12,10 +12,14 @@ from selenium.common.exceptions import NoSuchElementException
 import os
 import logging
 
-diretorio_atual = os.path.dirname(os.path.abspath(__file__))  # Diretório de teste.py
-diretorio_pai = os.path.dirname(diretorio_atual)  # Subindo um nível
-diretorio_avo = os.path.dirname(diretorio_pai)  # Subindo mais um nível
+# Configuração de logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
+# Definindo diretórios
+diretorio_atual = os.path.dirname(os.path.abspath(__file__))
+diretorio_pai = os.path.dirname(diretorio_atual)
+diretorio_avo = os.path.dirname(diretorio_pai)
+from insert_database import inserir_dados_no_banco
 # Adicionando o diretório 'docs' ao sys.path
 sys.path.insert(0, diretorio_avo)
 from salvardados import salvar_dados
@@ -68,21 +72,27 @@ async def coletar_precos_vmz_disneybasicos():
                     # Tente localizar o elemento com o preço
                     wait = WebDriverWait(driver, 10)
                     elemento_preco = driver.find_element(By.XPATH, xpath_selector)
-                    preco_texto = elemento_preco.text
-                    
+                    preco_texto = elemento_preco
 
                     # Multiplicar o preço por 10
-                    preco_texto = preco_texto.replace('R$ ', '').replace(',', '.')
-                    preco_float = float(preco_texto) * 10
-                    preco_texto = f"R$ {preco_float:.2f}"
+                    price_text = preco_texto.text
+                    price_decimal = float(price_text.replace('R$', '').replace('.', '').replace(',', '.').strip())
+                    new_price = round(price_decimal * 1.10, 2)
+                    new_price *= 10
                 except NoSuchElementException:
                     
 
                     # Se o elemento não for encontrado, atribua um traço "-" ao valor
-                    preco_texto = "-"
+                    new_price = "-"
 
-                # Adicione os dados a lista de dicionários
-                dados.append({'Data_Hora_Coleta': datetime.now(), 'Data_viagem': (data + timedelta(days=0)).strftime("%Y-%m-%d"), 'Parque': parque, 'Preco': preco_texto})
+                data_hora_atual = datetime.now()
+                dados.append({
+                        'Data_Coleta': data_hora_atual.strftime("%Y-%m-%d"),
+                        'Hora_Coleta': data_hora_atual.strftime("%H:%M:%S"),
+                        'Data_viagem': (data + timedelta(days=0)).strftime("%Y-%m-%d"),
+                        'Parque': parque,
+                        'Preco': new_price
+                    })
     logging.info("Coleta finalizada.")
     # Fechando o driver
     driver.quit()
@@ -90,8 +100,8 @@ async def coletar_precos_vmz_disneybasicos():
     # Criando um DataFrame
     df = pd.DataFrame(dados)
 
-    salvar_dados(df, diretorio_atual, 'vmz_disney_basicos')
-
+    #salvar_dados(df, diretorio_atual, 'vmz_disney_basicos')
+    inserir_dados_no_banco(df, 'vmz_disney')
     logging.info("Coleta finalizada Site Vmz- Disney.")
     
 if __name__ == "__main__":

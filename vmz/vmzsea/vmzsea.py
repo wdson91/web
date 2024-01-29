@@ -18,10 +18,10 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 diretorio_atual = os.path.dirname(os.path.abspath(__file__))  # Diretório de teste.py
 diretorio_pai = os.path.dirname(diretorio_atual)  # Subindo um nível
 diretorio_avo = os.path.dirname(diretorio_pai)  # Subindo mais um nível
-
+from insert_database import inserir_dados_no_banco
 # Adicionando o diretório 'docs' ao sys.path
 sys.path.insert(0, diretorio_avo)
-from salvardados import salvar_dados
+#from salvardados import salvar_dados
 async def coletar_precos_vmz_seaworld():
     logging.info("Iniciando coleta de preços do SeaWorld.")
     # Lista de sites e nomes de parques
@@ -54,23 +54,33 @@ async def coletar_precos_vmz_seaworld():
                 preco_texto = elemento_preco.text
 
                 # Multiplicar o preço por 10
-                preco_texto = preco_texto.replace('R$ ', '').replace(',', '.')
-                preco_float = float(preco_texto) * 10
-                preco_texto = f"R$ {preco_float:.2f}"
+                
+                price_decimal = float(preco_texto.replace('R$', '').replace('.', '').replace(',', '.').strip())
+                new_price = round(price_decimal * 1.10, 2)
+                new_price *= 10
             except NoSuchElementException:
                 # Se o elemento não for encontrado, atribua um traço "-" ao valor
                 preco_texto = "-"
 
             # Adicione os dados a lista de dicionários
-            dados.append({'Data_Hora_Coleta': datetime.now(), 'Data_viagem': data.strftime("%Y-%m-%d"), 'Parque': parque, 'Preco': preco_texto})
+            data_hora_atual = datetime.now()
+            dados.append({
+                    'Data_Coleta': data_hora_atual.strftime("%Y-%m-%d"),
+                    'Hora_Coleta': data_hora_atual.strftime("%H:%M:%S"),
+                    'Data_viagem': (data + timedelta(days=0)).strftime("%Y-%m-%d"),
+                    'Parque': parque,
+                    'Preco': new_price
+                })    
 
     # Fechando o driver
     driver.quit()
 
     # Criando um DataFrame
     df = pd.DataFrame(dados)
-
-    salvar_dados(df, diretorio_atual, 'vmz_disney_seaworld')
+    print(df)
+    # Inserindo os dados no banco de dados
+    inserir_dados_no_banco(df, 'vmz_seaworld')
+    #salvar_dados(df, diretorio_atual, 'vmz_disney_seaworld')
     
     logging.info("Coleta finalizada Site Vmz- SeaWorld")
 if __name__ == "__main__":

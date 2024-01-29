@@ -1,0 +1,31 @@
+Data_Hora_Coleta	Data_viagem	Parque	Preco
+2024-01-29 08:09	2024-02-03	1 Dia - Disney Básico Animal Kingdom	R$ 932.20
+2024-01-29 08:09	2024-02-03	1 Dia - Disney Básico Epcot	R$ 1029.40
+2024-01-29 08:09	2024-02-03	1 Dia - Disney Básico Hollywood Studios	R$ 1061.70
+2024-01-29 08:09	2024-02-03	1 Dia - Disney Básico Magic Kingdom	R$ 1094.10
+2024-01-29 08:10	2024-02-03	4 Dias - Disney Promocional	R$ 2644.60
+2024-01-29 08:10	2024-02-08	1 Dia - Disney Básico Animal Kingdom	R$ 964.60
+2024-01-29 08:10	2024-02-08	1 Dia - Disney Básico Epcot	R$ 1029.40
+2024-01-29 08:10	2024-02-08	1 Dia - Disney Básico Hollywood Studios	R$ 1094.10
+2024-01-29 08:10	2024-02-08	1 Dia - Disney Básico Magic Kingdom	R$ 1126.40
+2024-01-29 08:10	2024-02-08	4 Dias - Disney Promocional	R$ 2644.60
+2024-01-29 08:10	2024-02-18	1 Dia - Disney Básico Animal Kingdom	R$ 1061.70
+2024-01-29 08:10	2024-02-18	1 Dia - Disney Básico Epcot	R$ 1158.80
+2024-01-29 08:10	2024-02-18	1 Dia - Disney Básico Hollywood Studios	R$ 1158.80
+2024-01-29 08:10	2024-02-18	1 Dia - Disney Básico Magic Kingdom	R$ 1191.20
+2024-01-29 08:10	2024-02-18	4 Dias - Disney Promocional	R$ 2644.60
+2024-01-29 08:10	2024-03-16	1 Dia - Disney Básico Animal Kingdom	R$ 1029.40
+2024-01-29 08:10	2024-03-16	1 Dia - Disney Básico Epcot	R$ 1126.40
+2024-01-29 08:10	2024-03-16	1 Dia - Disney Básico Hollywood Studios	R$ 1126.40
+2024-01-29 08:10	2024-03-16	1 Dia - Disney Básico Magic Kingdom	R$ 1158.80
+2024-01-29 08:10	2024-03-16	4 Dias - Disney Promocional	-
+2024-01-29 08:10	2024-04-02	1 Dia - Disney Básico Animal Kingdom	R$ 1029.40
+2024-01-29 08:10	2024-04-02	1 Dia - Disney Básico Epcot	R$ 1061.70
+2024-01-29 08:10	2024-04-02	1 Dia - Disney Básico Hollywood Studios	R$ 1126.40
+2024-01-29 08:10	2024-04-02	1 Dia - Disney Básico Magic Kingdom	-
+2024-01-29 08:10	2024-04-02	4 Dias - Disney Promocional	-
+2024-01-29 08:10	2024-06-03	1 Dia - Disney Básico Animal Kingdom	R$ 932.20
+2024-01-29 08:10	2024-06-03	1 Dia - Disney Básico Epcot	R$ 997.00
+2024-01-29 08:10	2024-06-03	1 Dia - Disney Básico Hollywood Studios	R$ 1061.70
+2024-01-29 08:10	2024-06-03	1 Dia - Disney Básico Magic Kingdom	-
+2024-01-29 08:10	2024-06-03	4 Dias - Disney Promocional	-

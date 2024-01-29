@@ -11,6 +11,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 import logging
+from insert_database import inserir_dados_no_banco
 # Configuração inicial do Selenium
 
 
@@ -25,7 +26,7 @@ async def coletar_precos_voupra_sea():
     log_format = '%(asctime)s - %(levelname)s - %(message)s'
     logging.basicConfig(level=logging.INFO, format=log_format)
     # Definindo as datas de viagem
-    datas_viagem = [datetime.now().date() + timedelta(days=d) for d in [5, 10, 20, 47, 64, 126]]
+    datas = [datetime.now().date() + timedelta(days=d) for d in [5, 10, 20, 47, 64, 126]]
 
     # Definindo os nomes dos parques e os XPaths correspondentes
     parques_xpaths = [
@@ -38,9 +39,9 @@ async def coletar_precos_voupra_sea():
     # Lista para armazenar os dados
     dados = []
     logging.info("Iniciando a coleta de precos de ingressos Seaworld no site Voupra.")
-    for data_viagem in datas_viagem:
+    for data in datas:
         for parque, xpath in parques_xpaths:
-            url = f"https://www.voupra.com/estados-unidos/orlando/seaworld?Id=58825&Busca=true&DataTemporada={data_viagem.strftime('%d%%2F%m%%2F%Y')}"
+            url = f"https://www.voupra.com/estados-unidos/orlando/seaworld?Id=58825&Busca=true&DataTemporada={data.strftime('%d%%2F%m%%2F%Y')}"
             driver.get(url)
 
             try:
@@ -48,25 +49,32 @@ async def coletar_precos_voupra_sea():
                 wait = WebDriverWait(driver, 10)
                 elemento_preco = driver.find_element(By.XPATH, xpath)
                 preco_texto = elemento_preco.text
+                price_decimal = float(preco_texto.replace('R$', '').replace('.', '').replace(',', '.').strip())
+                
             except NoSuchElementException:
                 # Se o elemento não for encontrado, atribua um traço "-" ao valor
                 preco_texto = "-"
 
             # Adicione os dados a lista de dicionários
+            data_hora_atual = datetime.now()
             dados.append({
-                'Data_Hora_Coleta': datetime.now(),
-                'Data_viagem': data_viagem.strftime('%Y-%m-%d'),
-                'Parque': parque,
-                'Preco': preco_texto
-            })
-
+                    'Data_Coleta': data_hora_atual.strftime("%Y-%m-%d"),
+                    'Hora_Coleta': data_hora_atual.strftime("%H:%M:%S"),
+                    'Data_viagem': (data + timedelta(days=0)).strftime("%Y-%m-%d"),
+                    'Parque': parque,
+                    'Preco': price_decimal
+                })    
+            
     # Fechando o driver
     driver.quit()
 
     # Criando um DataFrame
     df = pd.DataFrame(dados)
     
-    salvar_dados(df, diretorio_atual, 'voupra_seaworld')
+
+    # Inserindo os dados no banco de dados
+    inserir_dados_no_banco(df, 'voupra_seaworld')    
+    #salvar_dados(df, diretorio_atual, 'voupra_seaworld')
     
     logging.info("Coleta finalizada.")
     # Salvando em um arquivo TXT

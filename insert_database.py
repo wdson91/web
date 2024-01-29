@@ -1,5 +1,7 @@
 import psycopg2
 import pandas as pd
+
+from create_database import criar_database
 # Conectar ao banco de dados
 
 def converter_data_hora(data_hora_str):
@@ -23,23 +25,29 @@ def inserir_dados_no_banco(df, nome_banco):
 
     cursor = conexao.cursor()
 
-    # Comando SQL para inserir dados
-    sql = "INSERT INTO {} (data_hora_coleta, data_viagem, parque, preco) VALUES (%s, %s, %s, %s)".format(nome_banco)
+    
+    criar_database()
 
-    # Processar cada linha do DataFrame
+    # Comando SQL para inserir dados
+    sql = "INSERT INTO {} (data_coleta, hora_coleta, data_viagem, parque, preco) VALUES (%s, %s, %s, %s, %s)".format(nome_banco)
+
     for _, row in df.iterrows():
         
-        preco = row['Preco']
-        if isinstance(preco, str) and preco.strip() == '-':
+        # Tratamento do preço
+        preco_texto = row['Preco']
+        
+        #preco_texto = preco_texto.replace('R$', '').replace(',', '').strip()  # Remove 'R$', vírgulas e espaços
+        if isinstance(preco_texto, str) and preco_texto.strip() == '-':
             preco = None  # Ou outro valor padrão se não permitir nulo
         else:
             try:
-                preco = float(preco.replace('R$ ', '').replace(',', '.'))
+                preco = float(preco_texto)
             except ValueError:
                 preco = None  # Ou outro valor padrão se não permitir nulo
 
-        cursor.execute(sql, (row["Data_Hora_Coleta"], row["Data_viagem"], row["Parque"], preco))
-
+        # Executar a inserção
+        cursor.execute(sql, (row["Data_Coleta"], row["Hora_Coleta"], row["Data_viagem"], row["Parque"], preco))
+    
     # Commit e fechar conexões
     conexao.commit()
     cursor.close()
