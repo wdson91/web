@@ -1,0 +1,10 @@
+Data_Hora_Coleta	Data_viagem	Parque	Preco
+2024-01-27 12:06	2024-02-01	1 Dia - Disney Basico Animal Kingdom	R$ 772,77
+2024-01-27 12:06	2024-02-01	1 Dia - Disney Basico Epcot	R$ 828,32
+2024-01-27 12:06	2024-02-01	1 Dia - Disney Basico Hollywood Studios	R$ 883,92
+2024-01-27 12:06	2024-02-01	1 Dia - Disney Basico Magic Kingdom	R$ 911,75
+2024-01-27 12:06	2024-02-01	2 Dias - Disney World Bsico	R$ 1.654,85
+2024-01-27 12:06	2024-02-01	3 Dias - Disney World Basico	R$ 2.144,84
+2024-01-27 12:06	2024-02-01	4 Dias - Disney Promocional	R$ 2.707,98
+2024-01-27 12:06	2024-02-01	4 Dias - Disney World Basico	R$ 2.707,98
+2024-01-27 12:06	2024-02-01	5 Dias - Disney World Basico	R$ 2.957,40

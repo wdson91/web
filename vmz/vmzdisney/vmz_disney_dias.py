@@ -1,4 +1,5 @@
 import asyncio
+import sys
 import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -11,6 +12,13 @@ import time
 import os
 import logging
 
+diretorio_atual = os.path.dirname(os.path.abspath(__file__))  # Diretório de teste.py
+diretorio_pai = os.path.dirname(diretorio_atual)  # Subindo um nível
+diretorio_avo = os.path.dirname(diretorio_pai)  # Subindo mais um nível
+
+# Adicionando o diretório 'docs' ao sys.path
+sys.path.insert(0, diretorio_avo)
+from salvardados import salvar_dados
 # Configuração inicial do Selenium
 async def coletar_precos_vmz_disneydias():
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
@@ -26,7 +34,7 @@ async def coletar_precos_vmz_disneydias():
             botao_fechar.click()
             logging.info("Pop-up fechado.")
         except Exception as e:
-            logging.warning(f"Popup não encontrada")
+            logging.warning(f"Popup nao encontrada")
 
     def scroll_to_element(driver, element):
         driver.execute_script("arguments[0].scrollIntoView(true);", element)
@@ -45,9 +53,9 @@ async def coletar_precos_vmz_disneydias():
             month_select.click()
             driver.find_element(By.CSS_SELECTOR, f'option[value="{mes}"]').click()
 
-            logging.info(f"Mudança para mês {mes} e ano {ano} realizada com sucesso.")
+            logging.info(f"Mudanca para mes {mes} e ano {ano} realizada com sucesso.")
         except Exception as e:
-            logging.error(f"Erro ao mudar mês e ano: {e}")
+            logging.error(f"Erro ao mudar mes e ano: {e}")
 
         
 
@@ -68,10 +76,10 @@ async def coletar_precos_vmz_disneydias():
             return None
 
     nome_pacotes = {
-        2: "2 Dias - Disney World Básico",
-        3: "3 Dias - Disney World Básico",
-        4: "4 Dias - Disney World Básico",
-        5: "5 Dias - Disney World Básico"
+        2: "2 Dias - Disney World Basico",
+        3: "3 Dias - Disney World Basico",
+        4: "4 Dias - Disney World Basico",
+        5: "5 Dias - Disney World Basico"
     }
 
     def processar_dias(driver, dias):
@@ -80,7 +88,7 @@ async def coletar_precos_vmz_disneydias():
         resultados = []
 
         for dia in dias:
-            logging.info(f"Coletando preços para {dia} dias.")
+            logging.info(f"Coletando precos para {dia} dias.")
             nome_pacote = nome_pacotes.get(dia, f"{dia} Dias - Desconhecido")
             url_com_dias = f"{base_url}?mes=2024-01&dias={dia}"
             driver.get(url_com_dias)
@@ -110,23 +118,11 @@ async def coletar_precos_vmz_disneydias():
 
     driver.quit()
 
-    diretorio_atual = os.path.dirname(os.path.abspath(__file__))
-
-    # Define o nome do arquivo de saída
-    nome_arquivo_saida = "precos_vmz_disney_dias.txt"
-
-    # Define o caminho completo para o arquivo de saída dentro da pasta "vmzdisney"
-    caminho_arquivo_saida = os.path.join(diretorio_atual,nome_arquivo_saida)
-    
     df_resultados = pd.DataFrame(resultados)
 
-    df_resultados['Data_viagem'] = pd.to_datetime(df_resultados['Data_viagem'])
-    df_resultados['Data_Hora_Coleta'] = pd.to_datetime(df_resultados['Data_Hora_Coleta']).dt.strftime('%Y-%m-%d %H:%M:%S')
-    df_resultados = df_resultados.sort_values(by=['Data_viagem', 'Parque'])
+    salvar_dados(df_resultados, diretorio_atual, 'vmz_disney_dias')
+
+    logging.info("Coleta finalizada Site Vmz- Disney.")
     
-    df_resultados.to_csv(caminho_arquivo_saida, sep='\t', index=False)
-
-    logging.info(f"Resultados salvos em {caminho_arquivo_saida}")
-
 if __name__ == "__main__":
     asyncio.run(coletar_precos_vmz_disneydias())

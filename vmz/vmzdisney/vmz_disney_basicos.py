@@ -1,4 +1,5 @@
 import asyncio
+import sys
 import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -11,6 +12,13 @@ from selenium.common.exceptions import NoSuchElementException
 import os
 import logging
 
+diretorio_atual = os.path.dirname(os.path.abspath(__file__))  # Diretório de teste.py
+diretorio_pai = os.path.dirname(diretorio_atual)  # Subindo um nível
+diretorio_avo = os.path.dirname(diretorio_pai)  # Subindo mais um nível
+
+# Adicionando o diretório 'docs' ao sys.path
+sys.path.insert(0, diretorio_avo)
+from salvardados import salvar_dados
 async def coletar_precos_vmz_disneybasicos():
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -82,26 +90,9 @@ async def coletar_precos_vmz_disneybasicos():
     # Criando um DataFrame
     df = pd.DataFrame(dados)
 
-    order = ['1 Dia - Disney Básico Magic Kingdom', '1 Dia - Disney Básico Hollywood Studios', '1 Dia - Disney Básico Animal Kingdom', '1 Dia - Disney Básico Epcot','4 Dias - Disney Promocional']
-    df['Parque'] = pd.Categorical(df['Parque'], categories=order, ordered=True)
-    df['Data_viagem'] = pd.to_datetime(df['Data_viagem'])
-    df['Data_Hora_Coleta'] = pd.to_datetime(df['Data_Hora_Coleta']).dt.strftime('%Y-%m-%d %H:%M:%S')
+    salvar_dados(df, diretorio_atual, 'vmz_disney_basicos')
 
-    df = df.sort_values(by=['Data_viagem', 'Parque'])
-
-    # Obtém o diretório atual onde o arquivo Python está localizado
-    diretorio_atual = os.path.dirname(os.path.abspath(__file__))
-
-    # Define o nome do arquivo de saída
-    nome_arquivo_saida = "precos_vmz_disney_basicos.txt"
-
-    # Define o caminho completo para o arquivo de saída dentro da pasta "vmzdisney"
-    caminho_arquivo_saida = os.path.join(diretorio_atual, nome_arquivo_saida)
-
-    # Salvando em um arquivo TXT
-    df.to_csv(caminho_arquivo_saida, sep='\t', index=False)
-
-
-
+    logging.info("Coleta finalizada Site Vmz- Disney.")
+    
 if __name__ == "__main__":
     asyncio.run(coletar_precos_vmz_disneybasicos())

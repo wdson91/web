@@ -93,8 +93,7 @@ async def coletar_precos_voupra_disney():
     salvar_dados(df, diretorio_atual, 'voupra_disney')
     
     logging.info("Coleta finalizada Site Voupra - Disney.")
-    # Encerrar o log
-    logging.info("Coleta de preços finalizada.")
+
 
 
 if __name__ == '__main__':

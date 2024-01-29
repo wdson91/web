@@ -3,8 +3,8 @@ import asyncio
 import os
 from datetime import datetime
 import logging
-from vmz_disney_dias import coletar_precos_vmz_disneydias
-from vmz_disney_basicos import coletar_precos_vmz_disneybasicos
+from .vmz_disney_dias import coletar_precos_vmz_disneydias
+from .vmz_disney_basicos import coletar_precos_vmz_disneybasicos
 
 
 async def coletar_precos_vmz_disney():
@@ -34,15 +34,15 @@ async def coletar_precos_vmz_disney():
 
         # Definindo a ordem personalizada para a coluna 'Parque'
         ordem_personalizada = [
-            "1 Dia - Disney Básico Magic Kingdom",
-            "1 Dia - Disney Básico Hollywood Studios",
-            "1 Dia - Disney Básico Animal Kingdom",
-            "1 Dia - Disney Básico Epcot",
-            "2 Dias - Disney World Básico",
-            "3 Dias - Disney World Básico",
+            "1 Dia - Disney Basico Magic Kingdom",
+            "1 Dia - Disney Basico Hollywood Studios",
+            "1 Dia - Disney Basico Animal Kingdom",
+            "1 Dia - Disney Basico Epcot",
+            "2 Dias - Disney World Basico",
+            "3 Dias - Disney World Basico",
             "4 Dias - Disney Promocional",
-            "4 Dias - Disney World Básico",
-            "5 Dias - Disney World Básico"
+            "4 Dias - Disney World Basico",
+            "5 Dias - Disney World Basico"
         ]
 
         # Aplicando a ordenação personalizada
@@ -83,7 +83,7 @@ async def coletar_precos_vmz_disney():
 
                     attempts += 1
                     if attempts == max_attempts:
-                        logging.error(f"Falha após {max_attempts} tentativas para {func.__name__}")
+                        logging.error(f"Falha apos {max_attempts} tentativas para {func.__name__}")
 
         # Chamadas das funções com tentativas de recuperação de erro
         await try_execute(coletar_precos_vmz_disneybasicos)

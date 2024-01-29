@@ -1,4 +1,5 @@
 import asyncio
+import sys
 import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -10,8 +11,16 @@ from selenium.common.exceptions import NoSuchElementException
 import os
 import logging
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+diretorio_atual = os.path.dirname(os.path.abspath(__file__))  # Diretório de teste.py
+diretorio_pai = os.path.dirname(diretorio_atual)  # Subindo um nível
+diretorio_avo = os.path.dirname(diretorio_pai)  # Subindo mais um nível
+
+# Adicionando o diretório 'docs' ao sys.path
+sys.path.insert(0, diretorio_avo)
+from salvardados import salvar_dados
+from insert_database import inserir_dados_no_banco
 async def coletar_precos_vmz_universal():
     logging.info("Iniciando coleta de preços da Universal Orlando.")
     # Lista de sites e nomes de parques
@@ -31,15 +40,15 @@ async def coletar_precos_vmz_universal():
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
     # Definindo as datas
-    datas = [datetime.now().date() + timedelta(days=d) for d in [5, 10, 20, 47, 64, 126]]
-
+    #datas = [datetime.now().date() + timedelta(days=d) for d in [5, 10, 20, 47, 64, 126]]
+    datas = [datetime.now().date() + timedelta(days=d) for d in [5]]
     # Lista para armazenar os dados
     dados = []
 
     for data in datas:
         
         for url_template, parque in sites:
-            logging.info(f"Coletando preços do parque {parque}.")
+            logging.info(f"Coletando precos do parque {parque}.")
             site_url = f"{url_template}data={data.strftime('%Y-%m-%d')}"
             driver.get(site_url)
 
@@ -84,33 +93,9 @@ async def coletar_precos_vmz_universal():
     # Criando um DataFrame
     df = pd.DataFrame(dados)
 
-    # Ordenando o DataFrame pelas datas da viagem e pelo nome do parque
-    df['Data_viagem'] = pd.to_datetime(df['Data_viagem'], format="%Y-%m-%d")
-    df = df.sort_values(by=['Data_viagem', 'Parque'])
+    #salvar_dados(df, diretorio_atual, 'vmz_disney_universal')
+    inserir_dados_no_banco(df, 'vmz_universal')
 
-    diretorio_atual = os.path.dirname(os.path.abspath(__file__))
-
-    # Define o nome do arquivo de saída em formato TXT
-    nome_arquivo_saida_txt = "precos_vmz_universal.txt"
-
-    # Define o caminho completo para o arquivo de saída TXT na mesma pasta que o script
-    caminho_arquivo_saida_txt = os.path.join(diretorio_atual, nome_arquivo_saida_txt)
-
-    # Salvando em um arquivo TXT no mesmo diretório que o script
-    df.to_csv(caminho_arquivo_saida_txt, sep='\t', index=False)
-
-    # Define o nome do arquivo de saída em formato JSON
-    formato_data_hora = "%d%m%Y_%H%M"
-    data_hora_atual = datetime.now().strftime(formato_data_hora)
-    nome_arquivo_saida_json = f"coleta_vmz_universal_{data_hora_atual}.json"
-    nome_arquivo_json = nome_arquivo_saida_json.replace("/", "_").replace(":", "_").replace(" ", "_")
-
-    # Define o caminho completo para o arquivo de saída JSON na mesma pasta que o script
-    caminho_arquivo_saida_json = os.path.join(nome_arquivo_json)
-
-    # Salvando em um arquivo JSON no mesmo diretório que o script
-    df.to_json(caminho_arquivo_saida_json, orient='records')
-    logging.info(f"Resultados salvos em {caminho_arquivo_saida_txt} e {caminho_arquivo_saida_json}")
-    logging.info("Coleta finalizada.")
+    logging.info("Coleta finalizada Site Vmz- Universal Orlando.")
 if __name__ == "__main__":
     asyncio.run(coletar_precos_vmz_universal())

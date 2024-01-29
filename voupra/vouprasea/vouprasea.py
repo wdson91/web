@@ -37,7 +37,7 @@ async def coletar_precos_voupra_sea():
 
     # Lista para armazenar os dados
     dados = []
-    logging.info("Iniciando a coleta de preços de ingressos Seaworld no site Voupra.")
+    logging.info("Iniciando a coleta de precos de ingressos Seaworld no site Voupra.")
     for data_viagem in datas_viagem:
         for parque, xpath in parques_xpaths:
             url = f"https://www.voupra.com/estados-unidos/orlando/seaworld?Id=58825&Busca=true&DataTemporada={data_viagem.strftime('%d%%2F%m%%2F%Y')}"

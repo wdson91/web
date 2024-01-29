@@ -1,0 +1,19 @@
+Data_Hora_Coleta	Data_viagem	Parque	Preco
+2024-01-27 12:06	2024-02-01	1 Dia 1 Parque - SeaWorld Orlando	R$ 570,71
+2024-01-27 12:06	2024-02-01	14 Dias 3 Parques - SeaWorld Orlando	R$ 1.118,27
+2024-01-27 12:06	2024-02-01	3 Dias 3 Parques - SeaWorld Orlando	R$ 759,67
+2024-01-27 12:06	2024-02-06	1 Dia 1 Parque - SeaWorld Orlando	R$ 570,71
+2024-01-27 12:07	2024-02-06	14 Dias 3 Parques - SeaWorld Orlando	R$ 1.118,27
+2024-01-27 12:06	2024-02-06	3 Dias 3 Parques - SeaWorld Orlando	R$ 759,67
+2024-01-27 12:07	2024-02-16	1 Dia 1 Parque - SeaWorld Orlando	R$ 570,71
+2024-01-27 12:07	2024-02-16	14 Dias 3 Parques - SeaWorld Orlando	R$ 1.118,27
+2024-01-27 12:07	2024-02-16	3 Dias 3 Parques - SeaWorld Orlando	R$ 759,67
+2024-01-27 12:07	2024-03-14	1 Dia 1 Parque - SeaWorld Orlando	R$ 548,32
+2024-01-27 12:07	2024-03-14	14 Dias 3 Parques - SeaWorld Orlando	R$ 1.074,42
+2024-01-27 12:07	2024-03-14	3 Dias 3 Parques - SeaWorld Orlando	R$ 729,88
+2024-01-27 12:07	2024-03-31	1 Dia 1 Parque - SeaWorld Orlando	R$ 548,32
+2024-01-27 12:07	2024-03-31	14 Dias 3 Parques - SeaWorld Orlando	R$ 1.074,42
+2024-01-27 12:07	2024-03-31	3 Dias 3 Parques - SeaWorld Orlando	R$ 729,88
+2024-01-27 12:07	2024-06-01	1 Dia 1 Parque - SeaWorld Orlando	R$ 525,94
+2024-01-27 12:07	2024-06-01	14 Dias 3 Parques - SeaWorld Orlando	R$ 1.030,56
+2024-01-27 12:07	2024-06-01	3 Dias 3 Parques - SeaWorld Orlando	R$ 700,09
