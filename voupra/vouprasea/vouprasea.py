@@ -49,11 +49,11 @@ async def coletar_precos_voupra_sea():
                 wait = WebDriverWait(driver, 10)
                 elemento_preco = driver.find_element(By.XPATH, xpath)
                 preco_texto = elemento_preco.text
-                price_decimal = float(preco_texto.replace('R$', '').replace('.', '').replace(',', '.').strip())
+                preco_final = float(preco_texto.replace('R$', '').replace('.', '').replace(',', '.').strip())
                 
             except NoSuchElementException:
                 # Se o elemento não for encontrado, atribua um traço "-" ao valor
-                preco_texto = "-"
+                preco_final = "-"
 
             # Adicione os dados a lista de dicionários
             data_hora_atual = datetime.now()
@@ -62,7 +62,7 @@ async def coletar_precos_voupra_sea():
                     'Hora_Coleta': data_hora_atual.strftime("%H:%M:%S"),
                     'Data_viagem': (data + timedelta(days=0)).strftime("%Y-%m-%d"),
                     'Parque': parque,
-                    'Preco': price_decimal
+                    'Preco': preco_final
                 })    
             
     # Fechando o driver
@@ -74,7 +74,7 @@ async def coletar_precos_voupra_sea():
 
     # Inserindo os dados no banco de dados
     inserir_dados_no_banco(df, 'voupra_seaworld')    
-    #salvar_dados(df, diretorio_atual, 'voupra_seaworld')
+    
     
     logging.info("Coleta finalizada.")
     # Salvando em um arquivo TXT

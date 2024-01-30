@@ -26,7 +26,7 @@ def criar_database():
         password="LlMXotSjrzJIJzw9OaICXHtunOOymrqe"
     )
     # Nomes das tabelas a serem criadas
-    nomes_tabelas = ["vmz_disney", "vmz_seaworld", "vmz_universal", "voupra_disney", "voupra_seaworld", "voupra_universal"]
+    nomes_tabelas = ["vmz_disney", "vmz_seaworld", "vmz_universal", "voupra_disney", "voupra_seaworld", "voupra_universal","ml_disney", "ml_seaworld", "ml_universal"]
 
     # Criar cada tabela
     for nome_tabela in nomes_tabelas:

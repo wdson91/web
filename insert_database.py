@@ -1,6 +1,6 @@
 import psycopg2
 import pandas as pd
-
+from datetime import datetime, timedelta
 from create_database import criar_database
 # Conectar ao banco de dados
 
@@ -36,7 +36,6 @@ def inserir_dados_no_banco(df, nome_banco):
         # Tratamento do preço
         preco_texto = row['Preco']
         
-        #preco_texto = preco_texto.replace('R$', '').replace(',', '').strip()  # Remove 'R$', vírgulas e espaços
         if isinstance(preco_texto, str) and preco_texto.strip() == '-':
             preco = None  # Ou outro valor padrão se não permitir nulo
         else:
@@ -45,27 +44,12 @@ def inserir_dados_no_banco(df, nome_banco):
             except ValueError:
                 preco = None  # Ou outro valor padrão se não permitir nulo
 
+
         # Executar a inserção
-        cursor.execute(sql, (row["Data_Coleta"], row["Hora_Coleta"], row["Data_viagem"], row["Parque"], preco))
+        data_hora_atual = datetime.now()
+        cursor.execute(sql, (row["Data_Coleta"], data_hora_atual.strftime("%H:%M"), row["Data_viagem"], row["Parque"], preco))
     
     # Commit e fechar conexões
     conexao.commit()
     cursor.close()
     conexao.close()
-
-def salvar_dados(df, diretorio, identificador, nome_banco):
-    df['Data_Hora_Coleta'] = df['Data_Hora_Coleta'].apply(converter_data_hora)
-    df['Data_Hora_Coleta'] = df['Data_Hora_Coleta'].dt.strftime('%Y-%m-%d %H:%M')
-    df = df.sort_values(by=['Data_viagem', 'Parque'])
-
-    # Aqui você pode optar por manter ou remover a parte de salvar em TXT e JSON
-    # Se você quiser apenas inserir no banco, pode remover essas linhas
-
-    # Inserir dados no banco de dados
-    inserir_dados_no_banco(df, nome_banco)
-
-    print(f'Dados inseridos no banco de dados: {nome_banco}')
-
-# Exemplo de uso
-# df = pd.read_csv('caminho_do_arquivo.csv')
-# salvar_dados(df, 'diretorio', 'identificador', 'nome_do_banco')

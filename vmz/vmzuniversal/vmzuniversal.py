@@ -11,6 +11,21 @@ from selenium.common.exceptions import NoSuchElementException
 import os
 import logging
 
+# Função para formatar o preço
+def formatar_preco(preco):
+    if isinstance(preco, float):
+        preco_formatado = round(preco, 2)
+        
+        return preco_formatado
+    else:
+        try:
+            preco_float = float(preco.replace('R$', '').replace(',', '.').strip())
+            preco_formatado = round(preco_float, 2)
+            
+            return preco_formatado
+        except ValueError:
+            return preco
+
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 diretorio_atual = os.path.dirname(os.path.abspath(__file__))  # Diretório de teste.py
@@ -21,6 +36,7 @@ diretorio_avo = os.path.dirname(diretorio_pai)  # Subindo mais um nível
 sys.path.insert(0, diretorio_avo)
 from salvardados import salvar_dados
 from insert_database import inserir_dados_no_banco
+
 async def coletar_precos_vmz_universal():
     logging.info("Iniciando coleta de preços da Universal Orlando.")
     # Lista de sites e nomes de parques
@@ -48,7 +64,7 @@ async def coletar_precos_vmz_universal():
     for data in datas:
         
         for url_template, parque in sites:
-            logging.info(f"Coletando precos do parque {parque}.")
+            logging.info(f"Coletando preços do parque {parque}.")
             site_url = f"{url_template}data={data.strftime('%Y-%m-%d')}"
             driver.get(site_url)
 
@@ -59,15 +75,15 @@ async def coletar_precos_vmz_universal():
                 elemento_preco = driver.find_element(By.XPATH, xpath_selector)
                 preco_texto = elemento_preco.text
                 
-                
                 # Multiplicar o preço por 10
                 preco_texto = preco_texto.replace('R$ ', '').replace(',', '.')
                 preco_float = float(preco_texto) * 10
-                preco_texto = f"R$ {preco_float:.2f}"
+                preco_final = f"R$ {preco_float:.2f}"
+               
             except NoSuchElementException:
                 # Se o elemento não for encontrado, atribua um traço "-" ao valor
-                preco_texto = "-"
-                
+                preco_final = "-"
+            
             # Adicione os dados a lista de dicionários
             data_hora_atual = datetime.now()
             dados.append({
@@ -75,8 +91,9 @@ async def coletar_precos_vmz_universal():
                     'Hora_Coleta': data_hora_atual.strftime("%H:%M:%S"),
                     'Data_viagem': (data + timedelta(days=0)).strftime("%Y-%m-%d"),
                     'Parque': parque,
-                    'Preco': preco_texto
+                    'Preco': preco_final
                 })
+    
     # Coleta de preços para 14 Dias 3 Parques - Universal Orlando (não dinâmico)
     driver.get(url_14_dias)
     try:
@@ -85,32 +102,36 @@ async def coletar_precos_vmz_universal():
         elemento_preco_14_dias = driver.find_element(By.XPATH, xpath_selector)
         preco_texto_14_dias = elemento_preco_14_dias.text
         price_decimal = float(preco_texto_14_dias.replace('R$', '').replace('.', '').replace(',', '.').strip())
-        new_price = round(price_decimal * 1.10, 2)
-        new_price *= 10
+        preco_final = round(price_decimal * 1.10, 2)
+        
+        
     except NoSuchElementException:
-        new_price = "-"
+        preco_final = "-"
 
     # Adicionando o preço fixo para 14 Dias 3 Parques - Universal Orlando
     for data in datas:
-                data_hora_atual = datetime.now()
-                dados.append({
-                    'Data_Coleta': data_hora_atual.strftime("%Y-%m-%d"),
-                    'Hora_Coleta': data_hora_atual.strftime("%H:%M:%S"),
-                    'Data_viagem': (data + timedelta(days=0)).strftime("%Y-%m-%d"),
-                    'Parque': parque,
-                    'Preco': new_price
-                })    
+        data_hora_atual = datetime.now()
+        
+        dados.append({
+            'Data_Coleta': data_hora_atual.strftime("%Y-%m-%d"),
+            'Hora_Coleta': data_hora_atual.strftime("%H:%M:%S"),
+            'Data_viagem': (data + timedelta(days=0)).strftime("%Y-%m-%d"),
+            'Parque': '14 Dias 3 Parques - Universal Orlando',
+            'Preco':  preco_final*10
+        })    
     # Fechando o driver
     driver.quit()
 
     # Criando um DataFrame
     df = pd.DataFrame(dados)
 
-    #salvar_dados(df, diretorio_atual, 'vmz_disney_universal')
+    # Aplicando a formatação dos preços
+    df['Preco'] = df['Preco'].apply(formatar_preco)
 
     # Inserindo os dados no banco de dados
     inserir_dados_no_banco(df, 'vmz_universal')
-    print(df)
+    
     logging.info("Coleta finalizada Site Vmz- Universal Orlando.")
+
 if __name__ == "__main__":
     asyncio.run(coletar_precos_vmz_universal())

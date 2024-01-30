@@ -67,15 +67,15 @@ async def coletar_precos_voupra_disney():
 
                     except NoSuchElementException:
                         # The element is not present, set the price to "-"
-                        preco_texto = "-"
+                        preco_final = "-"
                 else:
                     # For other parks, get the price directly
                     elemento_preco = driver.find_element(By.XPATH, xpath)
                     preco_texto = elemento_preco.text
-                    price = float(preco_texto.replace('R$', '').replace('.', '').replace(',', '.').strip())
+                    preco_final = float(preco_texto.replace('R$', '').replace('.', '').replace(',', '.').strip())
             except TimeoutException:
                 # Handle the timeout exception here
-                preco_texto = "-"
+                preco_final = "-"
 
             data_hora_atual = datetime.now()
             
@@ -85,7 +85,7 @@ async def coletar_precos_voupra_disney():
                     'Hora_Coleta': data_hora_atual.strftime("%H:%M:%S"),
                     'Data_viagem': (data + timedelta(days=0)).strftime("%Y-%m-%d"),
                     'Parque': parque,
-                    'Preco': price 
+                    'Preco': preco_final 
                 })
 
     # Fechando o driver
@@ -96,8 +96,6 @@ async def coletar_precos_voupra_disney():
 
     # Inserindo os dados no banco de dados
     inserir_dados_no_banco(df, 'voupra_disney')
-    
-    #salvar_dados(df, diretorio_atual, 'voupra_disney')
     
     logging.info("Coleta finalizada Site Voupra - Disney.")
 
