@@ -80,15 +80,20 @@ async def coletar_precos_ml_disney():
                 if price_text != '-':
                     price_number_str = price_text.replace("R$", "").replace(",", ".").strip()
                 # Additional code to process and print the price
-                if "R$" in price_text:
-                    price_number_str = price_text.replace("R$", "").replace(",", ".").strip()
-                    try:
-                        price_number = float(price_number_str)
-                        multiplied_price = price_number * 10
-                        formatted_price = "{:.2f}".format(multiplied_price)
-                        #print(f"{park_name}: {formatted_price}")
-                    except ValueError:
+                try:
+                        price_number_str = price_text.replace("R$", "").replace(",", ".").strip()
+                        if price_number_str != '-':
+                            price_number = float(price_number_str)
+                            multiplied_price = price_number * 10
+                            formatted_price = "{:.2f}".format(multiplied_price)
+                            # Resto do seu código...
+                        else:
+                            print(f"Price text is not valid for {park_name}: {price_text}")
+                except ValueError:
                         print(f"Error converting price for {park_name}: {price_text}")
+                        formatted_price = None  # Ou outro valor padrão que você desejar
+                        # Resto do seu código...
+
                     # ...
                 data_hora_atual = datetime.now()        
                 dados.append({
