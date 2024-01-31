@@ -9,7 +9,7 @@ RUN pip install --upgrade pip
 RUN pip install aiohttp pandas selenium webdriver_manager
 
 # Copie o seu código fonte para o contêiner
-COPY index.py .
+COPY . .
 
 # Execute o seu código Python quando o contêiner for iniciado
 CMD ["python", "index.py"]
