@@ -7,7 +7,7 @@ WORKDIR /app
 # Instale as dependências do Python
 RUN pip install --upgrade pip
 RUN pip install aiohttp pandas selenium webdriver_manager
-
+RUN pip install psycopg2-binary
 # Copie o seu código fonte para o contêiner
 COPY . .
 
