@@ -5,3 +5,4 @@ time
 pandas
 selenium
 webdriver_manager
+psycopg2
