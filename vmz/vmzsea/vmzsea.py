@@ -72,12 +72,11 @@ async def coletar_precos_vmz_seaworld():
                     'Preco': new_price
                 })    
 
-    # Fechando o driver
     driver.quit()
 
     # Criando um DataFrame
     df = pd.DataFrame(dados)
-    print(df)
+    
     # Inserindo os dados no banco de dados
     inserir_dados_no_banco(df, 'vmz_seaworld')
     #salvar_dados(df, diretorio_atual, 'vmz_disney_seaworld')

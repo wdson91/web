@@ -1,17 +1,17 @@
 import asyncio
 import os
 import sys
-import time
+
 import pandas as pd
 from datetime import datetime, timedelta
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import ElementClickInterceptedException, TimeoutException
-from webdriver_manager.chrome import ChromeDriverManager
 
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 
 diretorio_atual = os.path.dirname(os.path.abspath(__file__))  # Diretório de teste.py
 diretorio_pai = os.path.dirname(diretorio_atual)  # Subindo um nível
@@ -30,21 +30,23 @@ def get_future_date(days):
 # List of days to add to the current date
 
 async def coletar_precos_ml_seaworld():
+
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     dados = []
-    wait = WebDriverWait(driver, 5)
+    
     days_to_add = [5, 10, 20, 47, 64, 126]
     try:
-    
+        
         for days in days_to_add:
+            wait = WebDriverWait(driver,10)
             future_date = get_future_date(days)
             url = f"https://www.vamonessa.com.br/ingressos/Orlando/8?destination=Orlando&destinationCode=2&destinationState=&destinationStateCode=&date={future_date}"
             driver.get(url)
-            time.sleep(5)
+            await asyncio.sleep(5)
             # XPaths for buttons and corresponding price elements
             xpath_pairs = [
                 ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[1]/button[1]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','1 Dia 1 Parque - SeaWorld Orlando'),
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[1]/button[3]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','3 Dias 3 Parques - SeaWorld Orlando'),
+                ('/html/body/div[1]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[1]/button[3]', '/html/body/div[1]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','3 Dias 3 Parques - SeaWorld Orlando'),
                 ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[3]/div[2]/div[1]/button', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[3]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','14 Dias 3 Parques - SeaWorld Orlando')
                 # Add other pairs as needed
             ]
@@ -55,7 +57,7 @@ async def coletar_precos_ml_seaworld():
                 # Scroll to button and click
                 button = wait.until(EC.presence_of_element_located((By.XPATH, button_xpath)))
                 driver.execute_script("arguments[0].scrollIntoView();", button)
-                time.sleep(2)  # Allow time for any lazy-loaded elements
+                await asyncio.sleep(2)  # Allow time for any lazy-loaded elements
 
                 try:
                     button.click()
@@ -66,7 +68,7 @@ async def coletar_precos_ml_seaworld():
                 try:
                     price_element = wait.until(EC.presence_of_element_located((By.XPATH, price_xpath)))
                     driver.execute_script("arguments[0].scrollIntoView();", price_element)
-                    time.sleep(4)
+                    await asyncio.sleep(4)
                     price_text = price_element.text
                 except TimeoutException:
                     price_text = '-'
@@ -100,7 +102,7 @@ async def coletar_precos_ml_seaworld():
     except Exception as e:
                 print("Unexpected error:", e)
     finally:
-                driver.quit()
+                driver.quit()    
 
                 df = pd.DataFrame(dados)
         

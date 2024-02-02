@@ -104,8 +104,8 @@ async def coletar_precos_ml_universal():
     except Exception as e:
                 print("Unexpected error:", e)
     finally:
+                
                 driver.quit()
-
                 df = pd.DataFrame(dados)
         
 

@@ -1,83 +1,121 @@
 import asyncio
+import logging
 import os
 import sys
-import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
-from datetime import datetime, timedelta
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import NoSuchElementException
-import logging
-from insert_database import inserir_dados_no_banco
-# Configuração inicial do Selenium
-
+from webdriver_manager.chrome import ChromeDriverManager
+from datetime import datetime, timedelta
+import pandas as pd
 
 diretorio_atual = os.path.dirname(os.path.abspath(__file__))  # Diretório de teste.py
 diretorio_pai = os.path.dirname(diretorio_atual)  # Subindo um nível
 diretorio_avo = os.path.dirname(diretorio_pai)  # Subindo mais um nível
+
+# Adicionando o diretório 'docs' ao sys.path
 sys.path.insert(0, diretorio_avo)
 from salvardados import salvar_dados
+from insert_database import inserir_dados_no_banco
 
 async def coletar_precos_voupra_sea():
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    # Configuração do Selenium
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service)
+
+    # Configuração de logs
     log_format = '%(asctime)s - %(levelname)s - %(message)s'
     logging.basicConfig(level=logging.INFO, format=log_format)
-    # Definindo as datas de viagem
+
+    # Lista de datas a serem consideradas
     datas = [datetime.now().date() + timedelta(days=d) for d in [5, 10, 20, 47, 64, 126]]
 
-    # Definindo os nomes dos parques e os XPaths correspondentes
-    parques_xpaths = [
-        ("1 Dia 1 Parque - SeaWorld Orlando", '/html/body/div[4]/div/div[1]/div[2]/div[12]/div/div/div[3]/div[1]/div[2]'),
-        ("3 Dias 3 Parques - SeaWorld Orlando", '/html/body/div[4]/div/div[1]/div[2]/div[6]/div/div/div[3]/div[1]/div[2]'),
-        ("14 Dias 3 Parques - SeaWorld Orlando", '/html/body/div[4]/div/div[1]/div[2]/div[27]/div/div/div[3]/div[1]/div[2]')
-    ]
+    # URL base
+    base_url = "https://www.voupra.com/estados-unidos/orlando/seaworld?Id=58825&Busca=true&DataTemporada="
 
+    # Mapeamento de nomes desejados
+    mapeamento_nomes = {
+        "Ingresso 1 Dia SeaWorld - Adulto ou Criança": "1 Dia 1 Parque - SeaWorld Orlando",
+        "Ingresso 3 Dias SeaWorld Parks com 3 Parques - Adulto ou Criança": "3 Dias 3 Parques - SeaWorld Orlando",
+        "Ingresso 14 Dias SeaWorld Parks com 3 Parques - Adulto ou Criança": "14 Dias 3 Parques - SeaWorld Orlando"
+    }
 
-    # Lista para armazenar os dados
     dados = []
-    logging.info("Iniciando a coleta de precos de ingressos Seaworld no site Voupra.")
+
+    # Iniciar o loop pelas datas
     for data in datas:
-        for parque, xpath in parques_xpaths:
-            url = f"https://www.voupra.com/estados-unidos/orlando/seaworld?Id=58825&Busca=true&DataTemporada={data.strftime('%d%%2F%m%%2F%Y')}"
+        try:
+            # Montar a URL com a data atual do loop
+            url = base_url + data.strftime('%d%%2F%m%%2F%Y')
             driver.get(url)
 
-            try:
-                # Tente localizar o elemento com o preço
-                wait = WebDriverWait(driver, 10)
-                elemento_preco = driver.find_element(By.XPATH, xpath)
-                preco_texto = elemento_preco.text
-                preco_final = float(preco_texto.replace('R$', '').replace('.', '').replace(',', '.').strip())
-                
-            except NoSuchElementException:
-                # Se o elemento não for encontrado, atribua um traço "-" ao valor
-                preco_final = "-"
+            # Usar WebDriverWait
+            wait = WebDriverWait(driver, 10)  # Esperar até 10 segundos
 
-            # Adicione os dados a lista de dicionários
-            data_hora_atual = datetime.now()
-            dados.append({
-                    'Data_Coleta': data_hora_atual.strftime("%Y-%m-%d"),
-                    'Hora_Coleta': data_hora_atual.strftime("%H:%M:%S"),
-                    'Data_viagem': (data + timedelta(days=0)).strftime("%Y-%m-%d"),
-                    'Parque': parque,
-                    'Preco': preco_final
-                })    
-            
-    # Fechando o driver
+            # Aguardar até que os elementos estejam presentes
+            produtos = wait.until(EC.presence_of_all_elements_located((By.CLASS_NAME, "compra_expressa_item")))
+
+            # Inicializar um dicionário para armazenar os preços
+            precos = {}
+
+            # Loop pelos produtos
+            for produto in produtos:
+                try:
+                    # Extraindo o título do produto
+                    titulo = produto.find_element(By.CLASS_NAME, "produto_titulo")
+                    titulo_texto = titulo.text
+
+                    # Extraindo o preço do produto
+                    preco = produto.find_element(By.CLASS_NAME, "produto_preco_padrao")
+                    driver.execute_script("arguments[0].classList.remove('d-none');", preco)
+                    preco_texto = preco.text
+
+                    # Removendo 'R$' e substituindo vírgulas por pontos
+                    preco_texto = preco_texto.replace('R$', '').replace(',', '.').strip()
+
+                    # Removendo pontos usados como separadores de milhar
+                    preco_texto = preco_texto.replace('.', '', preco_texto.count('.') - 1)
+
+                    # Convertendo para float e formatando
+                    preco_float = float(preco_texto)
+                    preco_formatado = round(preco_float, 2)
+
+                    # Adicionando o preço ao dicionário
+                    precos[titulo_texto] = preco_formatado
+
+                except Exception as e:
+                    logging.error("Erro ao processar produto:", e)
+
+            # Loop pelos nomes desejados
+            for nome, nome_desejado in mapeamento_nomes.items():
+                if nome in precos:
+                    preco = precos[nome]
+                else:
+                    preco = ''
+
+                # Adicionar os dados à lista
+                dados.append({
+                    'Data_Coleta': datetime.now().strftime("%Y-%m-%d"),
+                    'Hora_Coleta': datetime.now().strftime("%H:%M:%S"),
+                    'Data_viagem': data.strftime("%Y-%m-%d"),
+                    'Parque': nome_desejado,
+                    'Preco': preco
+                })
+
+        except Exception as e:
+            logging.error("Erro ao processar data:", e)
+
+    # Fechar o driver
     driver.quit()
-
-    # Criando um DataFrame
+    
+    # Criar um DataFrame com os dados
     df = pd.DataFrame(dados)
     
+    # Inserir os dados no banco de dados
+    inserir_dados_no_banco(df, 'voupra_seaworld')
 
-    # Inserindo os dados no banco de dados
-    inserir_dados_no_banco(df, 'voupra_seaworld')    
-    
-    
-    logging.info("Coleta finalizada.")
-    # Salvando em um arquivo TXT
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     asyncio.run(coletar_precos_voupra_sea())

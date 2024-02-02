@@ -15,17 +15,19 @@ async def main_ml(run_once=False):
     if run_once:
         logging.info("Iniciando coleta de preços.")
         try:
+            
             # Execute as funções assíncronas em sequência
             await coletar_precos_ml_disney()
             await coletar_precos_ml_seaworld()
             await coletar_precos_ml_universal()
+            
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços: {e}")
 
         return 
         # # Aguarda por 1 hora (3600 segundos)
         # logging.info("Aguardando a próxima execução...")
-        # await asyncio.sleep(3600)  # 3600 segundos = 1 hora
+        #await asyncio.sleep(3600)  # 3600 segundos = 1 hora
 
 if __name__ == "__main__":
     # Crie um loop de eventos e execute a função principal

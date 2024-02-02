@@ -2,16 +2,14 @@ import asyncio
 import os
 import sys
 import pandas as pd
-from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
 from datetime import datetime, timedelta
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 import logging
-
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 
 
 diretorio_atual = os.path.dirname(os.path.abspath(__file__))  # Diretório de teste.py
@@ -32,12 +30,11 @@ async def coletar_precos_voupra_universal():
 
     # Definindo os nomes dos parques e os XPaths correspondentes
     parques_xpaths = [
-        ("1 Dia 1 Parque - Universal Orlando", '/html/body/div[4]/div/div[1]/div[2]/div[1]/div[34]/div/div/div[3]/div[1]/div[2]'),
-        ("1 Dia 2 Parques - Universal Orlando", '/html/body/div[4]/div/div[1]/div[2]/div[1]/div[27]/div/div/div[3]/div[1]/div[2]'),
-        ("2 Dias 2 Parques - Universal Orlando", '/html/body/div[4]/div/div[1]/div[2]/div[1]/div[19]/div/div/div[3]/div[1]/div[2]'),
-        ("4 Dias 2 Parques - Universal Orlando", '/html/body/div[4]/div/div[1]/div[2]/div[1]/div[12]/div/div/div[3]/div[1]/div[2]'),
-        ("4 Dias 3 Parques - Universal Orlando", '/html/body/div[4]/div/div[1]/div[2]/div[1]/div[32]/div/div/div[3]/div[1]/div[2]'),
-        ("14 Dias 3 Parques - Universal Orlando", '/html/body/div[4]/div/div[1]/div[2]/div[1]/div[4]/div/div/div[3]/div[1]/div[2]')
+        ("1 Dia 1 Parque - Universal Orlando", '/html/body/div[4]/div/div[1]/div[2]/div[1]/div[34]/div/div/div[3]/div[1]/div[5]'),
+        ("1 Dia 2 Parques - Universal Orlando", '/html/body/div[4]/div/div[1]/div[2]/div[1]/div[27]/div/div/div[3]/div[1]/div[5]'),
+        ("2 Dias 2 Parques - Universal Orlando", '/html/body/div[4]/div/div[1]/div[2]/div[1]/div[19]/div/div/div[3]/div[1]/div[5]'),
+        ("4 Dias 2 Parques - Universal Orlando", '/html/body/div[4]/div/div[1]/div[2]/div[1]/div[12]/div/div/div[3]/div[1]/div[5]'),
+        ("14 Dias 3 Parques - Universal Orlando", '/html/body/div[4]/div/div[1]/div[2]/div[1]/div[4]/div/div/div[3]/div[1]/div[5]')
     ]
 
 
@@ -54,7 +51,11 @@ async def coletar_precos_voupra_universal():
                 wait = WebDriverWait(driver, 10)
                 elemento_preco = driver.find_element(By.XPATH, xpath)
                 preco_texto = elemento_preco.text
-                preco_final = float(preco_texto.replace('R$', '').replace('.', '').replace(',', '.').strip())
+                preco_final = preco_texto.replace('R$', '').replace('.', '').replace(',', '.').strip()
+                
+                preco_final = float(preco_final) * 12
+                
+
             except NoSuchElementException:
                 # Se o elemento não for encontrado, atribua um traço "-" ao valor
                 preco_final = "-"

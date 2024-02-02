@@ -54,7 +54,6 @@ async def coletar_precos_vmz_universal():
 
     # Configuração inicial do Selenium
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-
     # Definindo as datas
     datas = [datetime.now().date() + timedelta(days=d) for d in [5, 10, 20, 47, 64, 126]]
     
@@ -119,7 +118,7 @@ async def coletar_precos_vmz_universal():
             'Parque': '14 Dias 3 Parques - Universal Orlando',
             'Preco':  preco_final*10
         })    
-    # Fechando o driver
+    
     driver.quit()
 
     # Criando um DataFrame

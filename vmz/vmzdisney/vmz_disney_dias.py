@@ -118,8 +118,8 @@ async def coletar_precos_vmz_disneydias():
     dias_para_processar = [2,3,4,5]
     resultados = processar_dias(driver, dias_para_processar)
 
+    
     driver.quit()
-
     df_resultados = pd.DataFrame(resultados)
 
     # salvar_dados(df_resultados, diretorio_atual, 'vmz_disney_dias')
