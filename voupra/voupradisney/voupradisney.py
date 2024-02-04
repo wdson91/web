@@ -1,25 +1,4 @@
-import asyncio
-import logging
-import os
-import sys
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from webdriver_manager.chrome import ChromeDriverManager
-from datetime import datetime, timedelta
-import pandas as pd
-
-diretorio_atual = os.path.dirname(os.path.abspath(__file__))  # Diretório de teste.py
-diretorio_pai = os.path.dirname(diretorio_atual)  # Subindo um nível
-diretorio_avo = os.path.dirname(diretorio_pai)  # Subindo mais um nível
-
-# Adicionando o diretório 'docs' ao sys.path
-sys.path.insert(0, diretorio_avo)
-from salvardados import salvar_dados
-from insert_database import inserir_dados_no_banco
-
+from imports import *
 async def coletar_precos_voupra_disney():
     # Configuração do Selenium
     service = Service(ChromeDriverManager().install())

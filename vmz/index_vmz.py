@@ -1,23 +1,17 @@
-import asyncio
-import sys
-import os
-import logging
+from imports import *
 
 from .vmzdisney.vmz_disney import coletar_precos_vmz_disney
 from .vmzsea.vmzsea import coletar_precos_vmz_seaworld
 from .vmzuniversal.vmzuniversal import coletar_precos_vmz_universal
-
-
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 async def main_vmz(run_once=False):
     if run_once:
         logging.info("Iniciando coleta de preços.")
         try:
             # Execute as funções assíncronas em sequência
-            await coletar_precos_vmz_disney()
+            #await coletar_precos_vmz_disney()
             await coletar_precos_vmz_seaworld()
-            await coletar_precos_vmz_universal()
+            #await coletar_precos_vmz_universal()
             
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços: {e}")

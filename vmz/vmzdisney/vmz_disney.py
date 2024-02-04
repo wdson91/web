@@ -1,16 +1,4 @@
-import pandas as pd
-import asyncio
-import os
-from datetime import datetime
-import logging
-
-
-
-diretorio_atual = os.path.dirname(os.path.abspath(__file__))  # Diretório de teste.py
-diretorio_pai = os.path.dirname(diretorio_atual)  # Subindo um nível
-diretorio_avo = os.path.dirname(diretorio_pai)  # Subindo mais um nível
-
-
+from imports import *
 from .vmz_disney_dias import coletar_precos_vmz_disneydias
 from .vmz_disney_basicos import coletar_precos_vmz_disneybasicos
 async def coletar_precos_vmz_disney():

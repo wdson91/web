@@ -1,27 +1,4 @@
-import asyncio
-import sys
-import pandas as pd
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
-from datetime import datetime, timedelta
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import NoSuchElementException
-import os
-import logging
-
-
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-
-diretorio_atual = os.path.dirname(os.path.abspath(__file__))  # Diretório de teste.py
-diretorio_pai = os.path.dirname(diretorio_atual)  # Subindo um nível
-diretorio_avo = os.path.dirname(diretorio_pai)  # Subindo mais um nível
-from insert_database import inserir_dados_no_banco
-# Adicionando o diretório 'docs' ao sys.path
-sys.path.insert(0, diretorio_avo)
-#from salvardados import salvar_dados
+from imports import *
 async def coletar_precos_vmz_seaworld():
     logging.info("Iniciando coleta de preços do SeaWorld.")
     # Lista de sites e nomes de parques
