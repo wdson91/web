@@ -1,8 +1,15 @@
 from imports import *
+
+diretorio_atual = os.path.dirname(os.path.abspath(__file__))  # Diretório de teste.py
+diretorio_pai = os.path.dirname(diretorio_atual)  # Subindo um nível
+diretorio_avo = os.path.dirname(diretorio_pai)  # Subindo mais um nível
+
+# Adicionando o diretório 'docs' ao sys.path
+sys.path.insert(0, diretorio_avo)
+from insert_database import inserir_dados_no_banco
 async def coletar_precos_voupra_disney():
     # Configuração do Selenium
-    service = Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=service)
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
     # Configuração de logs
     log_format = '%(asctime)s - %(levelname)s - %(message)s'
@@ -101,6 +108,6 @@ async def coletar_precos_voupra_disney():
     # Inserir os dados no banco de dados
     inserir_dados_no_banco(df, 'voupra_disney')
 
-
+    logging.info("Coleta finalizada.")
 if __name__ == "__main__":
     asyncio.run(coletar_precos_voupra_disney())

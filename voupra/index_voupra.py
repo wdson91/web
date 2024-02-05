@@ -10,9 +10,9 @@ async def main_voupra(run_once=False):
         logging.info("Iniciando coleta de preços.")
         try:
             # Execute as funções assíncronas em sequência
-            #await coletar_precos_voupra_disney()
+            await coletar_precos_voupra_disney()
             await coletar_precos_voupra_sea()
-            #await coletar_precos_voupra_universal()
+            await coletar_precos_voupra_universal()
             
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços: {e}")

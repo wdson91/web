@@ -5,8 +5,12 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 
-service = Service(ChromeDriverManager().install())
-driver = webdriver.Chrome(service=service)
+
+driver = webdriver.Remote(
+    command_executor='http://localhost:4444',
+    options=webdriver.FirefoxOptions()  
+    
+)
 
 driver.get("https://www.voupra.com/estados-unidos/orlando/disney-world?Id=49824&DataIngresso=06%2F02%2F2024")
 
@@ -58,9 +62,13 @@ for produto in produtos:
             print("Preço:", preco_formatado)
             print("-----------")
 
+        
+
 # ...
 
     except Exception as e:
         print("Erro ao processar produto:", e)
 
 
+        
+driver.quit()
