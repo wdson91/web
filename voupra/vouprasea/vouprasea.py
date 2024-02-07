@@ -9,7 +9,8 @@ sys.path.insert(0, diretorio_avo)
 from insert_database import inserir_dados_no_banco
 async def coletar_precos_voupra_sea():
     
-    
+    options = webdriver.ChromeOptions()
+    driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
     # Lista de datas a serem consideradas
     datas = [datetime.now().date() + timedelta(days=d) for d in [5, 10, 20, 47, 64, 126]]
 

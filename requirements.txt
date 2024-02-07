@@ -1,30 +1,4 @@
-"1 Dia - Disney Basico Magic Kingdom",
-        ("1 Dia - Disney Basico Hollywood Studios", 
-        ("1 Dia - Disney Basico Animal Kingdom", 
-        ("1 Dia - Disney Basico Epcot", 
-        ("2 Dias - Disney World Basico", 
-        ("3 Dias - Disney World Basico", 
-        ("4 Dias - Disney World Basico", 
-        ("4 Dias - Disney Promocional", 
-        ("5 Dias - Disney World Basico"
-
-
-
-        parques_xpaths = [
-        ("1 Dia 1 Parque - SeaWorld Orlando", '/html/body/div[4]/div/div[1]/div[2]/div[12]/div/div/div[3]/div[1]/div[5]'),
-        ("3 Dias 3 Parques - SeaWorld Orlando", '/html/body/div[4]/div/div[1]/div[2]/div[6]/div/div/div[3]/div[1]/div[5]'),
-        ("14 Dias 3 Parques - SeaWorld Orlando", '/html/body/div[4]/div/div[1]/div[2]/div[27]/div/div/div[3]/div[1]/div[5]')
-    ]
-
-
-
- parques_xpaths = [
-        ("1 Dia 1 Parque - Universal Orlando", '/html/body/div[4]/div/div[1]/div[2]/div[1]/div[34]/div/div/div[3]/div[1]/div[4]'),
-        ("1 Dia 2 Parques - Universal Orlando", '/html/body/div[4]/div/div[1]/div[2]/div[1]/div[27]/div/div/div[3]/div[1]/div[4]'),
-        ("2 Dias 2 Parques - Universal Orlando", '/html/body/div[4]/div/div[1]/div[2]/div[1]/div[19]/div/div/div[3]/div[1]/div[4]'),
-        ("4 Dias 2 Parques - Universal Orlando", '/html/body/div[4]/div/div[1]/div[2]/div[1]/div[12]/div/div/div[3]/div[1]/div[4]'),
-        ("4 Dias 3 Parques - Universal Orlando", '/html/body/div[4]/div/div[1]/div[2]/div[1]/div[32]/div/div/div[3]/div[1]/div[2]'),
-        ("14 Dias 3 Parques - Universal Orlando", '/html/body/div[4]/div/div[1]/div[2]/div[1]/div[4]/div/div/div[3]/div[1]/div[4]')
-    ]
-
-    url = f"https://www.voupra.com/estados-unidos/orlando/universal-orlando?Id=53458&DataIngresso={data.strftime('%d%%2F%m%%2F%Y')}"
+pandas==1.1.5
+selenium==4.9.0
+webdriver_manager==3.4.2
+psycopg2--binary==2.8.6

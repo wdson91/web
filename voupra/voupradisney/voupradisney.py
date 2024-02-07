@@ -9,7 +9,8 @@ sys.path.insert(0, diretorio_avo)
 from insert_database import inserir_dados_no_banco
 async def coletar_precos_voupra_disney():
     # Configuração do Selenium
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    options = webdriver.ChromeOptions()
+    driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
 
     # Configuração de logs
     log_format = '%(asctime)s - %(levelname)s - %(message)s'

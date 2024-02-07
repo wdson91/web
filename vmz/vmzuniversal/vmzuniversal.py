@@ -39,7 +39,8 @@ async def coletar_precos_vmz_universal():
     xpath_14_dias = '//*[@id="__layout"]/div/div/section/article[1]/div/div/div[4]/div[1]/div[3]/div[2]/b'
 
     # Configuração inicial do Selenium
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    options = webdriver.ChromeOptions()
+    driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
     # Definindo as datas
     datas = [datetime.now().date() + timedelta(days=d) for d in [5, 10, 20, 47, 64, 126]]
     

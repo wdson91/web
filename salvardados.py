@@ -2,6 +2,8 @@ import pandas as pd
 import os
 from datetime import datetime
 
+from blob import upload_blob
+
 def converter_data_hora(data_hora_str):
     formatos = ['%Y%m%d_%H%M%S.%f', '%Y-%m-%d %H:%M.%f','%Y-%m-%d %H:%M:%S.%f']  # Adicione mais formatos conforme necessário
     for formato in formatos:
@@ -37,4 +39,5 @@ def salvar_dados(df, diretorio, identificador):
     caminho_arquivo_json = os.path.join( nome_arquivo_json)
     df.to_json(caminho_arquivo_json, orient='records', date_format='iso')
 
+    upload_blob(caminho_arquivo_json,nome_arquivo_json)
     print(f'Arquivos salvos: {nome_arquivo_txt} e {nome_arquivo_json}')

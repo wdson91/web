@@ -17,7 +17,8 @@ async def coletar_precos_vmz_seaworld():
     ]
 
     # Configuração inicial do Selenium
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    options = webdriver.ChromeOptions()
+    driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
 
     # Definindo as datas
     datas = [datetime.now().date() + timedelta(days=d) for d in [5, 10, 20, 47, 64, 126]]
@@ -63,8 +64,8 @@ async def coletar_precos_vmz_seaworld():
     df = pd.DataFrame(dados)
     
     # Inserindo os dados no banco de dados
-    inserir_dados_no_banco(df, 'vmz_seaworld')
-    #salvar_dados(df, diretorio_atual, 'vmz_disney_seaworld')
+    #inserir_dados_no_banco(df, 'vmz_seaworld')
+    salvar_dados(df, diretorio_atual, 'vmz_disney_seaworld')
     
     logging.info("Coleta finalizada Site Vmz- SeaWorld")
 if __name__ == "__main__":

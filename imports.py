@@ -13,7 +13,6 @@ from selenium.common.exceptions import ElementClickInterceptedException, Timeout
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support import expected_conditions as EC
 import logging
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 from salvardados import salvar_dados
 
 
