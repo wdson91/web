@@ -19,11 +19,19 @@ def criar_database():
         cursor.close()
         
     # Conectar ao banco de dados
+   # conexao = psycopg2.connect(
+    # host="dpg-cmqhtt021fec739mbem0-a.oregon-postgres.render.com",
+    # database="teste_fgdc",
+    # user="teste_fgdc_user",
+    # password="LlMXotSjrzJIJzw9OaICXHtunOOymrqe"
+    # )
+
+
     conexao = psycopg2.connect(
-        host="dpg-cmqhtt021fec739mbem0-a.oregon-postgres.render.com",
-        database="teste_fgdc",
-        user="teste_fgdc_user",
-        password="LlMXotSjrzJIJzw9OaICXHtunOOymrqe"
+    host="localhost",
+    database="postgres",
+    user="postgres",
+    password="Voupra2024st"
     )
     # Nomes das tabelas a serem criadas
     nomes_tabelas = ["vmz_disney", "vmz_seaworld", "vmz_universal", "voupra_disney", "voupra_seaworld", "voupra_universal","ml_disney", "ml_seaworld", "ml_universal"]
@@ -35,3 +43,4 @@ def criar_database():
     # Fechar a conexão com o banco de dados
     conexao.close()
 
+criar_database()

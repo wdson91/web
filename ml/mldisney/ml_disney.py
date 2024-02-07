@@ -1,16 +1,4 @@
-import asyncio
-import os
-import sys
-import time
-import pandas as pd
-from datetime import datetime, timedelta
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import ElementClickInterceptedException, TimeoutException
-from webdriver_manager.chrome import ChromeDriverManager
+from imports import *
 
 
 diretorio_atual = os.path.dirname(os.path.abspath(__file__))  # Diretório de teste.py
@@ -30,7 +18,8 @@ def get_future_date(days):
 # List of days to add to the current date
 
 async def coletar_precos_ml_disney():
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    options = webdriver.ChromeOptions()
+    driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub',options=options)
     dados = []
     wait = WebDriverWait(driver, 5)
     days_to_add = [5, 10, 20, 47, 64, 126]

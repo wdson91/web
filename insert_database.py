@@ -16,12 +16,20 @@ def converter_data_hora(data_hora_str):
 
 def inserir_dados_no_banco(df, nome_banco):
     
+    # conexao = psycopg2.connect(
+    # host="dpg-cmqhtt021fec739mbem0-a.oregon-postgres.render.com",
+    # database="teste_fgdc",
+    # user="teste_fgdc_user",
+    # password="LlMXotSjrzJIJzw9OaICXHtunOOymrqe"
+    # )
+
+
     conexao = psycopg2.connect(
-    host="dpg-cmqhtt021fec739mbem0-a.oregon-postgres.render.com",
-    database="teste_fgdc",
-    user="teste_fgdc_user",
-    password="LlMXotSjrzJIJzw9OaICXHtunOOymrqe"
-)
+    host="localhost",
+    database="postgres",
+    user="postgres",
+    password="Voupra2024st"
+    )
 
     cursor = conexao.cursor()
 

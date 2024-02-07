@@ -10,7 +10,6 @@ from selenium import webdriver
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 async def executar_ambos():
    while True:  # Adicionando um loop para continuar executando
         await asyncio.gather(

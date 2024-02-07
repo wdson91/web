@@ -1,16 +1,5 @@
-import asyncio
-import sys
-import pandas as pd
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from webdriver_manager.chrome import ChromeDriverManager
-from datetime import datetime, timedelta
-import time
-import os
-import logging
+
+from imports import *
 
 
 diretorio_atual = os.path.dirname(os.path.abspath(__file__))  # Diretório de teste.py
@@ -25,8 +14,9 @@ from insert_database import inserir_dados_no_banco
 
 
 async def coletar_precos_vmz_disneydias():
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+    options = webdriver.ChromeOptions()
+    driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub',options=options)
+    
 
     waiter = 1
 

@@ -1,15 +1,4 @@
-import asyncio
-import os
-import sys
-import pandas as pd
-from selenium.webdriver.common.by import By
-from datetime import datetime, timedelta
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.common.exceptions import NoSuchElementException
-import logging
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
+from imports import *
 
 
 diretorio_atual = os.path.dirname(os.path.abspath(__file__))  # Diretório de teste.py
@@ -22,7 +11,8 @@ from salvardados import salvar_dados
 
 async def coletar_precos_voupra_universal():
     # Configuração inicial do Selenium
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    options = webdriver.ChromeOptions()
+    driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub',options=options)
     log_format = '%(asctime)s - %(levelname)s - %(message)s'
     logging.basicConfig(level=logging.INFO, format=log_format)
     # Definindo as datas de viagem
