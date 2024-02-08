@@ -20,14 +20,15 @@ def get_future_date(days):
 
 async def coletar_precos_ml_seaworld():
 
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    options = webdriver.ChromeOptions()
+    driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
     dados = []
-    
+    wait = WebDriverWait(driver,10)
     days_to_add = [5, 10, 20, 47, 64, 126]
     try:
-        
+
         for days in days_to_add:
-            wait = WebDriverWait(driver,10)
+            
             future_date = get_future_date(days)
             url = f"https://www.vamonessa.com.br/ingressos/Orlando/8?destination=Orlando&destinationCode=2&destinationState=&destinationStateCode=&date={future_date}"
             driver.get(url)
@@ -76,8 +77,7 @@ async def coletar_precos_ml_seaworld():
                     # ...
                 data_hora_atual = datetime.now()        
                 dados.append({
-                        'Data_Coleta': data_hora_atual.strftime("%Y-%m-%d"),
-                        'Hora_Coleta': data_hora_atual.strftime("%H:%M:%S"),
+                     
                         'Data_viagem': (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d"),
                         'Parque': park_name,
                         'Preco': formatted_price 
@@ -94,10 +94,11 @@ async def coletar_precos_ml_seaworld():
                 driver.quit()    
 
                 df = pd.DataFrame(dados)
-        
+                
 
                 # Inserindo os dados no banco de dados
-                inserir_dados_no_banco(df, 'ml_seaworld')
-
+                #inserir_dados_no_banco(df, 'ml_seaworld')
+                nome_arquivo = f'{datetime.now().strftime("%Y-%m-%d")}_ml_seaworld.json'
+                salvar_dados(df, nome_arquivo,'ml')
 if __name__ == '__main__':
     asyncio.run(coletar_precos_ml_seaworld())

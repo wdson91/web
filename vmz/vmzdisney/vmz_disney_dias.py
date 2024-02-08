@@ -1,13 +1,6 @@
 from imports import *
-# Configuração inicial do Selenium
 
-diretorio_atual = os.path.dirname(os.path.abspath(__file__))  # Diretório de teste.py
-diretorio_pai = os.path.dirname(diretorio_atual)  # Subindo um nível
-diretorio_avo = os.path.dirname(diretorio_pai)  # Subindo mais um nível
 
-# Adicionando o diretório 'docs' ao sys.path
-sys.path.insert(0, diretorio_avo)
-from insert_database import inserir_dados_no_banco
 
 async def coletar_precos_vmz_disneydias():
     options = webdriver.ChromeOptions()
@@ -90,8 +83,7 @@ async def coletar_precos_vmz_disneydias():
                 if preco:
                     data_hora_atual = datetime.now()
                     dados.append({
-                        'Data_Coleta': data_hora_atual.strftime("%Y-%m-%d"),
-                        'Hora_Coleta': data_hora_atual.strftime("%H:%M:%S"),
+                        
                         'Data_viagem': (data + timedelta(days=0)).strftime("%Y-%m-%d"),
                         'Parque': nome_pacote,
                         'Preco': preco
@@ -106,10 +98,11 @@ async def coletar_precos_vmz_disneydias():
 
     
     driver.quit()
-    df_resultados = pd.DataFrame(resultados)
+    df = pd.DataFrame(resultados)
 
-    # salvar_dados(df_resultados, diretorio_atual, 'vmz_disney_dias')
-    inserir_dados_no_banco(df_resultados, 'vmz_disney')
+    nome_arquivo = f'{datetime.now().strftime("%Y-%m-%d")}_vmz_disney.json'
+    salvar_dados(df, nome_arquivo,'vmz')
+    #inserir_dados_no_banco(df_resultados, 'vmz_disney')
 
     logging.info("Coleta finalizada Site Vmz- Disney.")
 

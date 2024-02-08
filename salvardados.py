@@ -1,43 +1,39 @@
-import pandas as pd
 import os
+import json
 from datetime import datetime
+
+import pandas as pd
 
 from blob import upload_blob
 
-def converter_data_hora(data_hora_str):
-    formatos = ['%Y%m%d_%H%M%S.%f', '%Y-%m-%d %H:%M.%f','%Y-%m-%d %H:%M:%S.%f']  # Adicione mais formatos conforme necessário
-    for formato in formatos:
-        try:
-            return pd.to_datetime(data_hora_str, format=formato)
-        except (ValueError, TypeError):
-            continue
-    raise ValueError(f"Data e hora não reconhecidas: {data_hora_str}")
+# Função para carregar os dados existentes do arquivo JSON
+def carregar_dados_json(nome_arquivo):
+    dados = []
+    if not os.path.exists(nome_arquivo) or os.stat(nome_arquivo).st_size == 0:
+        with open(nome_arquivo, 'w') as file:
+            json.dump([], file)
+    else:
+        with open(nome_arquivo, 'r') as file:
+            dados = json.load(file)
+    return dados
 
-
-def salvar_dados(df, diretorio, identificador):
-    """
-    Salva um DataFrame em arquivos TXT e JSON.
-
-    Parâmetros:
-    df (pandas.DataFrame): O DataFrame a ser salvo.
-    diretorio (str): Caminho do diretório onde os arquivos serão salvos.
-    identificador (str): Um identificador para o nome do arquivo.
-    """
-    df['Data_Hora_Coleta'] = df['Data_Hora_Coleta'].apply(converter_data_hora)
-    df['Data_Hora_Coleta'] = df['Data_Hora_Coleta'].dt.strftime('%Y-%m-%d %H:%M')
-    # Ordenando por data de viagem
-    df = df.sort_values(by=['Data_viagem', 'Parque'])
+# Função para adicionar os novos dados ao arquivo JSON existente, junto com a hora da coleta
+def salvar_dados( df,nome_arquivo,pasta):
+    data_hora_coleta = datetime.now().strftime('%H:%M')
+    novos_dados = df.to_dict(orient='records')
+    novo_registro = {'Hora_coleta': data_hora_coleta, 'Dados': novos_dados}
     
+    # Carregar os dados existentes do arquivo JSON
+    dados_exist = carregar_dados_json(nome_arquivo)
+    
+    # Adicionar o novo registro aos dados existentes
+    dados_exist.append(novo_registro)
+    
+    # Salvar os dados no arquivo JSON
+    with open(nome_arquivo, 'w') as file:
+        json.dump(dados_exist, file, indent=4)
 
-    # Salvar em TXT
-    nome_arquivo_txt = f'coleta_{identificador}_{datetime.now().strftime("%d%m%Y")}.txt'
-    caminho_arquivo_txt = os.path.join(diretorio, nome_arquivo_txt)
-    df.to_csv(caminho_arquivo_txt, sep='\t', index=False)
+    upload_blob(nome_arquivo, nome_arquivo, pasta)
+# Exemplo de uso:
+# Suponha que você já tenha um DataFrame df
 
-    # Salvar em JSON
-    nome_arquivo_json = f'{identificador}_{datetime.now().strftime("%d%m%Y")}.json'
-    caminho_arquivo_json = os.path.join( nome_arquivo_json)
-    df.to_json(caminho_arquivo_json, orient='records', date_format='iso')
-
-    upload_blob(caminho_arquivo_json,nome_arquivo_json)
-    print(f'Arquivos salvos: {nome_arquivo_txt} e {nome_arquivo_json}')

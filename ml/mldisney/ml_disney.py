@@ -18,7 +18,8 @@ def get_future_date(days):
 # List of days to add to the current date
 
 async def coletar_precos_ml_disney():
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    options = webdriver.ChromeOptions()
+    driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
     dados = []
     wait = WebDriverWait(driver, 5)
     days_to_add = [5, 10, 20, 47, 64, 126]
@@ -85,8 +86,7 @@ async def coletar_precos_ml_disney():
                     # ...
                 data_hora_atual = datetime.now()        
                 dados.append({
-                        'Data_Coleta': data_hora_atual.strftime("%Y-%m-%d"),
-                        'Hora_Coleta': data_hora_atual.strftime("%H:%M:%S"),
+                       
                         'Data_viagem': (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d"),
                         'Parque': park_name,
                         'Preco': formatted_price 
@@ -106,7 +106,8 @@ async def coletar_precos_ml_disney():
         
 
                 # Inserindo os dados no banco de dados
-                inserir_dados_no_banco(df, 'ml_disney')
-
+                #inserir_dados_no_banco(df, 'ml_disney')
+                nome_arquivo = f'{datetime.now().strftime("%Y-%m-%d")}_ml_disney.json'
+                salvar_dados(df, nome_arquivo,'ml')
 if __name__ == '__main__':
     asyncio.run(coletar_precos_ml_disney())

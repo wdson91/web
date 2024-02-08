@@ -1,22 +1,33 @@
 version: '3'
 services:
-  selenium:
-    container_name: selenium
-    image: selenium/standalone-chrome
+  selenium-hub:
+    container_name: selenium-hub
+    image: selenium/hub:latest
     ports:
-      - "4444:4444"
+      - "4442:4442"
+      - "4443:4443"
     networks:
-      - mynetwork  
+      - grid
+  selenium-node-chrome:
+    container_name: selenium-node-chrome
+    image: selenium/node-chrome:latest
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    shm_size: "2g"
+    networks:
+      - grid
   python_app:
     container_name: python_app
     build:
       context: .
       dockerfile: Dockerfile.python_selenium
     depends_on:
-      - selenium
+      - selenium-hub
     networks:
-      - mynetwork
+      - grid
 
 networks:
-  mynetwork:
-    driver: bridge      
+  grid:
+    external: true

@@ -51,8 +51,7 @@ async def coletar_precos_vmz_seaworld():
             # Adicione os dados a lista de dicionários
             data_hora_atual = datetime.now()
             dados.append({
-                    'Data_Coleta': data_hora_atual.strftime("%Y-%m-%d"),
-                    'Hora_Coleta': data_hora_atual.strftime("%H:%M:%S"),
+
                     'Data_viagem': (data + timedelta(days=0)).strftime("%Y-%m-%d"),
                     'Parque': parque,
                     'Preco': new_price
@@ -65,7 +64,8 @@ async def coletar_precos_vmz_seaworld():
     
     # Inserindo os dados no banco de dados
     #inserir_dados_no_banco(df, 'vmz_seaworld')
-    salvar_dados(df, diretorio_atual, 'vmz_disney_seaworld')
+    nome_arquivo = f'{datetime.now().strftime("%Y-%m-%d")}_vmz_seaworld.json'
+    salvar_dados(df, nome_arquivo,'vmz')
     
     logging.info("Coleta finalizada Site Vmz- SeaWorld")
 if __name__ == "__main__":

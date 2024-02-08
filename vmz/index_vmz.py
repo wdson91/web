@@ -10,8 +10,8 @@ async def main_vmz(run_once=False):
         try:
             # Execute as funções assíncronas em sequência
             await coletar_precos_vmz_disney()
-            await coletar_precos_vmz_seaworld()
-            await coletar_precos_vmz_universal()
+            #await coletar_precos_vmz_seaworld()
+            #await coletar_precos_vmz_universal()
             
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços: {e}")

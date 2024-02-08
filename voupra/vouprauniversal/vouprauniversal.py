@@ -53,8 +53,6 @@ async def coletar_precos_voupra_universal():
                 # Adicione os dados a lista de dicionários
                 data_hora_atual = datetime.now()
                 dados.append({
-                        'Data_Coleta': data_hora_atual.strftime("%Y-%m-%d"),
-                        'Hora_Coleta': data_hora_atual.strftime("%H:%M:%S"),
                         'Data_viagem': (data + timedelta(days=0)).strftime("%Y-%m-%d"),
                         'Parque': parque,
                         'Preco': preco_final
@@ -63,7 +61,10 @@ async def coletar_precos_voupra_universal():
         df = pd.DataFrame(dados)
         
         # Inserindo os dados no banco de dados
-        inserir_dados_no_banco(df, 'voupra_universal')
+        #inserir_dados_no_banco(df, 'voupra_universal')
+        nome_arquivo = f'{datetime.now().strftime("%Y-%m-%d")}_voupra_universal.json'
+        salvar_dados(df, nome_arquivo,'voupra')
+        
         logging.info("Coleta finalizada.")
     except Exception as e:
         logging.error(f"Erro durante a coleta de preços: {e}")

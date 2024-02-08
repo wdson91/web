@@ -1,4 +1,17 @@
-from imports import *
+import asyncio
+import os
+import sys
+import time
+import pandas as pd
+from datetime import datetime, timedelta
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.support import expected_conditions as EC
+import logging
 
 
 async def coletar_precos_vmz_disneybasicos():
@@ -19,7 +32,7 @@ async def coletar_precos_vmz_disneybasicos():
     driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
 
     # Definindo as datas
-    datas = [datetime.now().date() + timedelta(days=d) for d in [5]]
+    datas = [datetime.now().date() + timedelta(days=d) for d in [5, 10, 20, 47, 64, 126]]
 
     # Lista para armazenar os dados
     dados = []
@@ -55,18 +68,18 @@ async def coletar_precos_vmz_disneybasicos():
                 'Parque': parque,
                 'Preco': new_price
             })
-            
+            print(dados)
     logging.info("Coleta finalizada.")
     # Fechando o driver
     driver.quit()
 
     # Criando um DataFrame
     df = pd.DataFrame(dados)
-    
+    print(df)
     
     #inserir_dados_no_banco(df, 'vmz_disney')
     nome_arquivo = f'{datetime.now().strftime("%Y-%m-%d")}_vmz_disney.json'
-    salvar_dados(df, nome_arquivo,'vmz')
+    #salvar_dados(df, nome_arquivo,'vmz')
     logging.info("Coleta finalizada Site Vmz- Disney.")
     
 if __name__ == "__main__":

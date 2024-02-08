@@ -1,12 +1,7 @@
 from imports import *
 
-diretorio_atual = os.path.dirname(os.path.abspath(__file__))  # Diretório de teste.py
-diretorio_pai = os.path.dirname(diretorio_atual)  # Subindo um nível
-diretorio_avo = os.path.dirname(diretorio_pai)  # Subindo mais um nível
 
-# Adicionando o diretório 'docs' ao sys.path
-sys.path.insert(0, diretorio_avo)
-from insert_database import inserir_dados_no_banco
+
 async def coletar_precos_voupra_sea():
     
     options = webdriver.ChromeOptions()
@@ -79,8 +74,6 @@ async def coletar_precos_voupra_sea():
 
                 # Adicionar os dados à lista
                 dados.append({
-                    'Data_Coleta': datetime.now().strftime("%Y-%m-%d"),
-                    'Hora_Coleta': datetime.now().strftime("%H:%M:%S"),
                     'Data_viagem': data.strftime("%Y-%m-%d"),
                     'Parque': nome_desejado,
                     'Preco': preco
@@ -96,8 +89,10 @@ async def coletar_precos_voupra_sea():
     df = pd.DataFrame(dados)
     
     # Inserir os dados no banco de dados
-    inserir_dados_no_banco(df, 'voupra_seaworld')
-
+    #inserir_dados_no_banco(df, 'voupra_seaworld')
+    #salvar_dados(df,diretorio_atual, 'voupra_seaworld','voupra')
+    nome_arquivo = f'{datetime.now().strftime("%Y-%m-%d")}_voupra_seaworld.json'
+    salvar_dados(df,nome_arquivo, 'voupra')
 
 if __name__ == "__main__":
     asyncio.run(coletar_precos_voupra_sea())

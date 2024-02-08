@@ -1,12 +1,6 @@
 from imports import *
 
-diretorio_atual = os.path.dirname(os.path.abspath(__file__))  # Diretório de teste.py
-diretorio_pai = os.path.dirname(diretorio_atual)  # Subindo um nível
-diretorio_avo = os.path.dirname(diretorio_pai)  # Subindo mais um nível
 
-# Adicionando o diretório 'docs' ao sys.path
-sys.path.insert(0, diretorio_avo)
-from insert_database import inserir_dados_no_banco
 # Função para formatar o preço
 def formatar_preco(preco):
     if isinstance(preco, float):
@@ -65,7 +59,7 @@ async def coletar_precos_vmz_universal():
                 preco_texto = preco_texto.replace('R$ ', '').replace(',', '.')
                 preco_float = float(preco_texto) * 10
                 preco_final = f"R$ {preco_float:.2f}"
-               
+
             except NoSuchElementException:
                 # Se o elemento não for encontrado, atribua um traço "-" ao valor
                 preco_final = "-"
@@ -73,8 +67,7 @@ async def coletar_precos_vmz_universal():
             # Adicione os dados a lista de dicionários
             data_hora_atual = datetime.now()
             dados.append({
-                    'Data_Coleta': data_hora_atual.strftime("%Y-%m-%d"),
-                    'Hora_Coleta': data_hora_atual.strftime("%H:%M:%S"),
+
                     'Data_viagem': (data + timedelta(days=0)).strftime("%Y-%m-%d"),
                     'Parque': parque,
                     'Preco': preco_final
@@ -99,8 +92,6 @@ async def coletar_precos_vmz_universal():
         data_hora_atual = datetime.now()
         
         dados.append({
-            'Data_Coleta': data_hora_atual.strftime("%Y-%m-%d"),
-            'Hora_Coleta': data_hora_atual.strftime("%H:%M:%S"),
             'Data_viagem': (data + timedelta(days=0)).strftime("%Y-%m-%d"),
             'Parque': '14 Dias 3 Parques - Universal Orlando',
             'Preco':  preco_final*10
@@ -115,8 +106,9 @@ async def coletar_precos_vmz_universal():
     df['Preco'] = df['Preco'].apply(formatar_preco)
 
     # Inserindo os dados no banco de dados
-    inserir_dados_no_banco(df, 'vmz_universal')
-    
+    #inserir_dados_no_banco(df, 'vmz_universal')
+    nome_arquivo = f'{datetime.now().strftime("%Y-%m-%d")}_vmz_universal.json'
+    salvar_dados(df, nome_arquivo,'vmz')
     logging.info("Coleta finalizada Site Vmz- Universal Orlando.")
 
 if __name__ == "__main__":

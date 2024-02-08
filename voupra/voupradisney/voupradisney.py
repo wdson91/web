@@ -1,5 +1,6 @@
 from imports import *
 
+
 diretorio_atual = os.path.dirname(os.path.abspath(__file__))  # Diretório de teste.py
 diretorio_pai = os.path.dirname(diretorio_atual)  # Subindo um nível
 diretorio_avo = os.path.dirname(diretorio_pai)  # Subindo mais um nível
@@ -90,8 +91,7 @@ async def coletar_precos_voupra_disney():
 
                 # Adicionar os dados à lista
                 dados.append({
-                    'Data_Coleta': datetime.now().strftime("%Y-%m-%d"),
-                    'Hora_Coleta': datetime.now().strftime("%H:%M:%S"),
+                    
                     'Data_viagem': data.strftime("%Y-%m-%d"),
                     'Parque': nome_desejado,
                     'Preco': preco
@@ -107,8 +107,11 @@ async def coletar_precos_voupra_disney():
     df = pd.DataFrame(dados)
     
     # Inserir os dados no banco de dados
-    inserir_dados_no_banco(df, 'voupra_disney')
-
+    #inserir_dados_no_banco(df, 'voupra_disney')
+    nome_arquivo = f'{datetime.now().strftime("%Y-%m-%d")}_voupra_disney.json'
+    salvar_dados(df,nome_arquivo,'voupra')
+    
+    
     logging.info("Coleta finalizada.")
 if __name__ == "__main__":
     asyncio.run(coletar_precos_voupra_disney())
