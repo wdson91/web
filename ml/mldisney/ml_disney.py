@@ -107,7 +107,8 @@ async def coletar_precos_ml_disney():
 
                 # Inserindo os dados no banco de dados
                 #inserir_dados_no_banco(df, 'ml_disney')
-                nome_arquivo = f'{datetime.now().strftime("%Y-%m-%d")}_ml_disney.json'
+                
+                nome_arquivo = f'disney_ml_{datetime.now().strftime("%Y-%m-%d")}.json'
                 salvar_dados(df, nome_arquivo,'ml')
 if __name__ == '__main__':
     asyncio.run(coletar_precos_ml_disney())

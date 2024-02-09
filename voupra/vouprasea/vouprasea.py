@@ -91,7 +91,7 @@ async def coletar_precos_voupra_sea():
     # Inserir os dados no banco de dados
     #inserir_dados_no_banco(df, 'voupra_seaworld')
     #salvar_dados(df,diretorio_atual, 'voupra_seaworld','voupra')
-    nome_arquivo = f'{datetime.now().strftime("%Y-%m-%d")}_voupra_seaworld.json'
+    nome_arquivo = f'seaworld_voupra_{datetime.now().strftime("%Y-%m-%d")}.json'
     salvar_dados(df,nome_arquivo, 'voupra')
 
 if __name__ == "__main__":

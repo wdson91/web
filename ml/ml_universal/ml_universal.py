@@ -100,7 +100,8 @@ async def coletar_precos_ml_universal():
 
                 # Inserindo os dados no banco de dados
                 #inserir_dados_no_banco(df, 'ml_universal')
-                nome_arquivo = f'{datetime.now().strftime("%Y-%m-%d")}_ml_universal.json'
+                
+                nome_arquivo = f'universal_ml_{datetime.now().strftime("%Y-%m-%d")}.json'
                 salvar_dados(df, nome_arquivo,'ml')
 if __name__ == '__main__':
     asyncio.run(coletar_precos_ml_universal())

@@ -107,7 +107,8 @@ async def coletar_precos_vmz_universal():
 
     # Inserindo os dados no banco de dados
     #inserir_dados_no_banco(df, 'vmz_universal')
-    nome_arquivo = f'{datetime.now().strftime("%Y-%m-%d")}_vmz_universal.json'
+    
+    nome_arquivo = f'universal_vmz_{datetime.now().strftime("%Y-%m-%d")}.json'
     salvar_dados(df, nome_arquivo,'vmz')
     logging.info("Coleta finalizada Site Vmz- Universal Orlando.")
 

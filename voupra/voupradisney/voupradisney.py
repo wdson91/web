@@ -8,6 +8,7 @@ diretorio_avo = os.path.dirname(diretorio_pai)  # Subindo mais um nível
 # Adicionando o diretório 'docs' ao sys.path
 sys.path.insert(0, diretorio_avo)
 from insert_database import inserir_dados_no_banco
+
 async def coletar_precos_voupra_disney():
     # Configuração do Selenium
     options = webdriver.ChromeOptions()
@@ -108,7 +109,7 @@ async def coletar_precos_voupra_disney():
     
     # Inserir os dados no banco de dados
     #inserir_dados_no_banco(df, 'voupra_disney')
-    nome_arquivo = f'{datetime.now().strftime("%Y-%m-%d")}_voupra_disney.json'
+    nome_arquivo = f'disney_voupra_{datetime.now().strftime("%Y-%m-%d")}.json'
     salvar_dados(df,nome_arquivo,'voupra')
     
     

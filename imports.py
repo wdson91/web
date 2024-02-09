@@ -26,7 +26,7 @@ from ml.index_ml import main_ml
 from voupra.index_voupra import main_voupra # Importando a função main do primeiro script
 from vmz.index_vmz import main_vmz # Importando a função do segundo script
 
-from vmz.vmzdisney.vmz_disney import coletar_precos_vmz_disney
+from vmz.vmzdisney.vmz_disney import coletar_precos_vmz
 from vmz.vmzsea.vmzsea import coletar_precos_vmz_seaworld
 from vmz.vmzuniversal.vmzuniversal import coletar_precos_vmz_universal
 

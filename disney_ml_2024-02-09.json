@@ -1,0 +1,1927 @@
+[
+    {
+        "Hora_coleta": "11:51",
+        "Dados": [
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1011.30"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "892.30"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "951.80"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1909.30"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2629.10"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3364.60"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "2532.00"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3692.20"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1100.50"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1070.80"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "981.60"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "1011.30"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1954.10"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2678.10"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3412.00"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "2532.00"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3710.90"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1011.30"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "922.10"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "951.80"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1867.30"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2543.50"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3230.90"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "2532.00"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3537.20"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1070.80"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "951.80"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "981.60"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1942.90"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2666.00"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3370.20"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "3266.40"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3684.10"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1070.80"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "951.80"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1887.00"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2564.90"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3283.90"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "3266.40"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3620.00"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1011.30"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "892.30"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "951.80"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1791.60"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2408.00"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3054.20"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "3266.40"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3312.90"
+            }
+        ]
+    },
+    {
+        "Hora_coleta": "12:39",
+        "Dados": [
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1011.30"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "892.30"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "951.80"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1909.30"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2629.10"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3364.60"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "2532.00"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3692.20"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1100.50"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1070.80"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "981.60"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "1011.30"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1954.10"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2678.10"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3412.00"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "2532.00"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3710.90"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1011.30"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "922.10"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "951.80"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1867.30"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2543.50"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3230.90"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "2532.00"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3537.20"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1070.80"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "951.80"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "981.60"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1942.90"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2666.00"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3370.20"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "3266.40"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3684.10"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1070.80"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "951.80"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1887.00"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2564.90"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3283.90"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "3266.40"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3620.00"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1011.30"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "892.30"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "951.80"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1791.60"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2408.00"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3054.20"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "3266.40"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3312.90"
+            }
+        ]
+    },
+    {
+        "Hora_coleta": "13:26",
+        "Dados": [
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1011.30"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "892.30"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "951.80"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1909.30"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2629.10"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3364.60"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "2532.00"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3692.20"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1100.50"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1070.80"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "981.60"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "1011.30"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1954.10"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2678.10"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3412.00"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "2532.00"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3710.90"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1011.30"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "922.10"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "951.80"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1867.30"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2543.50"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3230.90"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "2532.00"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3537.20"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1070.80"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "951.80"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "981.60"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1942.90"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2666.00"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3370.20"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "3266.40"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3684.10"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1070.80"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "951.80"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1887.00"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2564.90"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3283.90"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "3266.40"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3620.00"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1011.30"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "892.30"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "951.80"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1791.60"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2408.00"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3054.20"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "3266.40"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3312.90"
+            }
+        ]
+    },
+    {
+        "Hora_coleta": "14:14",
+        "Dados": [
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1011.30"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "892.30"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "951.80"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1909.30"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2629.10"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3364.60"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "2532.00"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3692.20"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1100.50"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1070.80"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "981.60"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "1011.30"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1954.10"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2678.10"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3412.00"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "2532.00"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3710.90"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1011.30"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "922.10"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "951.80"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1867.30"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2543.50"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3230.90"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "2532.00"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3537.20"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1070.80"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "951.80"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "981.60"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1942.90"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2666.00"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3370.20"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "3266.40"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3684.10"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1070.80"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "951.80"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1887.00"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2564.90"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3283.90"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "3266.40"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3620.00"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1011.30"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "892.30"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "951.80"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1791.60"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2408.00"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3054.20"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "3266.40"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3312.90"
+            }
+        ]
+    },
+    {
+        "Hora_coleta": "15:01",
+        "Dados": [
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1011.30"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "892.30"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "951.80"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1909.30"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2629.10"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3364.60"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "2532.00"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3692.20"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1100.50"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1070.80"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "981.60"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "1011.30"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1954.10"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2678.10"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3412.00"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "2532.00"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3710.90"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1011.30"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "922.10"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "951.80"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1867.30"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2543.50"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3230.90"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "2532.00"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3537.20"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1070.80"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "951.80"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "981.60"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1942.90"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2666.00"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3370.20"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "3266.40"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3684.10"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1070.80"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "951.80"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1887.00"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2564.90"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3283.90"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "3266.40"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3620.00"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1011.30"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "892.30"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "951.80"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1791.60"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2408.00"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3054.20"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "3266.40"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3312.90"
+            }
+        ]
+    },
+    {
+        "Hora_coleta": "15:49",
+        "Dados": [
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1011.30"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "892.30"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "951.80"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1909.30"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2629.10"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3364.60"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "2532.00"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3692.20"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1100.50"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1070.80"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "981.60"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "1011.30"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1954.10"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2678.10"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3412.00"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "2532.00"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3710.90"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1011.30"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "922.10"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "951.80"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1867.30"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2543.50"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3230.90"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "2532.00"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3537.20"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1070.80"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "951.80"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "981.60"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1942.90"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2666.00"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3370.20"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "3266.40"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3684.10"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1070.80"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "951.80"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1887.00"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2564.90"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3283.90"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "3266.40"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3620.00"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1011.30"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "892.30"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "951.80"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1791.60"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2408.00"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3054.20"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "3266.40"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3312.90"
+            }
+        ]
+    },
+    {
+        "Hora_coleta": "16:36",
+        "Dados": [
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1011.30"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "892.30"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "951.80"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1909.30"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2629.10"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3364.60"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "2532.00"
+            },
+            {
+                "Data_viagem": "2024-02-14",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3692.20"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1100.50"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1070.80"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "981.60"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "1011.30"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1954.10"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2678.10"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3412.00"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "2532.00"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3710.90"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1011.30"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "922.10"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "951.80"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1867.30"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2543.50"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3230.90"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "2532.00"
+            },
+            {
+                "Data_viagem": "2024-02-29",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3537.20"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1070.80"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "951.80"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "981.60"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1942.90"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2666.00"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3370.20"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "3266.40"
+            },
+            {
+                "Data_viagem": "2024-03-27",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3684.10"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1070.80"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "951.80"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1887.00"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2564.90"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3283.90"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "3266.40"
+            },
+            {
+                "Data_viagem": "2024-04-13",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3620.00"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "1 Dia - Disney Basico Magic Kingdom",
+                "Preco": "1041.00"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "1 Dia - Disney Basico Hollywood Studios",
+                "Preco": "1011.30"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "1 Dia - Disney Basico Animal Kingdom",
+                "Preco": "892.30"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "1 Dia - Disney Basico Epcot",
+                "Preco": "951.80"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "2 Dias - Disney World Basico",
+                "Preco": "1791.60"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "3 Dias - Disney World Basico",
+                "Preco": "2408.00"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "4 Dias - Disney World Basico",
+                "Preco": "3054.20"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "4 Dias - Disney Promocional",
+                "Preco": "3266.40"
+            },
+            {
+                "Data_viagem": "2024-06-14",
+                "Parque": "5 Dias - Disney World Basico",
+                "Preco": "3312.90"
+            }
+        ]
+    }
+]

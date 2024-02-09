@@ -62,7 +62,8 @@ async def coletar_precos_voupra_universal():
         
         # Inserindo os dados no banco de dados
         #inserir_dados_no_banco(df, 'voupra_universal')
-        nome_arquivo = f'{datetime.now().strftime("%Y-%m-%d")}_voupra_universal.json'
+        
+        nome_arquivo = f'universal_voupra_{datetime.now().strftime("%Y-%m-%d")}.json'
         salvar_dados(df, nome_arquivo,'voupra')
         
         logging.info("Coleta finalizada.")
