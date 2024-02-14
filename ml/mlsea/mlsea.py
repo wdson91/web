@@ -21,7 +21,7 @@ async def coletar_precos_ml_seaworld():
     options = webdriver.ChromeOptions()
     
     # Remote WebDriver
-    driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
+    driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
     dados = []
     wait = WebDriverWait(driver, 10)
     
@@ -33,12 +33,12 @@ async def coletar_precos_ml_seaworld():
             url = f"https://www.vamonessa.com.br/ingressos/Orlando/8?destination=Orlando&destinationCode=2&destinationState=&destinationStateCode=&date={future_date}"
             driver.get(url)
             await asyncio.sleep(5)  # Wait for page to load
-            
+            logging.info(f"Coletando preços para {future_date}")
             # XPaths for buttons and corresponding price elements
             xpath_pairs = [
                 ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[1]/button[1]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','1 Dia 1 Parque - SeaWorld Orlando'),
-                ('/html/body/div[1]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[1]/button[3]', '/html/body/div[1]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','3 Dias 3 Parques - SeaWorld Orlando'),
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[3]/div[2]/div[1]/button', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[3]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','14 Dias 3 Parques - SeaWorld Orlando')
+                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[1]/button[3]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','3 Dias 3 Parques - SeaWorld Orlando'),
+                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[1]/button', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','14 Dias 3 Parques - SeaWorld Orlando')
                 # Add other pairs as needed
             ]
 

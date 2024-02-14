@@ -12,7 +12,8 @@ from insert_database import inserir_dados_no_banco
 async def coletar_precos_voupra_disney():
     # Configuração do Selenium
     options = webdriver.ChromeOptions()
-    driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
+    #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
+    driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
 
     # Configuração de logs
     log_format = '%(asctime)s - %(levelname)s - %(message)s'
@@ -30,7 +31,7 @@ async def coletar_precos_voupra_disney():
         "Ingresso 1 Dia Hollywood Studios Disney - Adulto": "1 Dia - Disney Basico Hollywood Studios",
         "Ingresso 1 Dia Animal Kingdom Disney - Adulto": "1 Dia - Disney Basico Animal Kingdom",
         "Ingresso 1 Dia Epcot Disney - Adulto": "1 Dia - Disney Basico Epcot",
-        "Ingresso 2 Dias Disney - Adulto ": "2 Dias - Disney World Basico",
+        "Ingresso 2 Dias Disney - Adulto": "2 Dias - Disney World Basico",
         "Ingresso 3 Dias Disney - Adulto": "3 Dias - Disney World Basico",
         "Ingresso 4 Dias Disney - Adulto": "4 Dias - Disney World Basico",
         "Ingresso 4 Dias Disney para 4 Parques Diferentes - Adulto": "4 Dias - Disney Promocional",
@@ -42,6 +43,7 @@ async def coletar_precos_voupra_disney():
     # Iniciar o loop pelas datas
     for data in datas:
         try:
+            logging.info(f"Coletando preços para {data}...")
             # Montar a URL com a data atual do loop
             url = base_url + data.strftime('%d%%2F%m%%2F%Y')
             driver.get(url)
@@ -113,6 +115,6 @@ async def coletar_precos_voupra_disney():
     salvar_dados(df,nome_arquivo,'voupra')
     
     
-    logging.info("Coleta finalizada.")
+    logging.info("Coleta de preços finalizada.")
 if __name__ == "__main__":
     asyncio.run(coletar_precos_voupra_disney())

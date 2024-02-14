@@ -6,7 +6,8 @@ async def coletar_precos_vmz():
 
     # Configuração inicial do Selenium
     options = webdriver.ChromeOptions()
-    driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub',options=options)
+    #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub',options=options)
+    driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
 
     waiter = 1
 

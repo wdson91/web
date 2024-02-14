@@ -13,7 +13,8 @@ async def coletar_precos_voupra_universal():
     # Configuração inicial do Selenium
     try:
         options = webdriver.ChromeOptions()
-        driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
+        #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
+        driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
         # Definindo as datas de viagem
         datas = [datetime.now().date() + timedelta(days=d) for d in [5, 10, 20, 47, 64, 126]]
 
