@@ -1,0 +1,187 @@
+[
+    {
+        "Hora_coleta": "08:09",
+        "Dados": [
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "1 Dia 1 Parque - Universal Orlando",
+                "Preco": 1032.6
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "1 Dia 2 Parques - Universal Orlando",
+                "Preco": 1389.8
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "2 Dias 2 Parques - Universal Orlando",
+                "Preco": "-"
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "4 Dias 2 Parques - Universal Orlando",
+                "Preco": 1977.0
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "4 Dias 3 Parques - Universal Orlando",
+                "Preco": 2164.5
+            },
+            {
+                "Data_viagem": "2024-02-24",
+                "Parque": "1 Dia 1 Parque - Universal Orlando",
+                "Preco": 1065.0
+            },
+            {
+                "Data_viagem": "2024-02-24",
+                "Parque": "1 Dia 2 Parques - Universal Orlando",
+                "Preco": 1422.3
+            },
+            {
+                "Data_viagem": "2024-02-24",
+                "Parque": "2 Dias 2 Parques - Universal Orlando",
+                "Preco": "-"
+            },
+            {
+                "Data_viagem": "2024-02-24",
+                "Parque": "4 Dias 2 Parques - Universal Orlando",
+                "Preco": 1960.9
+            },
+            {
+                "Data_viagem": "2024-02-24",
+                "Parque": "4 Dias 3 Parques - Universal Orlando",
+                "Preco": 2148.4
+            },
+            {
+                "Data_viagem": "2024-03-05",
+                "Parque": "1 Dia 1 Parque - Universal Orlando",
+                "Preco": 967.7
+            },
+            {
+                "Data_viagem": "2024-03-05",
+                "Parque": "1 Dia 2 Parques - Universal Orlando",
+                "Preco": 1324.8
+            },
+            {
+                "Data_viagem": "2024-03-05",
+                "Parque": "2 Dias 2 Parques - Universal Orlando",
+                "Preco": "-"
+            },
+            {
+                "Data_viagem": "2024-03-05",
+                "Parque": "4 Dias 2 Parques - Universal Orlando",
+                "Preco": 1885.8
+            },
+            {
+                "Data_viagem": "2024-03-05",
+                "Parque": "4 Dias 3 Parques - Universal Orlando",
+                "Preco": 2100.2
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "1 Dia 1 Parque - Universal Orlando",
+                "Preco": 1097.5
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "1 Dia 2 Parques - Universal Orlando",
+                "Preco": 1454.7
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "2 Dias 2 Parques - Universal Orlando",
+                "Preco": "-"
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "4 Dias 2 Parques - Universal Orlando",
+                "Preco": 2089.4
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "4 Dias 3 Parques - Universal Orlando",
+                "Preco": 2303.7
+            },
+            {
+                "Data_viagem": "2024-04-18",
+                "Parque": "1 Dia 1 Parque - Universal Orlando",
+                "Preco": 967.7
+            },
+            {
+                "Data_viagem": "2024-04-18",
+                "Parque": "1 Dia 2 Parques - Universal Orlando",
+                "Preco": 1324.8
+            },
+            {
+                "Data_viagem": "2024-04-18",
+                "Parque": "2 Dias 2 Parques - Universal Orlando",
+                "Preco": "-"
+            },
+            {
+                "Data_viagem": "2024-04-18",
+                "Parque": "4 Dias 2 Parques - Universal Orlando",
+                "Preco": 1885.8
+            },
+            {
+                "Data_viagem": "2024-04-18",
+                "Parque": "4 Dias 3 Parques - Universal Orlando",
+                "Preco": 2100.2
+            },
+            {
+                "Data_viagem": "2024-06-19",
+                "Parque": "1 Dia 1 Parque - Universal Orlando",
+                "Preco": 967.7
+            },
+            {
+                "Data_viagem": "2024-06-19",
+                "Parque": "1 Dia 2 Parques - Universal Orlando",
+                "Preco": 1324.8
+            },
+            {
+                "Data_viagem": "2024-06-19",
+                "Parque": "2 Dias 2 Parques - Universal Orlando",
+                "Preco": "-"
+            },
+            {
+                "Data_viagem": "2024-06-19",
+                "Parque": "4 Dias 2 Parques - Universal Orlando",
+                "Preco": 1880.5
+            },
+            {
+                "Data_viagem": "2024-06-19",
+                "Parque": "4 Dias 3 Parques - Universal Orlando",
+                "Preco": 2202.0
+            },
+            {
+                "Data_viagem": "2024-02-19",
+                "Parque": "14 Dias 3 Parques - Universal Orlando",
+                "Preco": 2270.5
+            },
+            {
+                "Data_viagem": "2024-02-24",
+                "Parque": "14 Dias 3 Parques - Universal Orlando",
+                "Preco": 2270.5
+            },
+            {
+                "Data_viagem": "2024-03-05",
+                "Parque": "14 Dias 3 Parques - Universal Orlando",
+                "Preco": 2270.5
+            },
+            {
+                "Data_viagem": "2024-04-01",
+                "Parque": "14 Dias 3 Parques - Universal Orlando",
+                "Preco": 2270.5
+            },
+            {
+                "Data_viagem": "2024-04-18",
+                "Parque": "14 Dias 3 Parques - Universal Orlando",
+                "Preco": 2270.5
+            },
+            {
+                "Data_viagem": "2024-06-19",
+                "Parque": "14 Dias 3 Parques - Universal Orlando",
+                "Preco": 2270.5
+            }
+        ]
+    }
+]

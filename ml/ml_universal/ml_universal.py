@@ -1,4 +1,3 @@
-
 from imports import *
 
 diretorio_atual = os.path.dirname(os.path.abspath(__file__))  # Diretório de teste.py
@@ -13,9 +12,6 @@ from insert_database import inserir_dados_no_banco
 def get_future_date(days):
     return (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d")
 
-# Configuração inicial do Selenium
-
-
 # List of days to add to the current date
 
 async def coletar_precos_ml_universal():
@@ -24,15 +20,8 @@ async def coletar_precos_ml_universal():
     dados = []
     wait = WebDriverWait(driver, 5)
     days_to_add = [5, 10, 20, 47, 64, 126]
-    try:
     
-        for days in days_to_add:
-            future_date = get_future_date(days)
-            url = f"https://www.vamonessa.com.br/ingressos/Orlando/7?destination=Orlando&destinationCode=2&destinationState=&destinationStateCode=&date={future_date}"
-            driver.get(url)
-            time.sleep(5)
-            # XPaths for buttons and corresponding price elements
-            xpath_pairs = [
+    xpath_pairs = [
                 ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[1]/button[1]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','1 Dia 1 Parque - Universal Orlando'),
                 ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[1]/button[1]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','1 Dia 2 Parques - Universal Orlando'),
                 ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[1]/button[2]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','2 Dias 2 Parques - Universal Orlando'),
@@ -42,19 +31,24 @@ async def coletar_precos_ml_universal():
                 
                 # Add other pairs as needed
             ]
-
-            # ...
-
+    try:
+    
+        for days in days_to_add:
+            future_date = get_future_date(days)
+            url = f"https://www.vamonessa.com.br/ingressos/Orlando/7?destination=Orlando&destinationCode=2&destinationState=&destinationStateCode=&date={future_date}"
+            driver.get(url)
+            time.sleep(5)
+            
             for button_xpath, price_xpath, park_name in xpath_pairs:
                 # Scroll to button and click
                 button = wait.until(EC.presence_of_element_located((By.XPATH, button_xpath)))
                 driver.execute_script("arguments[0].scrollIntoView();", button)
-                time.sleep(2)  # Allow time for any lazy-loaded elements
+                time.sleep(2) 
 
                 try:
                     button.click()
                 except ElementClickInterceptedException:
-                    # Use JavaScript click as fallback
+                    
                     driver.execute_script("arguments[0].click();", button)
 
                 try:
@@ -79,7 +73,7 @@ async def coletar_precos_ml_universal():
                     # ...
                 data_hora_atual = datetime.now()        
                 dados.append({
-                     
+
                         'Data_viagem': (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d"),
                         'Parque': park_name,
                         'Preco': formatted_price 
@@ -89,9 +83,9 @@ async def coletar_precos_ml_universal():
         
                 
     except TimeoutException as e:
-                print("Error: Element not found or wait time exceeded", e)
+        logging.error("Erro: Elemento não encontrado ou tempo de espera excedido", e)
     except Exception as e:
-                print("Unexpected error:", e)
+        logging.error("Erro inesperado:", e)
     finally:
                 
                 driver.quit()
@@ -103,5 +97,6 @@ async def coletar_precos_ml_universal():
                 
                 nome_arquivo = f'universal_ml_{datetime.now().strftime("%Y-%m-%d")}.json'
                 salvar_dados(df, nome_arquivo,'ml')
+                logging.info("Coleta de preços ML Disney finalizada")
 if __name__ == '__main__':
     asyncio.run(coletar_precos_ml_universal())

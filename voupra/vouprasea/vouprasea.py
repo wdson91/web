@@ -27,6 +27,7 @@ async def coletar_precos_voupra_sea():
             # Montar a URL com a data atual do loop
             url = base_url + data.strftime('%d%%2F%m%%2F%Y')
             driver.get(url)
+            logging.info(f"Iniciando o processamento para a data: {data}")
 
             # Usar WebDriverWait
             wait = WebDriverWait(driver, 10)  # Esperar até 10 segundos
@@ -93,6 +94,6 @@ async def coletar_precos_voupra_sea():
     #salvar_dados(df,diretorio_atual, 'voupra_seaworld','voupra')
     nome_arquivo = f'seaworld_voupra_{datetime.now().strftime("%Y-%m-%d")}.json'
     salvar_dados(df,nome_arquivo, 'voupra')
-
+    logging.info("Dados coletados com sucesso!")
 if __name__ == "__main__":
     asyncio.run(coletar_precos_voupra_sea())

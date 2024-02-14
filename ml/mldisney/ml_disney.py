@@ -12,12 +12,8 @@ from insert_database import inserir_dados_no_banco
 def get_future_date(days):
     return (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d")
 
-# Configuração inicial do Selenium
-
-
-# List of days to add to the current date
-
 async def coletar_precos_ml_disney():
+    logging.info("Iniciando a coleta de preços ML Disney")
     options = webdriver.ChromeOptions()
     driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
     dados = []
@@ -27,10 +23,11 @@ async def coletar_precos_ml_disney():
     
         for days in days_to_add:
             future_date = get_future_date(days)
+            logging.info(f"Processando data: {future_date}")
             url = f"https://www.vamonessa.com.br/ingressos/WALT%20DISNEY%20WORLD/6?destination=Orlando&destinationCode=2&destinationState=Florida&destinationStateCode=2&date={future_date}&utm_source=Destaque-Advert&utm_medium=Ingressos+Disney+15-03-2022&utm_campaign=Ingressos+para+Disney&utm_id=Walt+Disney+World"
             driver.get(url)
             time.sleep(5)
-            # XPaths for buttons and corresponding price elements
+            
             xpath_pairs = [
                 ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[1]/button', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','1 Dia - Disney Basico Magic Kingdom'),
                 ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[1]/button', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','1 Dia - Disney Basico Hollywood Studios'),
@@ -41,11 +38,9 @@ async def coletar_precos_ml_disney():
                 ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[5]/div[2]/div[1]/button[3]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[5]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','4 Dias - Disney World Basico'),
                 ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[9]/div[2]/div[1]/button[1]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[9]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','4 Dias - Disney Promocional'),
                 ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[5]/div[2]/div[1]/button[4]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[5]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','5 Dias - Disney World Basico'),
-                
-                # Add other pairs as needed
             ]
 
-            # ...
+            
 
             for button_xpath, price_xpath, park_name in xpath_pairs:
                 # Scroll to button and click
@@ -75,18 +70,16 @@ async def coletar_precos_ml_disney():
                             price_number = float(price_number_str)
                             multiplied_price = price_number * 10
                             formatted_price = "{:.2f}".format(multiplied_price)
-                            # Resto do seu código...
+
                         else:
                             print(f"Price text is not valid for {park_name}: {price_text}")
                 except ValueError:
+                        logging.error(f"Erro ao converter preço para {park_name}: {price_text}")
                         print(f"Error converting price for {park_name}: {price_text}")
-                        formatted_price = None  # Ou outro valor padrão que você desejar
-                        # Resto do seu código...
+                        formatted_price = None 
 
-                    # ...
-                data_hora_atual = datetime.now()        
                 dados.append({
-                       
+
                         'Data_viagem': (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d"),
                         'Parque': park_name,
                         'Preco': formatted_price 
@@ -96,19 +89,20 @@ async def coletar_precos_ml_disney():
         
                 
     except TimeoutException as e:
-                print("Error: Element not found or wait time exceeded", e)
+                logging.error("Erro: Elemento não encontrado ou tempo de espera excedido", e)
     except Exception as e:
-                print("Unexpected error:", e)
+        logging.error("Erro inesperado:", e)
     finally:
                 driver.quit()
 
                 df = pd.DataFrame(dados)
-        
 
                 # Inserindo os dados no banco de dados
                 #inserir_dados_no_banco(df, 'ml_disney')
                 
                 nome_arquivo = f'disney_ml_{datetime.now().strftime("%Y-%m-%d")}.json'
                 salvar_dados(df, nome_arquivo,'ml')
+                logging.info("Coleta de preços ML Disney finalizada")
+                
 if __name__ == '__main__':
     asyncio.run(coletar_precos_ml_disney())
