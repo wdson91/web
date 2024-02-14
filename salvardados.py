@@ -1,7 +1,7 @@
 import os
 import json
 from datetime import datetime
-
+import pytz
 import pandas as pd
 
 from blob import upload_blob
@@ -19,7 +19,13 @@ def carregar_dados_json(nome_arquivo):
 
 # Função para adicionar os novos dados ao arquivo JSON existente, junto com a hora da coleta
 def salvar_dados( df,nome_arquivo,pasta):
-    data_hora_coleta = datetime.now().strftime('%H:%M')
+    
+    fuso_horario = pytz.timezone('America/Sao_Paulo')
+
+    # Obtém a hora atual no fuso horário GMT-3
+    data_hora_coleta = datetime.now(fuso_horario).strftime('%H:%M')
+
+    
     novos_dados = df.to_dict(orient='records')
     novo_registro = {'Hora_coleta': data_hora_coleta, 'Dados': novos_dados}
     
