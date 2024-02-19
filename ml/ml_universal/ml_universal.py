@@ -16,13 +16,16 @@ def get_future_date(days):
 
 async def coletar_precos_ml_universal():
     options = webdriver.ChromeOptions()
-    #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
-    #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
-    chromedriver_autoinstaller.install()  # Check if the current version of chromedriver exists
-                                      # and if it doesn't exist, download it automatically,
-                                      # then add chromedriver to path
+    options.add_argument('--headless')  # Define o navegador para o modo headless
+    options.add_argument('--disable-gpu')  # Desabilita a GPU para melhorar o desempenho
+    options.add_argument('--no-sandbox')  # Usa um sandbox para o processo isolado
+    options.add_argument('--disable-dev-shm-usage')  # Desativa o uso de /dev/shm
 
-    driver = webdriver.Chrome()
+    # Instalando o ChromeDriver
+    service = Service(ChromeDriverManager().install())
+
+    # Inicializando o driver do Chrome
+    driver = webdriver.Chrome(service=service, options=options)
     dados = []
     wait = WebDriverWait(driver, 5)
     days_to_add = [5, 10, 20, 47, 64, 126]
@@ -84,9 +87,6 @@ async def coletar_precos_ml_universal():
                         'Parque': park_name,
                         'Preco': formatted_price 
                     })
-                
-
-        
                 
     except TimeoutException as e:
         logging.error("Erro: Elemento não encontrado ou tempo de espera excedido", e)

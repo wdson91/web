@@ -4,7 +4,7 @@ from imports import *
 
 async def executar_ambos():
     
-   await asyncio.sleep(30)
+   await asyncio.sleep(1)
    
    while True:  # Adicionando um loop para continuar executando
         await asyncio.gather(

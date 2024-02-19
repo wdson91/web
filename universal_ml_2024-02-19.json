@@ -2,5 +2,29 @@
     {
         "Hora_coleta": "16:26",
         "Dados": []
+    },
+    {
+        "Hora_coleta": "16:38",
+        "Dados": [
+            {
+                "Data_viagem": "2024-02-24",
+                "Parque": "1 Dia 1 Parque - Universal Orlando",
+                "Preco": "1042.60"
+            },
+            {
+                "Data_viagem": "2024-02-24",
+                "Parque": "1 Dia 2 Parques - Universal Orlando",
+                "Preco": "1356.40"
+            },
+            {
+                "Data_viagem": "2024-02-24",
+                "Parque": "2 Dias 2 Parques - Universal Orlando",
+                "Preco": "1862.80"
+            }
+        ]
+    },
+    {
+        "Hora_coleta": "17:24",
+        "Dados": []
     }
 ]
