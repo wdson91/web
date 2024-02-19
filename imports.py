@@ -14,7 +14,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support import expected_conditions as EC
 import logging
 from salvardados import salvar_dados
-
+import chromedriver_autoinstaller
 
 from voupra.voupradisney.voupradisney import coletar_precos_voupra_disney
 from voupra.vouprasea.vouprasea import coletar_precos_voupra_sea

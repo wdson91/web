@@ -17,7 +17,12 @@ def get_future_date(days):
 async def coletar_precos_ml_universal():
     options = webdriver.ChromeOptions()
     #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
-    driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
+    #driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
+    chromedriver_autoinstaller.install()  # Check if the current version of chromedriver exists
+                                      # and if it doesn't exist, download it automatically,
+                                      # then add chromedriver to path
+
+    driver = webdriver.Chrome()
     dados = []
     wait = WebDriverWait(driver, 5)
     days_to_add = [5, 10, 20, 47, 64, 126]
