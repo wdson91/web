@@ -3,6 +3,8 @@ from imports import *
 
 
 async def executar_ambos():
+   
+   await asyncio.sleep(15)
    while True:  # Adicionando um loop para continuar executando
         await asyncio.gather(
             main_voupra(run_once=True),
