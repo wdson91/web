@@ -13,8 +13,8 @@ async def main_ml(run_once=False):
         try:
             
             # Execute as funções assíncronas em sequência
-            #await coletar_precos_ml_disney()
-            #await coletar_precos_ml_seaworld()
+            await coletar_precos_ml_disney()
+            await coletar_precos_ml_seaworld()
             await coletar_precos_ml_universal()
             
         except Exception as e:

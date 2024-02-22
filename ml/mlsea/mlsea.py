@@ -70,6 +70,7 @@ async def coletar_precos_ml_seaworld():
                         price_number = float(price_number_str)
                         multiplied_price = price_number * 10
                         formatted_price = "{:.2f}".format(multiplied_price)
+                        
                     except ValueError:
                         print(f"Error converting price for {park_name}: {price_text}")
 
@@ -80,7 +81,7 @@ async def coletar_precos_ml_seaworld():
                 dados.append({
                     'Data_viagem': (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d"),
                     'Parque': park_name,
-                    'Preco': formatted_price 
+                    'Preco': float(formatted_price)
                 })
     except TimeoutException as e:
         print("Error: Element not found or wait time exceeded", e)

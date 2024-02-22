@@ -16,16 +16,9 @@ def get_future_date(days):
 
 async def coletar_precos_ml_universal():
     options = webdriver.ChromeOptions()
-    options.add_argument('--headless')  # Define o navegador para o modo headless
-    options.add_argument('--disable-gpu')  # Desabilita a GPU para melhorar o desempenho
-    options.add_argument('--no-sandbox')  # Usa um sandbox para o processo isolado
-    options.add_argument('--disable-dev-shm-usage')  # Desativa o uso de /dev/shm
-
-    # Instalando o ChromeDriver
-    service = Service(ChromeDriverManager().install())
-
-    # Inicializando o driver do Chrome
-    driver = webdriver.Chrome(service=service, options=options)
+    # driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
+    driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
+    
     dados = []
     wait = WebDriverWait(driver, 5)
     days_to_add = [5, 10, 20, 47, 64, 126]
@@ -76,7 +69,7 @@ async def coletar_precos_ml_universal():
                         price_number = float(price_number_str)
                         multiplied_price = price_number * 10
                         formatted_price = "{:.2f}".format(multiplied_price)
-                        #print(f"{park_name}: {formatted_price}")
+                        
                     except ValueError:
                         print(f"Error converting price for {park_name}: {price_text}")
                     # ...
@@ -85,7 +78,7 @@ async def coletar_precos_ml_universal():
 
                         'Data_viagem': (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d"),
                         'Parque': park_name,
-                        'Preco': formatted_price 
+                        'Preco': float(formatted_price)
                     })
                 
     except TimeoutException as e:

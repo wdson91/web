@@ -7,8 +7,8 @@ async def executar_ambos():
    await asyncio.sleep(15)
    while True:  # Adicionando um loop para continuar executando
         await asyncio.gather(
-            #main_voupra(run_once=True),
-            #main_vmz(run_once=True),
+            main_voupra(run_once=True),
+            main_vmz(run_once=True),
             main_ml(run_once=True)
         )
         logging.info("Aguardando a próxima execução...")

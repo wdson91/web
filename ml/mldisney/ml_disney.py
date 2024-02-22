@@ -84,7 +84,7 @@ async def coletar_precos_ml_disney():
 
                         'Data_viagem': (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d"),
                         'Parque': park_name,
-                        'Preco': formatted_price 
+                        'Preco': float(formatted_price) 
                     })
                 
 
