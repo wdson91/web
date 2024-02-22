@@ -12,7 +12,7 @@ from insert_database import inserir_dados_no_banco
 def get_future_date(days):
     return (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d")
 
-async def coletar_precos_ml_disney():
+async def coletar_precos_ml_disney(hour):
     logging.info("Iniciando a coleta de preços ML Disney")
     options = webdriver.ChromeOptions()
     # driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
@@ -71,7 +71,7 @@ async def coletar_precos_ml_disney():
                         if price_number_str != '-':
                             price_number = float(price_number_str)
                             multiplied_price = price_number * 10
-                            formatted_price = "{:.2f}".format(multiplied_price)
+                            
 
                         else:
                             print(f"Price text is not valid for {park_name}: {price_text}")
@@ -84,7 +84,7 @@ async def coletar_precos_ml_disney():
 
                         'Data_viagem': (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d"),
                         'Parque': park_name,
-                        'Preco': float(formatted_price) 
+                        'Preco': float(multiplied_price) 
                     })
                 
 
@@ -103,7 +103,7 @@ async def coletar_precos_ml_disney():
                 #inserir_dados_no_banco(df, 'ml_disney')
                 
                 nome_arquivo = f'disney_ml_{datetime.now().strftime("%Y-%m-%d")}.json'
-                salvar_dados(df, nome_arquivo,'ml')
+                salvar_dados(df, nome_arquivo,'ml',hour)
                 logging.info("Coleta de preços ML Disney finalizada")
                 
 if __name__ == '__main__':

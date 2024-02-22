@@ -9,7 +9,7 @@ diretorio_avo = os.path.dirname(diretorio_pai)  # Subindo mais um nível
 sys.path.insert(0, diretorio_avo)
 from insert_database import inserir_dados_no_banco
 
-async def coletar_precos_voupra_universal():
+async def coletar_precos_voupra_universal(hour):
     # Configuração inicial do Selenium
     try:
         options = webdriver.ChromeOptions()
@@ -65,7 +65,7 @@ async def coletar_precos_voupra_universal():
         #inserir_dados_no_banco(df, 'voupra_universal')
         
         nome_arquivo = f'universal_voupra_{datetime.now().strftime("%Y-%m-%d")}.json'
-        salvar_dados(df, nome_arquivo,'voupra')
+        salvar_dados(df, nome_arquivo,'voupra',hour)
         
         logging.info("Coleta finalizada.")
     except Exception as e:

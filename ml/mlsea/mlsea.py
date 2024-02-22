@@ -16,7 +16,7 @@ from insert_database import inserir_dados_no_banco
 def get_future_date(days):
     return (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d")
 
-async def coletar_precos_ml_seaworld():
+async def coletar_precos_ml_seaworld(hour):
     # Set up Selenium WebDriver options
     options = webdriver.ChromeOptions()
     
@@ -38,7 +38,7 @@ async def coletar_precos_ml_seaworld():
             xpath_pairs = [
                 ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[1]/button[1]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','1 Dia 1 Parque - SeaWorld Orlando'),
                 ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[1]/button[3]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','3 Dias 3 Parques - SeaWorld Orlando'),
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[1]/button', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','14 Dias 3 Parques - SeaWorld Orlando')
+                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[3]/div[2]/div[1]/button', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[3]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','14 Dias 3 Parques - SeaWorld Orlando')
                 # Add other pairs as needed
             ]
 
@@ -69,19 +69,19 @@ async def coletar_precos_ml_seaworld():
                         price_number_str = price_text.replace("R$", "").replace(",", ".").strip()
                         price_number = float(price_number_str)
                         multiplied_price = price_number * 10
-                        formatted_price = "{:.2f}".format(multiplied_price)
+                        
                         
                     except ValueError:
                         print(f"Error converting price for {park_name}: {price_text}")
 
                 # Logging
-                print(f"{park_name}: {formatted_price} for {future_date}")
+                print(f"{park_name}: {multiplied_price} for {future_date}")
 
                 data_hora_atual = datetime.now()
                 dados.append({
                     'Data_viagem': (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d"),
                     'Parque': park_name,
-                    'Preco': float(formatted_price)
+                    'Preco': float(multiplied_price)
                 })
     except TimeoutException as e:
         print("Error: Element not found or wait time exceeded", e)
@@ -91,7 +91,7 @@ async def coletar_precos_ml_seaworld():
         driver.quit()
         df = pd.DataFrame(dados)
         nome_arquivo = f'seaworld_ml_{datetime.now().strftime("%Y-%m-%d")}.json'
-        salvar_dados(df, nome_arquivo, 'ml')
+        salvar_dados(df, nome_arquivo, 'ml',hour)
 
 if __name__ == '__main__':
     asyncio.run(coletar_precos_ml_seaworld())

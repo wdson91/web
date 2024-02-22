@@ -1,7 +1,7 @@
 from imports import *
 
 
-async def coletar_precos_vmz():
+async def coletar_precos_vmz(hour):
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
     # Configuração inicial do Selenium
@@ -108,7 +108,7 @@ async def coletar_precos_vmz():
     df_final_sorted = df_final.sort_values(by=['Data_viagem', 'Parque'])
     nome_arquivo = f'disney_vmz_{datetime.now().strftime("%Y-%m-%d")}.json'
     
-    salvar_dados(df_final_sorted, nome_arquivo,'vmz')
+    salvar_dados(df_final_sorted, nome_arquivo,'vmz',hour)
     print(df_final_sorted)  
     
     logging.info("Coleta finalizada.")

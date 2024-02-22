@@ -89,10 +89,10 @@ def carregar_dados_json(nome_arquivo):
     return dados
 
 # Função para adicionar os novos dados ao arquivo JSON existente, junto com a hora da coleta
-def salvar_dados(df, nome_arquivo_json, pasta):
+def salvar_dados(df, nome_arquivo_json, pasta,hour):
     fuso_horario = pytz.timezone('America/Sao_Paulo')
-    data_hora_coleta = datetime.now(fuso_horario).strftime('%H:%M')
-
+    data_hora_coleta = hour
+    
     novos_dados = df.to_dict(orient='records')
     novo_registro = {'Hora_coleta': data_hora_coleta, 'Dados': novos_dados}
 

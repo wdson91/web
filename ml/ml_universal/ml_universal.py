@@ -14,7 +14,7 @@ def get_future_date(days):
 
 # List of days to add to the current date
 
-async def coletar_precos_ml_universal():
+async def coletar_precos_ml_universal(hour):
     options = webdriver.ChromeOptions()
     # driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
     driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
@@ -68,7 +68,7 @@ async def coletar_precos_ml_universal():
                     try:
                         price_number = float(price_number_str)
                         multiplied_price = price_number * 10
-                        formatted_price = "{:.2f}".format(multiplied_price)
+                        
                         
                     except ValueError:
                         print(f"Error converting price for {park_name}: {price_text}")
@@ -78,7 +78,7 @@ async def coletar_precos_ml_universal():
 
                         'Data_viagem': (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d"),
                         'Parque': park_name,
-                        'Preco': float(formatted_price)
+                        'Preco': float(multiplied_price)
                     })
                 
     except TimeoutException as e:
@@ -95,7 +95,7 @@ async def coletar_precos_ml_universal():
                 #inserir_dados_no_banco(df, 'ml_universal')
                 
                 nome_arquivo = f'universal_ml_{datetime.now().strftime("%Y-%m-%d")}.json'
-                salvar_dados(df, nome_arquivo,'ml')
+                salvar_dados(df, nome_arquivo,'ml',hour)
                 logging.info("Coleta de preços ML Disney finalizada")
 if __name__ == '__main__':
     asyncio.run(coletar_precos_ml_universal())

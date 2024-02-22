@@ -17,7 +17,7 @@ def formatar_preco(preco):
             return preco
 
 
-async def coletar_precos_vmz_universal():
+async def coletar_precos_vmz_universal(hour):
     logging.info("Iniciando coleta de preços da Universal Orlando.")
     # Lista de sites e nomes de parques
     sites = [
@@ -78,11 +78,12 @@ async def coletar_precos_vmz_universal():
     driver.get(url_14_dias)
     try:
         wait = WebDriverWait(driver, 10)
+        
         xpath_selector = '//*[@id="__layout"]/div/div/section/article[1]/div/div/div[4]/div[1]/div[1]/div[2]/b'
         elemento_preco_14_dias = driver.find_element(By.XPATH, xpath_selector)
         preco_texto_14_dias = elemento_preco_14_dias.text
         price_decimal = float(preco_texto_14_dias.replace('R$', '').replace('.', '').replace(',', '.').strip())
-        preco_final = round(price_decimal * 1.10, 2)
+        preco_final = round(price_decimal , 2)
         
         
     except NoSuchElementException:
@@ -110,7 +111,7 @@ async def coletar_precos_vmz_universal():
     #inserir_dados_no_banco(df, 'vmz_universal')
     
     nome_arquivo = f'universal_vmz_{datetime.now().strftime("%Y-%m-%d")}.json'
-    salvar_dados(df, nome_arquivo,'vmz')
+    salvar_dados(df, nome_arquivo,'vmz',hour)
     logging.info("Coleta finalizada Site Vmz- Universal Orlando.")
 
 if __name__ == "__main__":

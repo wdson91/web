@@ -7,7 +7,7 @@ diretorio_avo = os.path.dirname(diretorio_pai)  # Subindo mais um nível
 # Adicionando o diretório 'docs' ao sys.path
 sys.path.insert(0, diretorio_avo)
 from insert_database import inserir_dados_no_banco
-async def coletar_precos_vmz_seaworld():
+async def coletar_precos_vmz_seaworld(hour):
     logging.info("Iniciando coleta de preços do SeaWorld.")
     # Lista de sites e nomes de parques
     sites = [
@@ -43,7 +43,7 @@ async def coletar_precos_vmz_seaworld():
                 # Multiplicar o preço por 10
                 
                 price_decimal = float(preco_texto.replace('R$', '').replace('.', '').replace(',', '.').strip())
-                new_price = round(price_decimal * 1.10, 2)
+                new_price = round(price_decimal, 2)
                 new_price *= 10
             except NoSuchElementException:
                 # Se o elemento não for encontrado, atribua um traço "-" ao valor
@@ -67,7 +67,7 @@ async def coletar_precos_vmz_seaworld():
     #inserir_dados_no_banco(df, 'vmz_seaworld')
     
     nome_arquivo = f'seaworld_vmz_{datetime.now().strftime("%Y-%m-%d")}.json'
-    salvar_dados(df, nome_arquivo,'vmz')
+    salvar_dados(df, nome_arquivo,'vmz',hour)
     
     logging.info("Coleta finalizada Site Vmz- SeaWorld")
 if __name__ == "__main__":

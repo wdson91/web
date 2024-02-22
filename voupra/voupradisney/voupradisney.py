@@ -9,7 +9,7 @@ diretorio_avo = os.path.dirname(diretorio_pai)  # Subindo mais um nível
 sys.path.insert(0, diretorio_avo)
 from insert_database import inserir_dados_no_banco
 
-async def coletar_precos_voupra_disney():
+async def coletar_precos_voupra_disney(hour):
     # Configuração do Selenium
     options = webdriver.ChromeOptions()
     #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
@@ -112,7 +112,7 @@ async def coletar_precos_voupra_disney():
     # Inserir os dados no banco de dados
     #inserir_dados_no_banco(df, 'voupra_disney')
     nome_arquivo = f'disney_voupra_{datetime.now().strftime("%Y-%m-%d")}.json'
-    salvar_dados(df,nome_arquivo,'voupra')
+    salvar_dados(df,nome_arquivo,'voupra',hour)
     
     
     logging.info("Coleta de preços finalizada.")

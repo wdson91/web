@@ -2,7 +2,7 @@ from imports import *
 
 
 
-async def coletar_precos_voupra_sea():
+async def coletar_precos_voupra_sea(hour):
     
     options = webdriver.ChromeOptions()
     #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
@@ -94,7 +94,7 @@ async def coletar_precos_voupra_sea():
     #inserir_dados_no_banco(df, 'voupra_seaworld')
     #salvar_dados(df,diretorio_atual, 'voupra_seaworld','voupra')
     nome_arquivo = f'seaworld_voupra_{datetime.now().strftime("%Y-%m-%d")}.json'
-    salvar_dados(df,nome_arquivo, 'voupra')
+    salvar_dados(df,nome_arquivo, 'voupra',hour)
     logging.info("Dados coletados com sucesso!")
 if __name__ == "__main__":
     asyncio.run(coletar_precos_voupra_sea())
