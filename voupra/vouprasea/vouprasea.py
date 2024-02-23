@@ -90,9 +90,6 @@ async def coletar_precos_voupra_sea(hour):
     # Criar um DataFrame com os dados
     df = pd.DataFrame(dados)
     
-    # Inserir os dados no banco de dados
-    #inserir_dados_no_banco(df, 'voupra_seaworld')
-    #salvar_dados(df,diretorio_atual, 'voupra_seaworld','voupra')
     nome_arquivo = f'seaworld_voupra_{datetime.now().strftime("%Y-%m-%d")}.json'
     salvar_dados(df,nome_arquivo, 'voupra',hour)
     logging.info("Dados coletados com sucesso!")

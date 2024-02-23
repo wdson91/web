@@ -19,7 +19,6 @@ import chromedriver_autoinstaller
 from voupra.voupradisney.voupradisney import coletar_precos_voupra_disney
 from voupra.vouprasea.vouprasea import coletar_precos_voupra_sea
 from voupra.vouprauniversal.vouprauniversal import coletar_precos_voupra_universal
-from insert_database import inserir_dados_no_banco
 from selenium.webdriver.chrome.options import Options
 
 from ml.index_ml import main_ml

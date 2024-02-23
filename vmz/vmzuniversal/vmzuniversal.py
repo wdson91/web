@@ -106,9 +106,6 @@ async def coletar_precos_vmz_universal(hour):
 
     # Aplicando a formatação dos preços
     df['Preco'] = df['Preco'].apply(formatar_preco)
-
-    # Inserindo os dados no banco de dados
-    #inserir_dados_no_banco(df, 'vmz_universal')
     
     nome_arquivo = f'universal_vmz_{datetime.now().strftime("%Y-%m-%d")}.json'
     salvar_dados(df, nome_arquivo,'vmz',hour)

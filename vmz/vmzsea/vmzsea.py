@@ -6,7 +6,7 @@ diretorio_avo = os.path.dirname(diretorio_pai)  # Subindo mais um nível
 
 # Adicionando o diretório 'docs' ao sys.path
 sys.path.insert(0, diretorio_avo)
-from insert_database import inserir_dados_no_banco
+
 async def coletar_precos_vmz_seaworld(hour):
     logging.info("Iniciando coleta de preços do SeaWorld.")
     # Lista de sites e nomes de parques
@@ -62,9 +62,6 @@ async def coletar_precos_vmz_seaworld(hour):
 
     # Criando um DataFrame
     df = pd.DataFrame(dados)
-    
-    # Inserindo os dados no banco de dados
-    #inserir_dados_no_banco(df, 'vmz_seaworld')
     
     nome_arquivo = f'seaworld_vmz_{datetime.now().strftime("%Y-%m-%d")}.json'
     salvar_dados(df, nome_arquivo,'vmz',hour)

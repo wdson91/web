@@ -6,7 +6,7 @@ diretorio_avo = os.path.dirname(diretorio_pai)  # Subindo mais um nível
 
 # Adicionando o diretório 'docs' ao sys.path
 sys.path.insert(0, diretorio_avo)
-from insert_database import inserir_dados_no_banco
+
 
 # Function to calculate future dates
 def get_future_date(days):
@@ -89,10 +89,6 @@ async def coletar_precos_ml_universal(hour):
                 
                 driver.quit()
                 df = pd.DataFrame(dados)
-        
-
-                # Inserindo os dados no banco de dados
-                #inserir_dados_no_banco(df, 'ml_universal')
                 
                 nome_arquivo = f'universal_ml_{datetime.now().strftime("%Y-%m-%d")}.json'
                 salvar_dados(df, nome_arquivo,'ml',hour)

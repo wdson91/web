@@ -14,7 +14,7 @@ async def executar_ambos(hour):
 
 async def agendar_execucao():
     current_time = datetime.now(pytz.timezone('America/Sao_Paulo'))
-    target_hours = ["7:00","11:00", "16:28", "17:05"]
+    target_hours = ["07:00","10:10", "16:28", "17:05"]
 
     for hour in target_hours:
         if current_time.strftime("%H:%M") == hour:
