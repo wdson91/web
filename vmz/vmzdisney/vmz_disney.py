@@ -1,7 +1,7 @@
 from imports import *
 
 
-async def coletar_precos_vmz(hour):
+async def coletar_precos_vmz(hour,array_datas):
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
     # Configuração inicial do Selenium
@@ -58,9 +58,9 @@ async def coletar_precos_vmz(hour):
             logging.error(f"Erro ao encontrar preço para data {data}: {e}")
             return None
 
-    def processar_dias(driver, dias):
+    def processar_dias(driver, dias,array_datas):
         base_url = "https://www.vmzviagens.com.br/ingressos/orlando/walt-disney-orlando/ticket-disney-basico"
-        datas = [datetime.now() + timedelta(days=d) for d in [5, 10, 20, 47, 64, 126]]
+        datas = [datetime.now() + timedelta(days=d) for d in array_datas]
         dados = []
 
         for dia in dias:
@@ -96,12 +96,12 @@ async def coletar_precos_vmz(hour):
 
     # Coletar preços para Disney básico
     logging.info("Coletando preços para Disney Básico...")
-    df_disneybasicos = await coletar_precos_vmz_disneybasicos(driver, nome_pacotes)
+    df_disneybasicos = await coletar_precos_vmz_disneybasicos(driver,array_datas, nome_pacotes)
 
     # Coletar preços para Disney dias
     logging.info("Coletando preços para Disney Dias...")
     dias_para_processar = [2, 3, 4, 5]
-    df_disneydias = await coletar_precos_vmz_disneydias(driver, nome_pacotes, dias_para_processar)
+    df_disneydias = await coletar_precos_vmz_disneydias(driver, nome_pacotes, dias_para_processar,array_datas)
 
     # Concatenar os dataframes
     df_final = pd.concat([df_disneybasicos,df_disneydias], ignore_index=True)
@@ -116,7 +116,7 @@ async def coletar_precos_vmz(hour):
     return df_final
 
 
-async def coletar_precos_vmz_disneybasicos(driver, nome_pacotes):
+async def coletar_precos_vmz_disneybasicos(driver,array_datas, nome_pacotes):
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
     sites = [
@@ -129,7 +129,7 @@ async def coletar_precos_vmz_disneybasicos(driver, nome_pacotes):
 ]
 
     # Definindo as datas
-    datas = [datetime.now().date() + timedelta(days=d) for d in [5, 10, 20, 47, 64, 126]]
+    datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
 
     # Lista para armazenar os dados
     dados = []
@@ -168,7 +168,7 @@ async def coletar_precos_vmz_disneybasicos(driver, nome_pacotes):
     df = pd.DataFrame(dados)
     return df
 
-async def coletar_precos_vmz_disneydias(driver, nome_pacotes, dias_para_processar):
+async def coletar_precos_vmz_disneydias(driver, nome_pacotes, dias_para_processar,array_datas):
     waiter = 1
 
     def fechar_popups(driver):
@@ -225,9 +225,9 @@ async def coletar_precos_vmz_disneydias(driver, nome_pacotes, dias_para_processa
         5: "5 Dias - Disney World Basico"
     }
 
-    def processar_dias(driver, dias):
+    def processar_dias(driver, dias,array_datas):
         base_url = "https://www.vmzviagens.com.br/ingressos/orlando/walt-disney-orlando/ticket-disney-basico"
-        datas = [datetime.now() + timedelta(days=d) for d in [5, 10, 20, 47, 64, 126]]
+        datas = [datetime.now() + timedelta(days=d) for d in array_datas]
         dados = []
 
         for dia in dias:
@@ -256,7 +256,7 @@ async def coletar_precos_vmz_disneydias(driver, nome_pacotes, dias_para_processa
         return dados  # Return the 'dados' list
 
     dias_para_processar = [2,3,4,5]
-    resultados = processar_dias(driver, dias_para_processar)
+    resultados = processar_dias(driver, dias_para_processar,array_datas)
 
     
     driver.quit()
