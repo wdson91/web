@@ -11,7 +11,7 @@ sys.path.insert(0, diretorio_avo)
 def get_future_date(days):
     return (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d")
 
-async def coletar_precos_ml_disney(hour):
+async def coletar_precos_ml_disney(hour,array_datas):
     logging.info("Iniciando a coleta de preços ML Disney")
     options = webdriver.ChromeOptions()
     # driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
@@ -19,10 +19,10 @@ async def coletar_precos_ml_disney(hour):
     
     dados = []
     wait = WebDriverWait(driver, 5)
-    days_to_add = [5, 10, 20, 47, 64, 126]
+    
     try:
     
-        for days in days_to_add:
+        for days in array_datas:
             future_date = get_future_date(days)
             logging.info(f"Processando data: {future_date}")
             url = f"https://www.vamonessa.com.br/ingressos/WALT%20DISNEY%20WORLD/6?destination=Orlando&destinationCode=2&destinationState=Florida&destinationStateCode=2&date={future_date}&utm_source=Destaque-Advert&utm_medium=Ingressos+Disney+15-03-2022&utm_campaign=Ingressos+para+Disney&utm_id=Walt+Disney+World"

@@ -1,30 +1,38 @@
-from imports import *
-import asyncio
-import schedule
-from datetime import datetime
-import pytz
+# Importando os módulos necessários
+from imports import *  # Importa os módulos necessários, incluindo funções definidas em 'imports'
+import asyncio  # Importa o módulo asyncio para suporte a tarefas assíncronas
+import schedule  # Importa o módulo schedule para agendar tarefas
+from datetime import datetime  # Importa a classe datetime do módulo datetime
+import pytz  # Importa o módulo pytz para lidar com fusos horários
 
-async def executar_ambos(hour):
+array_datas =  [5, 10, 20, 47, 65, 126]
+
+# Define uma função assíncrona para executar as tarefas 'main_voupra', 'main_vmz' e 'main_ml' ao mesmo tempo
+async def executar_ambos(hour,array_datas):
     await asyncio.gather(
-        main_voupra(hour, run_once=True),
-        main_vmz(hour, run_once=True),
-        main_ml(hour, run_once=True)
+        main_voupra(hour,array_datas, run_once=True),  # Executa a função main_voupra com o argumento hour
+        main_vmz(hour,array_datas, run_once=True),      # Executa a função main_vmz com o argumento hour
+        main_ml(hour,array_datas, run_once=True)        # Executa a função main_ml com o argumento hour
     )
-    logging.info("Aguardando a próxima execução...")
+    logging.info("Aguardando a próxima execução...")  # Registra uma mensagem de log
 
+# Define uma função assíncrona para agendar a execução das tarefas em horários específicos
 async def agendar_execucao():
-    current_time = datetime.now(pytz.timezone('America/Sao_Paulo'))
-    target_hours = ["07:00","10:25", "16:28", "17:05"]
+    current_time = datetime.now(pytz.timezone('America/Sao_Paulo'))  # Obtém a hora atual com o fuso horário de São Paulo
+    target_hours = ["07:00", "11:30", "14:00", "17:00"]  # Lista de horários-alvo para execução das tarefas
 
+    # Itera sobre os horários-alvo
     for hour in target_hours:
-        if current_time.strftime("%H:%M") == hour:
-            await executar_ambos(hour)
-            break  # Uma vez que a tarefa é executada, não precisamos continuar verificando os outros horários
+        if current_time.strftime("%H:%M") == hour:  # Verifica se a hora atual corresponde a um horário-alvo
+            await executar_ambos(hour,array_datas)  # Executa as tarefas definidas na função 'executar_ambos'
+            break  # Uma vez que a tarefa é executada, interrompe o loop
 
+# Define a função principal assíncrona para agendar e executar as tarefas
 async def main():
-    while True:
-        await agendar_execucao()
-        await asyncio.sleep(60)
+    while True:  # Loop infinito para continuar agendando e executando tarefas
+        await agendar_execucao()  # Chama a função para agendar a execução das tarefas
+        await asyncio.sleep(60)   # Aguarda 60 segundos antes de verificar novamente os horários
 
+# Verifica se o script está sendo executado diretamente
 if __name__ == "__main__":
-    asyncio.run(main())
+    asyncio.run(main())  # Executa a função principal 'main' usando asyncio

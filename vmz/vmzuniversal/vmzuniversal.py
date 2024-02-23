@@ -17,7 +17,7 @@ def formatar_preco(preco):
             return preco
 
 
-async def coletar_precos_vmz_universal(hour):
+async def coletar_precos_vmz_universal(hour,array_datas):
     logging.info("Iniciando coleta de preços da Universal Orlando.")
     # Lista de sites e nomes de parques
     sites = [
@@ -37,7 +37,7 @@ async def coletar_precos_vmz_universal(hour):
     #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
     driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
     # Definindo as datas
-    datas = [datetime.now().date() + timedelta(days=d) for d in [5, 10, 20, 47, 64, 126]]
+    datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
     
     # Lista para armazenar os dados
     dados = []

@@ -13,7 +13,7 @@ sys.path.insert(0, diretorio_avo)
 def get_future_date(days):
     return (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d")
 
-async def coletar_precos_ml_seaworld(hour):
+async def coletar_precos_ml_seaworld(hour,array_datas):
     # Set up Selenium WebDriver options
     options = webdriver.ChromeOptions()
     
@@ -22,10 +22,10 @@ async def coletar_precos_ml_seaworld(hour):
     dados = []
     wait = WebDriverWait(driver, 10)
     
-    days_to_add = [5, 10, 20, 47, 64, 126]
+    
 
     try:
-        for days in days_to_add:
+        for days in array_datas:
             future_date = get_future_date(days)
             url = f"https://www.vamonessa.com.br/ingressos/Orlando/8?destination=Orlando&destinationCode=2&destinationState=&destinationStateCode=&date={future_date}"
             driver.get(url)

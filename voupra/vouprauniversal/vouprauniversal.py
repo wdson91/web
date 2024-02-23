@@ -9,14 +9,14 @@ diretorio_avo = os.path.dirname(diretorio_pai)  # Subindo mais um nível
 sys.path.insert(0, diretorio_avo)
 
 
-async def coletar_precos_voupra_universal(hour):
+async def coletar_precos_voupra_universal(hour,array_datas):
     # Configuração inicial do Selenium
     try:
         options = webdriver.ChromeOptions()
         #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
         driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
         # Definindo as datas de viagem
-        datas = [datetime.now().date() + timedelta(days=d) for d in [5, 10, 20, 47, 64, 126]]
+        datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
 
         # Definindo os nomes dos parques e os XPaths correspondentes
         parques_xpaths = [

@@ -2,13 +2,13 @@ from imports import *
 
 
 
-async def coletar_precos_voupra_sea(hour):
+async def coletar_precos_voupra_sea(hour,array_datas):
     
     options = webdriver.ChromeOptions()
     #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
     driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
     # Lista de datas a serem consideradas
-    datas = [datetime.now().date() + timedelta(days=d) for d in [5, 10, 20, 47, 64, 126]]
+    datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
 
     # URL base
     base_url = "https://www.voupra.com/estados-unidos/orlando/seaworld?Id=58825&Busca=true&DataTemporada="

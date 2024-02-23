@@ -9,7 +9,7 @@ diretorio_avo = os.path.dirname(diretorio_pai)  # Subindo mais um nível
 sys.path.insert(0, diretorio_avo)
 
 
-async def coletar_precos_voupra_disney(hour):
+async def coletar_precos_voupra_disney(hour,array_datas):
     # Configuração do Selenium
     options = webdriver.ChromeOptions()
     #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
@@ -20,7 +20,7 @@ async def coletar_precos_voupra_disney(hour):
     logging.basicConfig(level=logging.INFO, format=log_format)
 
     # Lista de datas a serem consideradas
-    datas = [datetime.now().date() + timedelta(days=d) for d in [5, 10, 20, 47, 64, 126]]
+    datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
 
     # URL base
     base_url = "https://www.voupra.com/estados-unidos/orlando/disney-world?Id=49824&DataIngresso="

@@ -7,7 +7,7 @@ diretorio_avo = os.path.dirname(diretorio_pai)  # Subindo mais um nível
 # Adicionando o diretório 'docs' ao sys.path
 sys.path.insert(0, diretorio_avo)
 
-async def coletar_precos_vmz_seaworld(hour):
+async def coletar_precos_vmz_seaworld(hour,array_datas):
     logging.info("Iniciando coleta de preços do SeaWorld.")
     # Lista de sites e nomes de parques
     sites = [
@@ -22,7 +22,7 @@ async def coletar_precos_vmz_seaworld(hour):
     driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
 
     # Definindo as datas
-    datas = [datetime.now().date() + timedelta(days=d) for d in [5, 10, 20, 47, 64, 126]]
+    datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
 
     # Lista para armazenar os dados
     dados = []

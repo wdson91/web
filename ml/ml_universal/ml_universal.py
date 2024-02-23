@@ -14,14 +14,14 @@ def get_future_date(days):
 
 # List of days to add to the current date
 
-async def coletar_precos_ml_universal(hour):
+async def coletar_precos_ml_universal(hour,array_datas):
     options = webdriver.ChromeOptions()
     # driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
     driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
     
     dados = []
     wait = WebDriverWait(driver, 5)
-    days_to_add = [5, 10, 20, 47, 64, 126]
+    
     
     xpath_pairs = [
                 ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[1]/button[1]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','1 Dia 1 Parque - Universal Orlando'),
@@ -35,7 +35,7 @@ async def coletar_precos_ml_universal(hour):
             ]
     try:
     
-        for days in days_to_add:
+        for days in array_datas:
             future_date = get_future_date(days)
             url = f"https://www.vamonessa.com.br/ingressos/Orlando/7?destination=Orlando&destinationCode=2&destinationState=&destinationStateCode=&date={future_date}"
             driver.get(url)
