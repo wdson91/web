@@ -18,7 +18,7 @@ async def coletar_precos_ml_disney(hour,array_datas):
     driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
     
     dados = []
-    wait = WebDriverWait(driver, 5)
+    wait = WebDriverWait(driver, 6)
     
     try:
     
@@ -44,49 +44,44 @@ async def coletar_precos_ml_disney(hour,array_datas):
             
 
             for button_xpath, price_xpath, park_name in xpath_pairs:
-                # Scroll to button and click
-                button = wait.until(EC.presence_of_element_located((By.XPATH, button_xpath)))
-                driver.execute_script("arguments[0].scrollIntoView();", button)
-                time.sleep(2)  # Allow time for any lazy-loaded elements
-
                 try:
-                    button.click()
+                        button = wait.until(EC.presence_of_element_located((By.XPATH, button_xpath)))
+                        driver.execute_script("arguments[0].scrollIntoView();", button)
+                        time.sleep(2)  # Permitir tempo para quaisquer elementos carregados preguiçosamente
+                        button.click()
+                except TimeoutException:
+                        logging.error(f"Tempo esgotado ao tentar localizar o botão para {park_name}")
+                        continue  # Ir para o próximo parque se não conseguir localizar o botão
                 except ElementClickInterceptedException:
-                    # Use JavaScript click as fallback
-                    driver.execute_script("arguments[0].click();", button)
+                        logging.error(f"Erro ao clicar no botão para {park_name}")
+                        continue  # Ir para o próximo parque se não conseguir clicar no botão
 
                 try:
                     price_element = wait.until(EC.presence_of_element_located((By.XPATH, price_xpath)))
                     driver.execute_script("arguments[0].scrollIntoView();", price_element)
                     time.sleep(4)
                     price_text = price_element.text
-                except TimeoutException:
-                    price_text = '-'
-                if price_text != '-':
-                    price_number_str = price_text.replace("R$", "").replace(",", ".").strip()
-                # Additional code to process and print the price
-                try:
-                        price_number_str = price_text.replace("R$", "").replace(",", ".").strip()
-                        if price_number_str != '-':
-                            price_number = float(price_number_str)
-                            multiplied_price = price_number * 10
-                            
 
-                        else:
-                            print(f"Price text is not valid for {park_name}: {price_text}")
+                    if price_text != '-':
+                        price_number_str = price_text.replace("R$", "").replace(",", ".").strip()
+                        price_number = float(price_number_str)
+                        multiplied_price = price_number * 10
+                    else:
+                        multiplied_price = '-'
+
+                except TimeoutException:
+                    logging.error(f"Tempo esgotado ao tentar obter o preço para {park_name}")
+                    multiplied_price = '-'
                 except ValueError:
-                        logging.error(f"Erro ao converter preço para {park_name}: {price_text}")
-                        print(f"Error converting price for {park_name}: {price_text}")
-                        formatted_price = None 
+                    logging.error(f"Erro ao converter preço para {park_name}: {price_text}")
+                    print(f"Erro ao converter preço para {park_name}: {price_text}")
+                    multiplied_price = '-'
 
                 dados.append({
-
-                        'Data_viagem': (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d"),
-                        'Parque': park_name,
-                        'Preco': float(multiplied_price) 
-                    })
-                
-
+                    'Data_viagem': (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d"),
+                    'Parque': park_name,
+                    'Preco': multiplied_price
+                })
         
                 
     except TimeoutException as e:
@@ -100,6 +95,7 @@ async def coletar_precos_ml_disney(hour,array_datas):
                 
                 nome_arquivo = f'disney_ml_{datetime.now().strftime("%Y-%m-%d")}.json'
                 salvar_dados(df, nome_arquivo,'ml',hour)
+                
                 logging.info("Coleta de preços ML Disney finalizada")
                 
 if __name__ == '__main__':
