@@ -24,12 +24,12 @@ async def coletar_precos_ml_universal(hour,array_datas):
     
     
     xpath_pairs = [
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[1]/button[1]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','1 Dia 1 Parque - Universal Orlando'),
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[1]/button[1]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','1 Dia 2 Parques - Universal Orlando'),
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[1]/button[2]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','2 Dias 2 Parques - Universal Orlando'),
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[4]/div[2]/div[1]/button', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[4]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','4 Dias 2 Parques - Universal Orlando'),
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[5]/div[2]/div[1]/button', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[5]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','4 Dias 3 Parques - Universal Orlando'),
-                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[3]/div[2]/div[1]/button', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[3]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','14 Dias 3 Parques - Universal Orlando')
+                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[1]/button[1]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/span','1 Dia 1 Parque - Universal Orlando'),
+                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[1]/button[1]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[1]/span','1 Dia 2 Parques - Universal Orlando'),
+                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[1]/button[2]', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[2]/div[2]/div[2]/div[2]/div[1]/div[1]/span','2 Dias 2 Parques - Universal Orlando'),
+                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[4]/div[2]/div[1]/button', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[4]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[4]/div[2]/div[2]/div[2]/div[1]/div[1]/span','4 Dias 2 Parques - Universal Orlando'),
+                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[5]/div[2]/div[1]/button', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[5]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[5]/div[2]/div[2]/div[2]/div[1]/div[1]/span','4 Dias 3 Parques - Universal Orlando'),
+                ('//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[3]/div[2]/div[1]/button', '//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[3]/div[2]/div[2]/div[2]/div[1]/div[2]/span/span','//*[@id="root"]/div[2]/div[1]/div[3]/div[4]/div[1]/div[3]/div[2]/div[2]/div[2]/div[1]/div[1]/span','14 Dias 3 Parques - Universal Orlando')
                 
                 # Add other pairs as needed
             ]
@@ -41,7 +41,7 @@ async def coletar_precos_ml_universal(hour,array_datas):
             driver.get(url)
             time.sleep(5)
             
-            for button_xpath, price_xpath, park_name in xpath_pairs:
+            for button_xpath, preco_parcelado, preco_avista, park_name in xpath_pairs:
                 # Scroll to button and click
                 button = wait.until(EC.presence_of_element_located((By.XPATH, button_xpath)))
                 driver.execute_script("arguments[0].scrollIntoView();", button)
@@ -54,31 +54,39 @@ async def coletar_precos_ml_universal(hour,array_datas):
                     driver.execute_script("arguments[0].click();", button)
 
                 try:
-                    price_element = wait.until(EC.presence_of_element_located((By.XPATH, price_xpath)))
-                    driver.execute_script("arguments[0].scrollIntoView();", price_element)
+                    price1 = wait.until(EC.presence_of_element_located((By.XPATH, preco_parcelado)))
+                    price2 = wait.until(EC.presence_of_element_located((By.XPATH, preco_avista)))
+                    driver.execute_script("arguments[0].scrollIntoView();",  preco_parcelado)
                     time.sleep(4)
-                    price_text = price_element.text
+                    price_text_1 =  preco_parcelado.text
+                    price_text_2 =  preco_avista.text
                 except TimeoutException:
-                    price_text = '-'
-                if price_text != '-':
-                    price_number_str = price_text.replace("R$", "").replace(",", ".").strip()
+                    price_text_1 = '-'
+                    price_text_2= '-'
+                if price_text_1 != '-':
+                    price_number_str_1 = price_text_1.replace("R$", "").replace(",", ".").strip()
+                    price_number_str_2 = price_text_2.replace("R$", "").replace(",", ".").strip()
                 # Additional code to process and print the price
-                if "R$" in price_text:
-                    price_number_str = price_text.replace("R$", "").replace(",", ".").strip()
+                if "R$" in price_text_1:
+                    price_number_str_1 = price_text_1.replace("R$", "").replace(",", ".").strip()
+                    price_number_str_2 = price_text_2.replace("R$", "").replace(",", ".").strip()
                     try:
-                        price_number = float(price_number_str)
-                        multiplied_price = price_number * 10
+                        price_number_1 = float(price_number_str_1)
                         
+                        multiplied_price = price_number_1* 10
+                        
+                        price_number_2 = float(price_number_str_2)
                         
                     except ValueError:
-                        print(f"Error converting price for {park_name}: {price_text}")
+                        print(f"Error converting price for {park_name}: {price_text_1}")
                     # ...
                 data_hora_atual = datetime.now()        
                 dados.append({
 
                         'Data_viagem': (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d"),
                         'Parque': park_name,
-                        'Preco': float(multiplied_price)
+                        'Preco_Parcelado': float(multiplied_price),
+                        'Preco_Avista': float(price_number_str_2),
                     })
                 
     except TimeoutException as e:
