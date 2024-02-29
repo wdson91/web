@@ -24,7 +24,7 @@ async def coletar_precos_vmz(hour,array_datas):
 
     def scroll_to_element(driver, element):
         driver.execute_script("arguments[0].scrollIntoView(true);", element)
-        time.sleep(waiter + 4)  # Espera para a rolagem acontecer
+        time.sleep(waiter + 2)  # Espera para a rolagem acontecer
 
     def mudar_mes_ano(driver, mes, ano):
         try:
@@ -44,7 +44,7 @@ async def coletar_precos_vmz(hour,array_datas):
 
     def encontrar_preco_data(driver, data):
         try:
-            time.sleep(waiter + 4)  # Aguardar o calendário carregar
+            time.sleep(waiter + 7)  # Aguardar o calendário carregar
             elementos_fc_content = driver.find_elements(By.CLASS_NAME, 'fc-content')
             for elemento in elementos_fc_content:
                 fc_date = elemento.find_element(By.CLASS_NAME, 'fc-date').text
@@ -207,7 +207,7 @@ async def coletar_precos_vmz_disneydias(driver, nome_pacotes, dias_para_processa
 
     def encontrar_preco_data(driver, data):
         try:
-            time.sleep(waiter + 4)  # Aguardar o calendário carregar
+            time.sleep(waiter + 7)  # Aguardar o calendário carregar
             elementos_fc_content = driver.find_elements(By.CLASS_NAME, 'fc-content')
             for elemento in elementos_fc_content:
                 fc_date = elemento.find_element(By.CLASS_NAME, 'fc-date').text
