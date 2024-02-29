@@ -44,7 +44,7 @@ async def coletar_precos_vmz(hour,array_datas):
 
     def encontrar_preco_data(driver, data):
         try:
-            time.sleep(waiter + 10)  # Aguardar o calendário carregar
+            time.sleep(waiter + 4)  # Aguardar o calendário carregar
             elementos_fc_content = driver.find_elements(By.CLASS_NAME, 'fc-content')
             for elemento in elementos_fc_content:
                 fc_date = elemento.find_element(By.CLASS_NAME, 'fc-date').text
@@ -144,7 +144,7 @@ async def coletar_precos_vmz_disneybasicos(driver, nome_pacotes,array_datas):
             driver.get(url_com_data)
             try:
                 # Tente localizar o elemento com o preço
-                wait = WebDriverWait(driver, 10)
+                wait = WebDriverWait(driver, 5)
                 elemento_preco = driver.find_element(By.XPATH, xpath_selector)
                 preco_texto = elemento_preco
 
@@ -187,7 +187,7 @@ async def coletar_precos_vmz_disneydias(driver, nome_pacotes, dias_para_processa
 
     def scroll_to_element(driver, element):
         driver.execute_script("arguments[0].scrollIntoView(true);", element)
-        time.sleep(waiter + 4)  # Espera para a rolagem acontecer
+        time.sleep(waiter + 2)  # Espera para a rolagem acontecer
 
     def mudar_mes_ano(driver, mes, ano):
         try:
@@ -196,7 +196,7 @@ async def coletar_precos_vmz_disneydias(driver, nome_pacotes, dias_para_processa
             year_select.click()
             driver.find_element(By.CSS_SELECTOR, f'option[value="{ano}"]').click()
 
-            month_select = WebDriverWait(driver, waiter + 3).until(EC.element_to_be_clickable((By.ID, "month-control")))
+            month_select = WebDriverWait(driver, waiter + 2).until(EC.element_to_be_clickable((By.ID, "month-control")))
             scroll_to_element(driver, month_select)
             month_select.click()
             driver.find_element(By.CSS_SELECTOR, f'option[value="{mes}"]').click()
@@ -207,7 +207,7 @@ async def coletar_precos_vmz_disneydias(driver, nome_pacotes, dias_para_processa
 
     def encontrar_preco_data(driver, data):
         try:
-            time.sleep(waiter + 10)  # Aguardar o calendário carregar
+            time.sleep(waiter + 4)  # Aguardar o calendário carregar
             elementos_fc_content = driver.find_elements(By.CLASS_NAME, 'fc-content')
             for elemento in elementos_fc_content:
                 fc_date = elemento.find_element(By.CLASS_NAME, 'fc-date').text
