@@ -65,7 +65,7 @@ async def coletar_precos_vmz_disneybasicos(driver, nome_pacotes,array_datas):
             driver.get(url_com_data)
             try:
                 # Tente localizar o elemento com o preço
-                wait = WebDriverWait(driver, 5)
+                wait = WebDriverWait(driver, 3)
                 elemento_preco = driver.find_element(By.XPATH, xpath_selector)
                 preco_texto = elemento_preco
 
@@ -88,6 +88,7 @@ async def coletar_precos_vmz_disneybasicos(driver, nome_pacotes,array_datas):
 
     logging.info("Coleta de preços finalizada.")
     
+    driver.quit()
     # Criando um DataFrame
     df = pd.DataFrame(dados)
     return df
