@@ -27,7 +27,7 @@ async def agendar_execucao():
         # Itera sobre os horários-alvo
         for hour in target_hours:
             target_time = datetime.strptime(hour, "%H:%M")  # Converte a string de hora para um objeto datetime
-            target_time -= timedelta(minutes=30)  # Subtrai 30 minutos do horário-alvo
+            target_time -= timedelta(minutes=40)  # Subtrai 30 minutos do horário-alvo
 
             # Verifica se a hora atual corresponde a meia hora antes do horário-alvo
             if current_time.hour == target_time.hour and current_time.minute == target_time.minute:
