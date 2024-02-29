@@ -1,25 +1,8 @@
 from imports import *
 
-
-# Função para formatar o preço
-def formatar_preco(preco):
-    if isinstance(preco, float):
-        preco_formatado = round(preco, 2)
-        
-        return preco_formatado
-    else:
-        try:
-            preco_float = float(preco.replace('R$', '').replace(',', '.').strip())
-            preco_formatado = round(preco_float, 2)
-            
-            return preco_formatado
-        except ValueError:
-            return preco
-
-
-async def coletar_precos_vmz_universal(hour,array_datas):
+async def coletar_precos_vmz_universal(hour, array_datas):
     logging.info("Iniciando coleta de preços da Universal Orlando.")
-    # Lista de sites e nomes de parques
+    
     sites = [
         ("https://www.vmzviagens.com.br/ingressos/orlando/universal-orlando-resort/1-parque-1-dia-data-fixa?", '1 Dia 1 Parque - Universal Orlando'),
         ("https://www.vmzviagens.com.br/ingressos/orlando/universal-orlando-resort/2-parques-1-dia-park-to-park-data-fixa?", '1 Dia 2 Parques - Universal Orlando'),
@@ -28,88 +11,79 @@ async def coletar_precos_vmz_universal(hour,array_datas):
         ("https://www.vmzviagens.com.br/ingressos/orlando/universal-orlando-resort/3-parques-compre-2-dias-e-ganhe-2-dias-gratis-park-to-park?", '4 Dias 3 Parques - Universal Orlando')
     ]
 
-    # URL para 14 Dias 3 Parques - Universal Orlando (não dinâmico)
     url_14_dias = "https://www.vmzviagens.com.br/ingressos/orlando/universal-orlando-resort/14-dias-flexiveis-uso-em-2024?"
-    xpath_14_dias = '//*[@id="__layout"]/div/div/section/article[1]/div/div/div[4]/div[1]/div[3]/div[2]/b'
-
-    # Configuração inicial do Selenium
-    options = webdriver.ChromeOptions()
-    #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
-    driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
-    # Definindo as datas
-    datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
     
-    # Lista para armazenar os dados
+    options = webdriver.ChromeOptions()
+    driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
+    
+    datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
     dados = []
 
     for data in datas:
-        
         for url_template, parque in sites:
             logging.info(f"Coletando preços do parque {parque}.")
             site_url = f"{url_template}data={data.strftime('%Y-%m-%d')}"
             driver.get(site_url)
 
             try:
-                # Tente localizar o elemento com o preço
-                wait = WebDriverWait(driver, 10)
-                xpath_selector = '//*[@id="__layout"]/div/div/section/article[1]/div/div/div[4]/div[1]/div[3]/div[2]/b'
-                elemento_preco = driver.find_element(By.XPATH, xpath_selector)
-                preco_texto = elemento_preco.text
-                
-                # Multiplicar o preço por 10
-                preco_texto = preco_texto.replace('R$ ', '').replace(',', '.')
-                preco_float = float(preco_texto) * 10
-                preco_final = f"R$ {preco_float:.2f}"
-
+                preco_parcelado_element = driver.find_element(By.XPATH, '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/b')
+                preco_avista_element = driver.find_element(By.XPATH, '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/span[1]')
             except NoSuchElementException:
-                # Se o elemento não for encontrado, atribua um traço "-" ao valor
-                preco_final = "-"
-            
-            # Adicione os dados a lista de dicionários
-            data_hora_atual = datetime.now()
+                try:
+                    preco_parcelado_element = driver.find_element(By.XPATH, '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[3]/div[2]/b')
+                    preco_avista_element = driver.find_element(By.XPATH, '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[3]/div[2]/span[1]')
+                except NoSuchElementException:
+                
+                    preco_final_avista = preco_float = "-"
+                else:
+                    # Multiplicar o preço parcelado por 10
+                    preco_parcelado = preco_parcelado_element.text.replace('R$ ', '').replace(',', '.')
+                    preco_float = float(preco_parcelado) * 10
+                    preco_final_avista = float(preco_avista_element.text.replace('R$ ', '').replace('.','').replace(',', '.'))
+            else:    
+                preco_final_avista = float(preco_avista_element.text.replace('R$ ', '').replace('.','').replace(',', '.'))
+                preco_parcelado = preco_parcelado_element.text.replace('R$ ', '').replace(',', '.')
+                preco_float = float(preco_parcelado) * 10
+                
             dados.append({
+                'Data_viagem': data.strftime("%Y-%m-%d"),
+                'Parque': parque,
+                'Preco_Parcelado': preco_float,
+                'Preco_Avista': preco_final_avista
+            })
 
-                    'Data_viagem': (data + timedelta(days=0)).strftime("%Y-%m-%d"),
-                    'Parque': parque,
-                    'Preco': preco_final
-                })
-    
-    # Coleta de preços para 14 Dias 3 Parques - Universal Orlando (não dinâmico)
-    driver.get(url_14_dias)
-    try:
-        wait = WebDriverWait(driver, 10)
-        
-        xpath_selector = '//*[@id="__layout"]/div/div/section/article[1]/div/div/div[4]/div[1]/div[1]/div[2]/b'
-        elemento_preco_14_dias = driver.find_element(By.XPATH, xpath_selector)
-        preco_texto_14_dias = elemento_preco_14_dias.text
-        price_decimal = float(preco_texto_14_dias.replace('R$', '').replace('.', '').replace(',', '.').strip())
-        preco_final = round(price_decimal , 2)
-        
-        
-    except NoSuchElementException:
-        preco_final = "-"
+        driver.get(url_14_dias)
+        try:
+            preco_parcelado_14_dias_element = driver.find_element(By.XPATH, '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[1]/div[2]/b')
+            preco_avista_14_dias_element = driver.find_element(By.XPATH, '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[1]/div[2]/span[1]')
+                
+            # Convertendo o preço parcelado para float e multiplicando por 10
+            preco_parcelado_14_dias = preco_parcelado_14_dias_element.text.replace('R$ ', '').replace(',', '.')
+            preco_final_14_dias_parcelado = float(preco_parcelado_14_dias) * 10
 
-    # Adicionando o preço fixo para 14 Dias 3 Parques - Universal Orlando
-    for data in datas:
-        data_hora_atual = datetime.now()
+            
+            preco_avista_14_dias = float(preco_avista_14_dias_element.text.replace('R$ ', '').replace('.','').replace(',', '.'))
+            
+        except NoSuchElementException:
+            preco_parcelado_14_dias = preco_final_14_dias_parcelado = "-"
+
         
         dados.append({
-            'Data_viagem': (data + timedelta(days=0)).strftime("%Y-%m-%d"),
+            'Data_viagem': data.strftime("%Y-%m-%d"),
             'Parque': '14 Dias 3 Parques - Universal Orlando',
-            'Preco':  preco_final*10
-        })    
-    
+            'Preco_Parcelado': preco_final_14_dias_parcelado,
+            'Preco_Avista': preco_avista_14_dias
+        })
+
     driver.quit()
 
-    # Criando um DataFrame
     df = pd.DataFrame(dados)
-
-    # Aplicando a formatação dos preços
-    df['Preco'] = df['Preco'].apply(formatar_preco)
     
+
     nome_arquivo = f'universal_vmz_{datetime.now().strftime("%Y-%m-%d")}.json'
-    salvar_dados(df, nome_arquivo,'vmz',hour)
+    salvar_dados(df, nome_arquivo, 'vmz', hour)
     logging.info("Coleta finalizada Site Vmz- Universal Orlando.")
+
 
 if __name__ == "__main__":
     asyncio.run(coletar_precos_vmz_universal())

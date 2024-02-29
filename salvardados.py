@@ -17,11 +17,12 @@ def baixar_blob_se_existir(nome_arquivo_json, pasta):
 
     if blob_client.exists():
         with open(nome_arquivo_json, "wb") as download_file:
-            download_file.write(blob_client.download_blob().readall())
-        print(f"Arquivo {nome_arquivo_json} baixado com sucesso.")
+            print(f"Arquivo {nome_arquivo_json} baixado com sucesso.")
+            return download_file.write(blob_client.download_blob().readall())
+        
     else:
         print(f"Arquivo {nome_arquivo_json} não existe no Blob Storage.")
-
+    
 # Função para fazer upload do arquivo para o Azure Blob Storage
 def upload_blob(caminho_arquivo_json, nome_arquivo_json, pasta):
     blob_service_client = BlobServiceClient.from_connection_string(connect_str)
@@ -67,4 +68,18 @@ def salvar_dados(df, nome_arquivo_json, pasta,hour):
     # Fazer upload do arquivo atualizado para o Azure Blob Storage
     upload_blob(nome_arquivo_json, nome_arquivo_json, pasta)
 
+def salvar_dados_margem(df, nome_arquivo_json, pasta, hour):
+    # Converter o DataFrame para JSON
+    json_data = df.to_json(orient='records')
 
+    # Inicializar o cliente do serviço de Blob
+    blob_service_client = BlobServiceClient.from_connection_string(connect_str)
+
+    # Referenciar o container no Blob Storage
+    container_client = blob_service_client.get_container_client(f'imagens/Automacao_python/{pasta}')
+
+    # Enviar o JSON para o Blob Storage com o nome desejado
+    blob_client = container_client.get_blob_client(nome_arquivo_json)
+    blob_client.upload_blob(json_data, overwrite=True)
+
+    print(f"Arquivo {nome_arquivo_json} enviado com sucesso para {pasta}.")

@@ -1,9 +1,5 @@
 # Importando os módulos necessários
 from imports import *  # Importa os módulos necessários, incluindo funções definidas em 'imports'
-import asyncio  # Importa o módulo asyncio para suporte a tarefas assíncronas
-import schedule  # Importa o módulo schedule para agendar tarefas
-from datetime import datetime  # Importa a classe datetime do módulo datetime
-import pytz  # Importa o módulo pytz para lidar com fusos horários
 
 array_datas =  [5, 10, 20, 47, 65, 126]
 
@@ -11,7 +7,7 @@ array_datas =  [5, 10, 20, 47, 65, 126]
 async def executar_ambos(hour,array_datas):
     await asyncio.gather(
         #main_voupra(hour,array_datas, run_once=True),  # Executa a função main_voupra com o argumento hour
-        #main_vmz(hour,array_datas, run_once=True),      # Executa a função main_vmz com o argumento hour
+        main_vmz(hour,array_datas, run_once=True),      # Executa a função main_vmz com o argumento hour
         main_ml(hour,array_datas, run_once=True)        # Executa a função main_ml com o argumento hour
     )
     logging.info("Aguardando a próxima execução...")  # Registra uma mensagem de log
@@ -19,12 +15,12 @@ async def executar_ambos(hour,array_datas):
 # Define uma função assíncrona para agendar a execução das tarefas em horários específicos
 async def agendar_execucao():
     current_time = datetime.now(pytz.timezone('America/Sao_Paulo'))  # Obtém a hora atual com o fuso horário de São Paulo
-    target_hours = ["07:00", "11:00", "15:24", "17:00"]  # Lista de horários-alvo para execução das tarefas
+    target_hours = ["07:00", "11:00", "13:50", "17:00"]  # Lista de horários-alvo para execução das tarefas
 
     # Itera sobre os horários-alvo
     for hour in target_hours:
         if current_time.strftime("%H:%M") == hour:  # Verifica se a hora atual corresponde a um horário-alvo
-            await executar_ambos(hour,array_datas)  # Executa as tarefas definidas na função 'executar_ambos'
+            await executar_ambos('14:00',array_datas)  # Executa as tarefas definidas na função 'executar_ambos'
             break  # Uma vez que a tarefa é executada, interrompe o loop
 
 # Define a função principal assíncrona para agendar e executar as tarefas

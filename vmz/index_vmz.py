@@ -3,6 +3,7 @@ from imports import *
 from .vmzdisney.vmz_disney import coletar_precos_vmz
 from .vmzsea.vmzsea import coletar_precos_vmz_seaworld
 from .vmzuniversal.vmzuniversal import coletar_precos_vmz_universal
+#from .vmzdisney.teste import coletar_precos_vmz
 
 async def main_vmz(hour,array_datas,run_once=False):
     if run_once:
@@ -10,11 +11,18 @@ async def main_vmz(hour,array_datas,run_once=False):
         try:
             # Execute as funções assíncronas em sequência
             await coletar_precos_vmz(hour,array_datas)
-            await coletar_precos_vmz_seaworld(hour,array_datas)
-            await coletar_precos_vmz_universal(hour,array_datas)
-            
         except Exception as e:
-            logging.error(f"Erro durante a coleta de preços: {e}")
+            logging.error(f"Erro durante a coleta de preços da Disney: {e}")
+
+        try:
+            await coletar_precos_vmz_seaworld(hour,array_datas)
+        except Exception as e:
+            logging.error(f"Erro durante a coleta de preços do SeaWorld: {e}")
+
+        try:
+            await coletar_precos_vmz_universal(hour,array_datas)
+        except Exception as e:
+            logging.error(f"Erro durante a coleta de preços da Universal: {e}")
 
         return
 

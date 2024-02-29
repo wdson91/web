@@ -33,30 +33,28 @@ async def coletar_precos_vmz_seaworld(hour,array_datas):
 
             driver.get(url)
 
+            
             try:
-                # Tente localizar o elemento com o preço
-                wait = WebDriverWait(driver, 10)
-                xpath_selector = '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div/div[1]/b'
-                elemento_preco = driver.find_element(By.XPATH, xpath_selector)
-                preco_texto = elemento_preco.text
+                preco_parcelado_element = driver.find_element(By.XPATH, '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div/div[1]/b')
+                preco_avista_element = driver.find_element(By.XPATH, '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div/div[1]/span[1]')
 
-                # Multiplicar o preço por 10
+                # Multiplicar o preço parcelado por 10
+                preco_parcelado = preco_parcelado_element.text.replace('R$ ', '').replace(',', '.')
+                preco_float = float(preco_parcelado) * 10
+                #preco_final_parcelado = f"R$ {preco_float:    
                 
-                price_decimal = float(preco_texto.replace('R$', '').replace('.', '').replace(',', '.').strip())
-                new_price = round(price_decimal, 2)
-                new_price *= 10
+                preco_final_avista = float(preco_avista_element.text.replace('R$ ', '').replace('.','').replace(',', '.'))
+                
             except NoSuchElementException:
-                # Se o elemento não for encontrado, atribua um traço "-" ao valor
-                preco_texto = "-"
-
-            # Adicione os dados a lista de dicionários
-            data_hora_atual = datetime.now()
+                
+                preco_final_avista = preco_float = "-"
             dados.append({
+                'Data_viagem': data.strftime("%Y-%m-%d"),
+                'Parque': parque,
+                'Preco_Parcelado': preco_float,
+                'Preco_Avista': preco_final_avista
+            })
 
-                    'Data_viagem': (data + timedelta(days=0)).strftime("%Y-%m-%d"),
-                    'Parque': parque,
-                    'Preco': new_price
-                })    
 
     driver.quit()
 

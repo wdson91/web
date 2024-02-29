@@ -1,7 +1,7 @@
 from imports import *
 
 
-async def coletar_precos_vmz(hour,array_datas):
+async def coletar_precos_vmz(hour):
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
     # Configuração inicial do Selenium
@@ -9,7 +9,7 @@ async def coletar_precos_vmz(hour,array_datas):
     #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub',options=options)
     driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
 
-    waiter = 2
+    waiter = 1
 
     def fechar_popups(driver):
         try:
@@ -24,7 +24,7 @@ async def coletar_precos_vmz(hour,array_datas):
 
     def scroll_to_element(driver, element):
         driver.execute_script("arguments[0].scrollIntoView(true);", element)
-        time.sleep(waiter + 4)  # Espera para a rolagem acontecer
+        time.sleep(waiter + 3)  # Espera para a rolagem acontecer
 
     def mudar_mes_ano(driver, mes, ano):
         try:
@@ -33,7 +33,7 @@ async def coletar_precos_vmz(hour,array_datas):
             year_select.click()
             driver.find_element(By.CSS_SELECTOR, f'option[value="{ano}"]').click()
 
-            month_select = WebDriverWait(driver, waiter + 3).until(EC.element_to_be_clickable((By.ID, "month-control")))
+            month_select = WebDriverWait(driver, waiter + 2).until(EC.element_to_be_clickable((By.ID, "month-control")))
             scroll_to_element(driver, month_select)
             month_select.click()
             driver.find_element(By.CSS_SELECTOR, f'option[value="{mes}"]').click()
@@ -44,24 +44,23 @@ async def coletar_precos_vmz(hour,array_datas):
 
     def encontrar_preco_data(driver, data):
         try:
-            time.sleep(waiter + 10)  # Aguardar o calendário carregar
+            time.sleep(waiter + 9)  # Aguardar o calendário carregar
             elementos_fc_content = driver.find_elements(By.CLASS_NAME, 'fc-content')
             for elemento in elementos_fc_content:
                 fc_date = elemento.find_element(By.CLASS_NAME, 'fc-date').text
                 if fc_date == str(data.day):
                     calendar_event_price = elemento.find_element(By.CLASS_NAME, 'calendar-event-price')
                     price_text = calendar_event_price.text.strip()
-                    preco_avista = float(price_text.replace('R$', '').replace('.', '').replace(',', '.').strip())
-                    preco_parcelado = round(preco_avista * 1.10, 2)
-                    
-                    return preco_avista,preco_parcelado
+                    price_decimal = float(price_text.replace('R$', '').replace('.', '').replace(',', '.').strip())
+                    new_price = round(price_decimal * 1.10, 2)
+                    return new_price
         except Exception as e:
             logging.error(f"Erro ao encontrar preço para data {data}: {e}")
             return None
 
-    def processar_dias(driver, dias,array_datas):
+    def processar_dias(driver, dias):
         base_url = "https://www.vmzviagens.com.br/ingressos/orlando/walt-disney-orlando/ticket-disney-basico"
-        datas = [datetime.now() + timedelta(days=d) for d in array_datas]
+        datas = [datetime.now() + timedelta(days=d) for d in [5, 10, 20, 47, 64, 126]]
         dados = []
 
         for dia in dias:
@@ -75,14 +74,13 @@ async def coletar_precos_vmz(hour,array_datas):
                 mes = data.month - 1
                 ano = data.year
                 mudar_mes_ano(driver, mes, ano)
-                preco_avista,preco_parcelado = encontrar_preco_data(driver, data)
-                if preco_avista:
-                    
+                preco = encontrar_preco_data(driver, data)
+                if preco:
+                    data_hora_atual = datetime.now()
                     dados.append({
                         'Data_viagem': (data + timedelta(days=0)).strftime("%Y-%m-%d"),
                         'Parque': nome_pacote,
-                        'Preco_Parcelado': preco_parcelado,
-                        'Preco_Avista': preco_avista
+                        'Preco': preco
                     })
                 else:
                     logging.warning(f"Preço não encontrado para {nome_pacote} em {data}")
@@ -98,12 +96,12 @@ async def coletar_precos_vmz(hour,array_datas):
 
     # Coletar preços para Disney básico
     logging.info("Coletando preços para Disney Básico...")
-    df_disneybasicos = await coletar_precos_vmz_disneybasicos(driver, nome_pacotes,array_datas)
+    df_disneybasicos = await coletar_precos_vmz_disneybasicos(driver, nome_pacotes)
 
     # Coletar preços para Disney dias
     logging.info("Coletando preços para Disney Dias...")
     dias_para_processar = [2, 3, 4, 5]
-    df_disneydias = await coletar_precos_vmz_disneydias(driver, nome_pacotes, dias_para_processar,array_datas)
+    df_disneydias = await coletar_precos_vmz_disneydias(driver, nome_pacotes, dias_para_processar)
 
     # Concatenar os dataframes
     df_final = pd.concat([df_disneybasicos,df_disneydias], ignore_index=True)
@@ -111,27 +109,27 @@ async def coletar_precos_vmz(hour,array_datas):
     nome_arquivo = f'disney_vmz_{datetime.now().strftime("%Y-%m-%d")}.json'
     
     salvar_dados(df_final_sorted, nome_arquivo,'vmz',hour)
-     
+    print(df_final_sorted)  
     
     logging.info("Coleta finalizada.")
 
     return df_final
 
 
-async def coletar_precos_vmz_disneybasicos(driver, nome_pacotes,array_datas):
+async def coletar_precos_vmz_disneybasicos(driver, nome_pacotes):
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
     sites = [
-    ("https://www.vmzviagens.com.br/ingressos/orlando/disney-world-ingresso/disney-ingresso-magic-kingdom-1dia?", '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/span[1]', '1 Dia - Disney Basico Magic Kingdom'),
-    ("https://www.vmzviagens.com.br/ingressos/orlando/disney-world-ingresso/epcot?",  '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/span[1]', '1 Dia - Disney Basico Epcot'),
-    ("https://www.vmzviagens.com.br/ingressos/orlando/disney-world-ingresso/disney-ingresso-hollywood-studios-1dia?", '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/span[1]', '1 Dia - Disney Basico Hollywood Studios'),
-    ("https://www.vmzviagens.com.br/ingressos/orlando/disney-world-ingresso/disney-ingresso-animal-kingdom-1dia?", '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/span[1]', '1 Dia - Disney Basico Animal Kingdom'),
-    ("https://www.vmzviagens.com.br/ingressos/orlando/promocao-disney-world-4-park-magic/promocao-disney-world-4-park-magic?", '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[3]/div[1]/span[1]', '4 Dias - Disney Promocional')
+    ("https://www.vmzviagens.com.br/ingressos/orlando/disney-world-ingresso/disney-ingresso-magic-kingdom-1dia?", '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/b', '1 Dia - Disney Basico Magic Kingdom'),
+    ("https://www.vmzviagens.com.br/ingressos/orlando/disney-world-ingresso/epcot?",  '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/b', '1 Dia - Disney Basico Epcot'),
+    ("https://www.vmzviagens.com.br/ingressos/orlando/disney-world-ingresso/disney-ingresso-hollywood-studios-1dia?", '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/b', '1 Dia - Disney Basico Hollywood Studios'),
+    ("https://www.vmzviagens.com.br/ingressos/orlando/disney-world-ingresso/disney-ingresso-animal-kingdom-1dia?", '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/b', '1 Dia - Disney Basico Animal Kingdom'),
+    ("https://www.vmzviagens.com.br/ingressos/orlando/promocao-disney-world-4-park-magic/promocao-disney-world-4-park-magic?", '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[3]/div[1]/b', '4 Dias - Disney Promocional')
     # Adicione outros sites, XPaths e nomes de parques conforme necessario
 ]
 
     # Definindo as datas
-    datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
+    datas = [datetime.now().date() + timedelta(days=d) for d in [5, 10, 20, 47, 64, 126]]
 
     # Lista para armazenar os dados
     dados = []
@@ -152,17 +150,16 @@ async def coletar_precos_vmz_disneybasicos(driver, nome_pacotes,array_datas):
                 price_text = preco_texto.text
                 price_decimal = float(price_text.replace('R$', '').replace('.', '').replace(',', '.').strip())
                 new_price = round(price_decimal , 2)
-                preco_parcelado = round(price_decimal * 1.10, 2)
+                new_price *= 10
             except NoSuchElementException:
                 # Se o elemento não for encontrado, atribua um traço "-" ao valor
                 new_price = "-"
-                preco_parcelado = "-"
+
             # Adicionar os dados coletados à lista
             dados.append({
                 'Data_viagem': (data + timedelta(days=0)).strftime("%Y-%m-%d"),
                 'Parque': parque_nome,
-                'Preco_Parcelado': preco_parcelado,
-                'Preco_Avista': new_price
+                'Preco': new_price
             })
 
     logging.info("Coleta de preços finalizada.")
@@ -171,8 +168,8 @@ async def coletar_precos_vmz_disneybasicos(driver, nome_pacotes,array_datas):
     df = pd.DataFrame(dados)
     return df
 
-async def coletar_precos_vmz_disneydias(driver, nome_pacotes, dias_para_processar,array_datas):
-    waiter = 2
+async def coletar_precos_vmz_disneydias(driver, nome_pacotes, dias_para_processar):
+    waiter = 1
 
     def fechar_popups(driver):
         try:
@@ -187,7 +184,7 @@ async def coletar_precos_vmz_disneydias(driver, nome_pacotes, dias_para_processa
 
     def scroll_to_element(driver, element):
         driver.execute_script("arguments[0].scrollIntoView(true);", element)
-        time.sleep(waiter + 4)  # Espera para a rolagem acontecer
+        time.sleep(waiter + 3)  # Espera para a rolagem acontecer
 
     def mudar_mes_ano(driver, mes, ano):
         try:
@@ -196,7 +193,7 @@ async def coletar_precos_vmz_disneydias(driver, nome_pacotes, dias_para_processa
             year_select.click()
             driver.find_element(By.CSS_SELECTOR, f'option[value="{ano}"]').click()
 
-            month_select = WebDriverWait(driver, waiter + 3).until(EC.element_to_be_clickable((By.ID, "month-control")))
+            month_select = WebDriverWait(driver, waiter + 2).until(EC.element_to_be_clickable((By.ID, "month-control")))
             scroll_to_element(driver, month_select)
             month_select.click()
             driver.find_element(By.CSS_SELECTOR, f'option[value="{mes}"]').click()
@@ -207,17 +204,16 @@ async def coletar_precos_vmz_disneydias(driver, nome_pacotes, dias_para_processa
 
     def encontrar_preco_data(driver, data):
         try:
-            time.sleep(waiter + 10)  # Aguardar o calendário carregar
+            time.sleep(waiter + 9)  # Aguardar o calendário carregar
             elementos_fc_content = driver.find_elements(By.CLASS_NAME, 'fc-content')
             for elemento in elementos_fc_content:
                 fc_date = elemento.find_element(By.CLASS_NAME, 'fc-date').text
                 if fc_date == str(data.day):
                     calendar_event_price = elemento.find_element(By.CLASS_NAME, 'calendar-event-price')
                     price_text = calendar_event_price.text.strip()
-                    preco_avista = float(price_text.replace('R$', '').replace('.', '').replace(',', '.').strip())
-                    preco_parcelado = round(preco_avista * 1.10, 2)
-                    
-                    return preco_avista,preco_parcelado
+                    price_decimal = float(price_text.replace('R$', '').replace('.', '').replace(',', '.').strip())
+                    new_price = round(price_decimal * 1.10, 2)
+                    return new_price
         except Exception as e:
             logging.error(f"Erro ao encontrar preço para data {data}: {e}")
             return None
@@ -229,9 +225,9 @@ async def coletar_precos_vmz_disneydias(driver, nome_pacotes, dias_para_processa
         5: "5 Dias - Disney World Basico"
     }
 
-    def processar_dias(driver, dias,array_datas):
+    def processar_dias(driver, dias):
         base_url = "https://www.vmzviagens.com.br/ingressos/orlando/walt-disney-orlando/ticket-disney-basico"
-        datas = [datetime.now() + timedelta(days=d) for d in array_datas]
+        datas = [datetime.now() + timedelta(days=d) for d in [5, 10, 20, 47, 64, 126]]
         dados = []
 
         for dia in dias:
@@ -245,14 +241,14 @@ async def coletar_precos_vmz_disneydias(driver, nome_pacotes, dias_para_processa
                 mes = data.month - 1
                 ano = data.year
                 mudar_mes_ano(driver, mes, ano)
-                preco_avista,preco_parcelado = encontrar_preco_data(driver, data)
-                if preco_avista:
-                    
+                preco = encontrar_preco_data(driver, data)
+                if preco:
+                    data_hora_atual = datetime.now()
                     dados.append({
+                        
                         'Data_viagem': (data + timedelta(days=0)).strftime("%Y-%m-%d"),
                         'Parque': nome_pacote,
-                        'Preco_Parcelado': preco_parcelado,
-                        'Preco_Avista': preco_avista
+                        'Preco': preco
                     })
                 else:
                     logging.warning(f"Preço não encontrado para {nome_pacote} em {data}")
@@ -260,7 +256,7 @@ async def coletar_precos_vmz_disneydias(driver, nome_pacotes, dias_para_processa
         return dados  # Return the 'dados' list
 
     dias_para_processar = [2,3,4,5]
-    resultados = processar_dias(driver, dias_para_processar,array_datas)
+    resultados = processar_dias(driver, dias_para_processar)
 
     
     driver.quit()

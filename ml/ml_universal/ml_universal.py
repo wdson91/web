@@ -18,7 +18,7 @@ async def coletar_precos_ml_universal(hour,array_datas):
     options = webdriver.ChromeOptions()
     # driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
     driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
-    
+    logging.info("Iniciando a coleta de preços ML Universal")
     dados = []
     wait = WebDriverWait(driver, 5)
     
@@ -39,13 +39,13 @@ async def coletar_precos_ml_universal(hour,array_datas):
             future_date = get_future_date(days)
             url = f"https://www.vamonessa.com.br/ingressos/Orlando/7?destination=Orlando&destinationCode=2&destinationState=&destinationStateCode=&date={future_date}"
             driver.get(url)
-            time.sleep(5)
-            
+            time.sleep(3)
+            logging.info(f"Coletando preços para {future_date}")
             for button_xpath, preco_parcelado, preco_avista, park_name in xpath_pairs:
                 # Scroll to button and click
                 button = wait.until(EC.presence_of_element_located((By.XPATH, button_xpath)))
                 driver.execute_script("arguments[0].scrollIntoView();", button)
-                time.sleep(2) 
+                
 
                 try:
                     button.click()
@@ -56,10 +56,10 @@ async def coletar_precos_ml_universal(hour,array_datas):
                 try:
                     price1 = wait.until(EC.presence_of_element_located((By.XPATH, preco_parcelado)))
                     price2 = wait.until(EC.presence_of_element_located((By.XPATH, preco_avista)))
-                    driver.execute_script("arguments[0].scrollIntoView();",  preco_parcelado)
+                    driver.execute_script("arguments[0].scrollIntoView();",  price1)
                     time.sleep(4)
-                    price_text_1 =  preco_parcelado.text
-                    price_text_2 =  preco_avista.text
+                    price_text_1 =  price1.text
+                    price_text_2 =  price2.text
                 except TimeoutException:
                     price_text_1 = '-'
                     price_text_2= '-'
@@ -75,18 +75,17 @@ async def coletar_precos_ml_universal(hour,array_datas):
                         
                         multiplied_price = price_number_1* 10
                         
-                        price_number_2 = float(price_number_str_2)
+                        price_number_2 = float(price_number_str_2.replace('.', ''))
                         
                     except ValueError:
                         print(f"Error converting price for {park_name}: {price_text_1}")
-                    # ...
-                data_hora_atual = datetime.now()        
+                    # ...       
                 dados.append({
 
                         'Data_viagem': (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d"),
                         'Parque': park_name,
                         'Preco_Parcelado': float(multiplied_price),
-                        'Preco_Avista': float(price_number_str_2),
+                        'Preco_Avista': float(price_number_2) / 100,
                     })
                 
     except TimeoutException as e:
