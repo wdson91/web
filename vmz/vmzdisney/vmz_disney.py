@@ -186,7 +186,7 @@ async def coletar_precos_vmz_disneydias(driver, nome_pacotes, dias_para_processa
     resultados = processar_dias(driver, dias_para_processar,array_datas)
 
     
-    driver.quit()
+    
     df = pd.DataFrame(resultados)
 
     return df
