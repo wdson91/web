@@ -17,14 +17,15 @@ async def coletar_precos_vmz(hour,array_datas):
         5: "5 Dias - Disney World Basico"
     }
 
+    dias_para_processar = [2, 3, 4, 5]
+    df_disneydias = await coletar_precos_vmz_disneydias(driver, nome_pacotes, dias_para_processar,array_datas)
     # Coletar preços para Disney básico
     logging.info("Coletando preços para Disney Básico...")
     df_disneybasicos = await coletar_precos_vmz_disneybasicos(driver, nome_pacotes,array_datas)
 
     # Coletar preços para Disney dias
     logging.info("Coletando preços para Disney Dias...")
-    dias_para_processar = [2, 3, 4, 5]
-    df_disneydias = await coletar_precos_vmz_disneydias(driver, nome_pacotes, dias_para_processar,array_datas)
+    
 
     # Concatenar os dataframes
     df_final = pd.concat([df_disneybasicos,df_disneydias], ignore_index=True)
