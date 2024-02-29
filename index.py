@@ -15,12 +15,12 @@ async def executar_ambos(hour,array_datas):
 # Define uma função assíncrona para agendar a execução das tarefas em horários específicos
 async def agendar_execucao():
     current_time = datetime.now(pytz.timezone('America/Sao_Paulo'))  # Obtém a hora atual com o fuso horário de São Paulo
-    target_hours = ["07:00", "11:00", "15:46", "17:00"]  # Lista de horários-alvo para execução das tarefas
+    target_hours = ["07:00", "11:00", "16:30", "17:00"]  # Lista de horários-alvo para execução das tarefas
 
     # Itera sobre os horários-alvo
     for hour in target_hours:
         if current_time.strftime("%H:%M") == hour:  # Verifica se a hora atual corresponde a um horário-alvo
-            await executar_ambos('17:00',array_datas)  # Executa as tarefas definidas na função 'executar_ambos'
+            await executar_ambos('18:00',array_datas)  # Executa as tarefas definidas na função 'executar_ambos'
             break  # Uma vez que a tarefa é executada, interrompe o loop
 
 # Define a função principal assíncrona para agendar e executar as tarefas

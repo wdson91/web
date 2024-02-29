@@ -3,7 +3,7 @@ from imports import *
 from .vmzdisney.vmz_disney import coletar_precos_vmz
 from .vmzsea.vmzsea import coletar_precos_vmz_seaworld
 from .vmzuniversal.vmzuniversal import coletar_precos_vmz_universal
-#from .vmzdisney.teste import coletar_precos_vmz
+
 
 async def main_vmz(hour,array_datas,run_once=False):
     if run_once:
