@@ -23,7 +23,7 @@ async def agendar_execucao(target_hours):
 
 async def main():
     # Defina os horários-alvo ajustados para o fuso horário de São Paulo
-    target_hours = ["07:00", "11:00", "16:40", "17:00"]
+    target_hours = ["07:00", "11:00", "16:46", "17:00"]
 
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
     await agendar_execucao(target_hours)
