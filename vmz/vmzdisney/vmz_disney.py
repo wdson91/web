@@ -4,12 +4,6 @@ from imports import *
 async def coletar_precos_vmz(hour,array_datas,):
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-    # Configuração inicial do Selenium
-    options = webdriver.ChromeOptions()
-    #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub',options=options)
-    driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
-
-
     nome_pacotes = {
         2: "2 Dias - Disney World Basico",
         3: "3 Dias - Disney World Basico",
@@ -24,15 +18,11 @@ async def coletar_precos_vmz(hour,array_datas,):
     # Carregue os dados do JSON baixado
     disney_basicos = carregar_dados_json('disney_vmz_basicos_parcial.json')
     disney_dias = carregar_dados_json('disney_vmz_dias_parcial.json')
-    
 
-    hora_coleta = disney_basicos[0]["Hora_coleta"]
 
     # Combine os dados de disney_basicos e disney_dias
     dados_combinados = disney_basicos[0]["Dados"] + disney_dias[0]["Dados"]
 
-
-    
     df = pd.DataFrame(dados_combinados)
     
     df_sorted = df.sort_values(by=['Data_viagem', 'Parque'], ignore_index=True)
@@ -41,7 +31,6 @@ async def coletar_precos_vmz(hour,array_datas,):
     
     nome_arquivo = f'disney_vmz_{datetime.now().strftime("%Y-%m-%d")}.json'
     
-   
     # Salvar o dataframe concatenado em um arquivo JSON
     salvar_dados(df_sorted, nome_arquivo, 'vmz', hour)
     

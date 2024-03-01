@@ -21,7 +21,7 @@ async def coletar_precos_ml_seaworld(hour, array_datas):
     # driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
     driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
     dados = []
-    wait = WebDriverWait(driver, 10)
+    wait = WebDriverWait(driver,2)
     logging.info("Iniciando a coleta de preços ML SeaWorld")
     try:
         for days in array_datas:
@@ -86,12 +86,6 @@ async def coletar_precos_ml_seaworld(hour, array_datas):
                         
                     except ValueError:
                         print(f"Erro ao converter preço para {park_name}: {price_text}")
-
-               
-
-                # Adicionando dados
-                data_hora_atual = datetime.now()
-                
                 dados.append({
                     'Data_viagem': (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d"),
                     'Parque': park_name,

@@ -6,6 +6,10 @@ services:
     ports:
       - "4442:4442"
       - "4443:4443"
+    environment:
+      GRID_MAX_SESSION: 16
+      GRID_BROWSER_TIMEOUT: 3000
+      GRID_TIMEOUT: 3000
     networks:
       - grid
   selenium-node-chrome:
@@ -17,6 +21,10 @@ services:
       - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
       - SE_NODE_MAX_SESSIONS=6
       - SE_NODE_MAX_INSTANCES=6
+      - GRID_MAX_SESSION=6
+      - GRID_BROWSER_TIMEOUT=3000
+      - GRID_TIMEOUT=3000
+
     shm_size: "4g"
     networks:
       - grid

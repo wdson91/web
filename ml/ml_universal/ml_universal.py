@@ -20,7 +20,7 @@ async def coletar_precos_ml_universal(hour,array_datas):
     driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
     logging.info("Iniciando a coleta de preços ML Universal")
     dados = []
-    wait = WebDriverWait(driver, 5)
+    wait = WebDriverWait(driver, 2)
     
     
     xpath_pairs = [
@@ -87,18 +87,15 @@ async def coletar_precos_ml_universal(hour,array_datas):
                         'Preco_Parcelado': float(multiplied_price),
                         'Preco_Avista': float(price_number_2) / 100,
                     })
-                
     except TimeoutException as e:
         logging.error("Erro: Elemento não encontrado ou tempo de espera excedido", e)
     except Exception as e:
         logging.error("Erro inesperado:", e)
     finally:
-                
-                driver.quit()
-                df = pd.DataFrame(dados)
-                
-                nome_arquivo = f'universal_ml_{datetime.now().strftime("%Y-%m-%d")}.json'
-                salvar_dados(df, nome_arquivo,'ml',hour)
-                logging.info("Coleta de preços ML Disney finalizada")
+        driver.quit()
+        df = pd.DataFrame(dados)
+        nome_arquivo = f'universal_ml_{datetime.now().strftime("%Y-%m-%d")}.json'
+        salvar_dados(df, nome_arquivo,'ml',hour)
+        logging.info("Coleta de preços ML Universal finalizada")
 if __name__ == '__main__':
     asyncio.run(coletar_precos_ml_universal())
