@@ -21,14 +21,14 @@ async def coletar_precos_ml_seaworld(hour, array_datas):
     # driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
     driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
     dados = []
-    wait = WebDriverWait(driver,2)
+    wait = WebDriverWait(driver,4)
     logging.info("Iniciando a coleta de preços ML SeaWorld")
     try:
         for days in array_datas:
             future_date = get_future_date(days)
             url = f"https://www.vamonessa.com.br/ingressos/Orlando/8?destination=Orlando&destinationCode=2&destinationState=&destinationStateCode=&date={future_date}"
             driver.get(url)
-            await asyncio.sleep(3)  # Aguardar o carregamento da página
+            await asyncio.sleep(4)  # Aguardar o carregamento da página
             logging.info(f"Coletando preços para {future_date}")
 
             # Pares de XPaths para botões e elementos de preço correspondentes
@@ -52,7 +52,7 @@ async def coletar_precos_ml_seaworld(hour, array_datas):
                 try:
                     button = wait.until(EC.presence_of_element_located((By.XPATH, button_xpath)))
                     driver.execute_script("arguments[0].scrollIntoView();", button)
-                    await asyncio.sleep(2)  # Permitir tempo para quaisquer elementos carregados preguiçosos
+                    await asyncio.sleep(4)  # Permitir tempo para quaisquer elementos carregados preguiçosos
                     button.click()
                 except TimeoutException:
                     print("Timeout ao esperar pelo botão:", button_xpath)

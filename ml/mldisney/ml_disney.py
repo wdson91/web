@@ -18,7 +18,7 @@ async def coletar_precos_ml_disney(hour,array_datas):
     driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
     
     dados = []
-    wait = WebDriverWait(driver, 4)
+    wait = WebDriverWait(driver, 5)
     
     try:
     
@@ -47,7 +47,7 @@ async def coletar_precos_ml_disney(hour,array_datas):
                 try:
                     button = wait.until(EC.presence_of_element_located((By.XPATH, button_xpath)))
                     driver.execute_script("arguments[0].scrollIntoView();", button)
-                    time.sleep(2)
+                    time.sleep(4)
                     button.click()
                 except TimeoutException:
                     logging.error(f"Tempo esgotado ao tentar localizar o botão para {park_name}")

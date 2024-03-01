@@ -20,7 +20,7 @@ async def coletar_precos_ml_universal(hour,array_datas):
     driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
     logging.info("Iniciando a coleta de preços ML Universal")
     dados = []
-    wait = WebDriverWait(driver, 2)
+    wait = WebDriverWait(driver, 4)
     
     
     xpath_pairs = [
@@ -39,7 +39,7 @@ async def coletar_precos_ml_universal(hour,array_datas):
             future_date = get_future_date(days)
             url = f"https://www.vamonessa.com.br/ingressos/Orlando/7?destination=Orlando&destinationCode=2&destinationState=&destinationStateCode=&date={future_date}"
             driver.get(url)
-            time.sleep(3)
+            time.sleep(4)
             logging.info(f"Coletando preços para {future_date}")
             for button_xpath, preco_parcelado, preco_avista, park_name in xpath_pairs:
                 # Scroll to button and click
