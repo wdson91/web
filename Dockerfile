@@ -14,4 +14,4 @@ RUN pip install -r requirements.txt
 COPY . .
 
 # Comando para executar a aplicação Python
-CMD ["python", "run.py"]
+CMD ["python", "index.py"]
