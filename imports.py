@@ -55,3 +55,14 @@ def get_directories():
 
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+
+#VMZ DISNEY 2 A 5 DIAS
+nome_pacotes = {
+        2: "2 Dias - Disney World Basico",
+        3: "3 Dias - Disney World Basico",
+        4: "4 Dias - Disney World Basico",
+        5: "5 Dias - Disney World Basico"
+    }
+
+dias_para_processar = [2, 3, 4, 5]

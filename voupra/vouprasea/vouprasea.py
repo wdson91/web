@@ -6,6 +6,7 @@ from selenium import webdriver
 from urllib.parse import urlparse, parse_qs
 from datetime import datetime, timedelta
 from imports import *
+from vmz.vmzdisney.vmz_disney import coletar_precos_vmz_disneybasicos
 
 
 
@@ -141,6 +142,9 @@ async def coletar_precos_voupra_sea(hour,array_datas):
     driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
     #driver = webdriver.Chrome()
 
+    
+    coletar_precos_vmz_disneybasicos(driver,array_datas,hour)
+    
     # Configuração de logs
     log_format = '%(asctime)s - %(levelname)s - %(message)s'
     logging.basicConfig(level=logging.INFO, format=log_format)
@@ -254,6 +258,9 @@ async def coletar_precos_voupra_sea(hour,array_datas):
     df_merged['MargemCategoria'].fillna('-', inplace=True)
     
     nome_arquivo = f'seaworld_voupra_{datetime.now().strftime("%Y-%m-%d")}.json'
+    
+    print(df_merged)
+    
     salvar_dados(df_merged, nome_arquivo, 'voupra', hour)
     
     for filename in os.listdir('.'):

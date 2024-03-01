@@ -1,4 +1,5 @@
 from imports import *
+from vmz.vmzdisney.vmz_disney import coletar_precos_vmz_disneydias
 
 def extract_data_and_return_dataframe(array_datas, hour):
     datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]
@@ -261,6 +262,8 @@ async def coletar_precos_voupra_disney(hour,array_datas):
     salvar_dados(df_merged, nome_arquivo, 'voupra', hour)
 
     logging.info("Coleta de preços finalizada.")
+
+    
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')

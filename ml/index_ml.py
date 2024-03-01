@@ -10,19 +10,13 @@ from ml.mlsea.mlsea import coletar_precos_ml_seaworld
 async def main_ml(hour,array_datas,run_once=False):
     if run_once:
         logging.info("Iniciando coleta de preços.")
+        
         try:
-            # Execute as funções assíncronas em sequência
-            await coletar_precos_ml_disney(hour,array_datas)
-        except Exception as e:
-            logging.error(f"Erro durante a coleta de preços da Disney: {e}")
-
-        try:
-            await coletar_precos_ml_seaworld(hour,array_datas)
-        except Exception as e:
-            logging.error(f"Erro durante a coleta de preços do SeaWorld: {e}")
-
-        try:
-            await coletar_precos_ml_universal(hour,array_datas)
+            await asyncio.gather(
+                coletar_precos_ml_disney(hour,array_datas),
+                coletar_precos_ml_seaworld(hour,array_datas),
+                coletar_precos_ml_universal(hour,array_datas)
+            )
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços da Universal: {e}")
 

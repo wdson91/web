@@ -1,7 +1,7 @@
 from imports import *
 
 
-async def coletar_precos_vmz(hour,array_datas):
+async def coletar_precos_vmz(hour,array_datas,):
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
     # Configuração inicial do Selenium
@@ -17,30 +17,39 @@ async def coletar_precos_vmz(hour,array_datas):
         5: "5 Dias - Disney World Basico"
     }
 
-    dias_para_processar = [2, 3, 4, 5]
-    df_disneydias = await coletar_precos_vmz_disneydias(driver, nome_pacotes, dias_para_processar,array_datas)
-    # Coletar preços para Disney básico
-    logging.info("Coletando preços para Disney Básico...")
-    df_disneybasicos = await coletar_precos_vmz_disneybasicos(driver, nome_pacotes,array_datas)
-
-    # Coletar preços para Disney dias
-    logging.info("Coletando preços para Disney Dias...")
+    # Defina sua lógica para baixar os arquivos e esperar por eles
+    baixar_blob_se_existir('disney_vmz_basicos_parcial.json', 'vmz')
+    baixar_blob_se_existir('disney_vmz_dias_parcial.json', 'vmz')
+    
+    # Carregue os dados do JSON baixado
+    disney_basicos = carregar_dados_json('disney_vmz_basicos_parcial.json')
+    disney_dias = carregar_dados_json('disney_vmz_dias_parcial.json')
     
 
-    # Concatenar os dataframes
-    df_final = pd.concat([df_disneybasicos,df_disneydias], ignore_index=True)
-    df_final_sorted = df_final.sort_values(by=['Data_viagem', 'Parque'])
+    hora_coleta = disney_basicos[0]["Hora_coleta"]
+
+    # Combine os dados de disney_basicos e disney_dias
+    dados_combinados = disney_basicos[0]["Dados"] + disney_dias[0]["Dados"]
+
+
+    
+    df = pd.DataFrame(dados_combinados)
+    
+    df_sorted = df.sort_values(by=['Data_viagem', 'Parque'], ignore_index=True)
+    # # Crie o DataFrame a partir dos dados formatados
+    # df = pd.DataFrame(dados_formatados)
+    
     nome_arquivo = f'disney_vmz_{datetime.now().strftime("%Y-%m-%d")}.json'
     
-    salvar_dados(df_final_sorted, nome_arquivo,'vmz',hour)
-    
+   
+    # Salvar o dataframe concatenado em um arquivo JSON
+    salvar_dados(df_sorted, nome_arquivo, 'vmz', hour)
     
     logging.info("Coleta finalizada.")
 
-    return df_final
 
 
-async def coletar_precos_vmz_disneybasicos(driver, nome_pacotes,array_datas):
+async def coletar_precos_vmz_disneybasicos(driver,array_datas,hour):
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
     sites = [
@@ -89,13 +98,17 @@ async def coletar_precos_vmz_disneybasicos(driver, nome_pacotes,array_datas):
 
     logging.info("Coleta de preços finalizada.")
     
+    
+    
     driver.quit()
     # Criando um DataFrame
     df = pd.DataFrame(dados)
+    
+    salvar_dados(df, 'disney_vmz_basicos_parcial.json','vmz',hour)
     return df
 
-async def coletar_precos_vmz_disneydias(driver, nome_pacotes, dias_para_processar,array_datas):
-    waiter = 1
+async def coletar_precos_vmz_disneydias(driver, nome_pacotes, dias_para_processar,array_datas,hour):
+    waiter = 2
 
     def fechar_popups(driver):
         try:
@@ -185,10 +198,10 @@ async def coletar_precos_vmz_disneydias(driver, nome_pacotes, dias_para_processa
     dias_para_processar = [2,3,4,5]
     resultados = processar_dias(driver, dias_para_processar,array_datas)
 
-    
-    
     df = pd.DataFrame(resultados)
 
+    salvar_dados(df, 'disney_vmz_dias_parcial.json','vmz',hour)
+    
     return df
 
 
