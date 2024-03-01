@@ -1,7 +1,7 @@
 # Importando os módulos necessários
 from imports import *  # Importa os módulos necessários, incluindo funções definidas em 'imports'
 
-array_datas =  [5,10,20,47]
+array_datas =  [5,10,20,47,65,126]
 
 # Define uma função assíncrona para executar as tarefas 'main_voupra', 'main_vmz' e 'main_ml' ao mesmo tempo
 async def executar_ambos(hour,array_datas):
@@ -15,4 +15,4 @@ async def executar_ambos(hour,array_datas):
 
 # Verifica se o script está sendo executado diretamente
 if __name__ == "__main__":
-    asyncio.run(executar_ambos("12:00",array_datas))  # Executa a função principal 'main' usando asyncio
+    asyncio.run(executar_ambos("00:00",array_datas))  # Executa a função principal 'main' usando asyncio

@@ -49,8 +49,12 @@ async def coletar_precos_vmz(hour,array_datas,):
 
 
 
-async def coletar_precos_vmz_disneybasicos(driver,array_datas,hour):
+async def coletar_precos_vmz_disneybasicos(array_datas,hour):
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+    options = webdriver.ChromeOptions()
+    #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub',options=options)
+    driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
 
     sites = [
     ("https://www.vmzviagens.com.br/ingressos/orlando/disney-world-ingresso/disney-ingresso-magic-kingdom-1dia?", '//*[@id="__layout"]/div/div[1]/section/article[1]/div/div/div[4]/div[1]/div[2]/div[2]/span[1]', '1 Dia - Disney Basico Magic Kingdom'),
@@ -107,9 +111,14 @@ async def coletar_precos_vmz_disneybasicos(driver,array_datas,hour):
     salvar_dados(df, 'disney_vmz_basicos_parcial.json','vmz',hour)
     return df
 
-async def coletar_precos_vmz_disneydias(driver, nome_pacotes, dias_para_processar,array_datas,hour):
+async def coletar_precos_vmz_disneydias( nome_pacotes,array_datas,hour):
+    
+    
+    options = webdriver.ChromeOptions()
+    driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
+    
     waiter = 2
-
+    dias_para_processar = [2, 3, 4, 5]
     def fechar_popups(driver):
         try:
             botao_fechar_selector = '.dinTargetFormCloseButtom'
@@ -194,7 +203,8 @@ async def coletar_precos_vmz_disneydias(driver, nome_pacotes, dias_para_processa
                     logging.warning(f"Preço não encontrado para {nome_pacote} em {data}")
 
         return dados  # Return the 'dados' list
-
+    driver.quit()
+    
     dias_para_processar = [2,3,4,5]
     resultados = processar_dias(driver, dias_para_processar,array_datas)
 

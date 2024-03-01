@@ -263,7 +263,7 @@ async def coletar_precos_voupra_disney(hour,array_datas):
 
     logging.info("Coleta de preços finalizada.")
 
-    
+    #coletar_precos_vmz_disneydias(driver, nome_pacotes, dias_para_processar,array_datas)
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')

@@ -143,7 +143,7 @@ async def coletar_precos_voupra_sea(hour,array_datas):
     #driver = webdriver.Chrome()
 
     
-    coletar_precos_vmz_disneybasicos(driver,array_datas,hour)
+    #coletar_precos_vmz_disneybasicos(driver,array_datas,hour)
     
     # Configuração de logs
     log_format = '%(asctime)s - %(levelname)s - %(message)s'

@@ -135,16 +135,16 @@ async def coletar_precos_voupra_universal(hour,array_datas):
     #driver = webdriver.Remote(command_executor='http://localhost:4444/wd/hub', options=options)
     driver = webdriver.Remote(command_executor='http://selenium-hub:4444/wd/hub', options=options)
     
-    nome_pacotes = {
-        2: "2 Dias - Disney World Basico",
-        3: "3 Dias - Disney World Basico",
-        4: "4 Dias - Disney World Basico",
-        5: "5 Dias - Disney World Basico"
-    }
+    # nome_pacotes = {
+    #     2: "2 Dias - Disney World Basico",
+    #     3: "3 Dias - Disney World Basico",
+    #     4: "4 Dias - Disney World Basico",
+    #     5: "5 Dias - Disney World Basico"
+    # }
 
-    dias_para_processar = [2, 3, 4, 5]
+    # dias_para_processar = [2, 3, 4, 5]
     
-    coletar_precos_vmz_disneydias(driver, nome_pacotes, dias_para_processar,array_datas, hour)
+    # coletar_precos_vmz_disneydias(driver, nome_pacotes, dias_para_processar,array_datas, hour)
     
     # Lista de datas a serem consideradas
     datas = [datetime.now().date() + timedelta(days=d) for d in array_datas]

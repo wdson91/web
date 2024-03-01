@@ -14,8 +14,6 @@ async def main_vmz(hour,array_datas,run_once=False):
                 coletar_precos_vmz_seaworld(hour,array_datas),
                 coletar_precos_vmz_universal(hour, array_datas)
             )
-            # Execute as funções assíncronas em sequência
-           
         except Exception as e:
             logging.error(f"Erro durante a coleta de preços da Disney: {e}")
             
