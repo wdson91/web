@@ -12,24 +12,76 @@ services:
       GRID_TIMEOUT: 3000
     networks:
       - grid
-  selenium-node-chrome:
-    container_name: selenium-node-chrome
+
+  selenium-node-chrome1:
+    container_name: selenium-node-chrome1
     image: selenium/node-chrome:latest
     environment:
       - SE_EVENT_BUS_HOST=selenium-hub
       - SE_EVENT_BUS_PUBLISH_PORT=4442
       - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
-      - SE_NODE_MAX_SESSIONS=6
-      - SE_NODE_MAX_INSTANCES=6
-      - GRID_MAX_SESSION=6
+      - SE_NODE_MAX_SESSIONS=3
+      - SE_NODE_MAX_INSTANCES=3
+      - GRID_MAX_SESSION=3
       - GRID_BROWSER_TIMEOUT=3000
       - GRID_TIMEOUT=3000
-
     shm_size: "4g"
     networks:
       - grid
-  python_app:
-    container_name: python_app
+
+  selenium-node-chrome2:
+    container_name: selenium-node-chrome2
+    image: selenium/node-chrome:latest
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_NODE_MAX_SESSIONS=3
+      - SE_NODE_MAX_INSTANCES=3
+      - GRID_MAX_SESSION=3
+      - GRID_BROWSER_TIMEOUT=3000
+      - GRID_TIMEOUT=3000
+    shm_size: "4g"
+    networks:
+      - grid
+      
+  selenium-node-chrome3:
+    container_name: selenium-node-chrome3
+    image: selenium/node-chrome:latest
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_NODE_MAX_SESSIONS=3
+      - SE_NODE_MAX_INSTANCES=3
+      - GRID_MAX_SESSION=3
+      - GRID_BROWSER_TIMEOUT=3000
+      - GRID_TIMEOUT=3000
+    shm_size: "4g"
+    networks:
+      - grid
+  voupra_container:
+    container_name: voupra_container
+    build:
+      context: .
+      dockerfile: Dockerfile.3
+    depends_on:
+      - selenium-hub
+    networks:
+      - grid
+
+  vmz_container:
+    container_name: vmz_container
+    build:
+      context: .
+      dockerfile: Dockerfile.2
+    depends_on:
+      - selenium-hub
+    networks:
+      - grid
+
+  ml_container:
+    container_name: ml_container
     build:
       context: .
       dockerfile: Dockerfile
@@ -37,7 +89,6 @@ services:
       - selenium-hub
     networks:
       - grid
-
 networks:
   grid:
     external: true

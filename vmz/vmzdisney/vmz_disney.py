@@ -192,11 +192,13 @@ async def coletar_precos_vmz_disneydias( nome_pacotes,array_datas,hour):
                     logging.warning(f"Preço não encontrado para {nome_pacote} em {data}")
 
         return dados  # Return the 'dados' list
-    driver.quit()
+    
     
     dias_para_processar = [2,3,4,5]
     resultados = processar_dias(driver, dias_para_processar,array_datas)
 
+    driver.quit()
+    
     df = pd.DataFrame(resultados)
 
     salvar_dados(df, 'disney_vmz_dias_parcial.json','vmz',hour)

@@ -6,7 +6,7 @@ from selenium import webdriver
 from urllib.parse import urlparse, parse_qs
 from datetime import datetime, timedelta
 from imports import *
-from vmz.vmzdisney.vmz_disney import coletar_precos_vmz_disneybasicos
+
 
 
 
